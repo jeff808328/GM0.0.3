@@ -16,28 +16,24 @@ public class CommonState : MonoBehaviour
 
     // 0. Idle
 
+    public ChatacterData ChatacterData;
+
     public int ActionLayerNow;
 
     public bool GroundTouching;
     public bool WallTouching;
 
-    void Start()
-    {
-        InitValueSet();
-    }
+    public bool IsInvincible;
+    public float lnvincibleLength;
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void InitValueSet()
+    protected void InitValueSet()
     {
         ActionLayerNow = 0;
 
         GroundTouching = false;
         WallTouching = false;
+
+        IsInvincible = false;
     }
 
     public void InitComponmentSet()

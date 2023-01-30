@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerState : CommonState
 {
-    private float RollCD;
-    private bool RollAble;
+    public float RollCD;
+    public float RollAniLength;
+
+    public bool RollAble;
+    public bool Rolling;
 
     void Start()
     {

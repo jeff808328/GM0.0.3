@@ -17,6 +17,8 @@ public class CommonMove : MonoBehaviour
 
     private float AddSpeed; // 加速度初始值
     private float MinusSpeed; // 減速度初始值   
+
+    protected int LastMoveDirection;
     #endregion
 
     #region 垂直速度控制
@@ -34,9 +36,16 @@ public class CommonMove : MonoBehaviour
     protected int JumpTime;
     #endregion
 
+    #region 速度控制
+
+    [SerializeField] protected Vector2 FinalMoveSpeed;
+
+
+    #endregion 
+
     #region 組件
 
-    protected CommonState CommonState;
+    protected ChatacterData ChatacterData;
 
     #endregion
 

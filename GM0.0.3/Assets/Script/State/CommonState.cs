@@ -16,15 +16,25 @@ public class CommonState : MonoBehaviour
 
     // 0. Idle
 
+    [Header("SO")]
     public ChatacterData ChatacterData;
 
+    [Header("當前動作階級")]
     public int ActionLayerNow;
 
+    [Header("牆 & 地板碰撞判定")]
     public bool GroundTouching;
     public bool WallTouching;
 
-    public bool IsInvincible;
-    public float lnvincibleLength;
+    [Header("無敵設定")]
+    public bool IsUnbreak;
+    public float UnbreakLength;
+
+    [Header("攻擊設定")]
+    public bool AttackAble;
+    public bool AttackIng;
+    public float AttackCD;
+    public float AttackAniLength;
 
     protected void InitValueSet()
     {
@@ -33,7 +43,7 @@ public class CommonState : MonoBehaviour
         GroundTouching = false;
         WallTouching = false;
 
-        IsInvincible = false;
+        IsUnbreak = false;
     }
 
     public void InitComponmentSet()

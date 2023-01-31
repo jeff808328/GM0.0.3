@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class CommonState : MonoBehaviour
 {
-    // For control action layer and other state
-
+    // 控制動作階級用
     // three level of action layer
-
     // 3. Dash,Hurt
-
     // 2. Attack
-
     // 1. Run,Jump
-
     // 0. Idle
 
+    // 狀態控制用,提供各腳本參考
+    // 參數僅允許外部修改
+
     [Header("SO")]
-    public ChatacterData ChatacterData;
+    public ChatacterData CharacterData;
 
     [Header("當前動作階級")]
     public int ActionLayerNow;
@@ -27,8 +25,13 @@ public class CommonState : MonoBehaviour
     public bool WallTouching;
 
     [Header("無敵設定")]
-    public bool IsUnbreak;
-    public float UnbreakLength;
+    public bool IsUnbreakable;
+    public float UnbreakableLength;
+
+    [Header("受傷設定")]
+    public bool Hurting;
+    public float LightHurtAniLength;
+    public float HeavyHurtAniLength;
 
     [Header("攻擊設定")]
     public bool AttackAble;
@@ -43,7 +46,10 @@ public class CommonState : MonoBehaviour
         GroundTouching = false;
         WallTouching = false;
 
-        IsUnbreak = false;
+        IsUnbreakable = false;
+
+        AttackAble = true;
+        AttackIng = false;
     }
 
     public void InitComponmentSet()

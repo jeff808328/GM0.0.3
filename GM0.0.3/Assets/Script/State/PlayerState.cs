@@ -4,20 +4,37 @@ using UnityEngine;
 
 public class PlayerState : CommonState
 {
+    [Header("翻滾設定")]
     public float RollCD;
     public float RollAniLength;
-
     public bool RollAble;
     public bool Rolling;
 
-    void Start()
+    [Header("跳躍設定")]
+    public int MaxJumpTime;
+    public int JumpTime;
+    public bool JumpAble;
+
+    [Header("移動控制")]
+    public bool MoveAble;
+
+    private void PlayerInitValueSet()
     {
-        
+        RollAble = true;
+        Rolling = false;
+
+        MaxJumpTime = CharacterData.AirJumpTimes;
+        JumpAble = true;
+
+        MoveAble = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        InitValueSet();
+
+        PlayerInitValueSet();
     }
+
+
 }

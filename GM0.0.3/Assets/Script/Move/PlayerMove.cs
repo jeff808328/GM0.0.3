@@ -24,4 +24,6 @@ public class PlayerMove : CommonMove
     {
         PlayerState = GetComponent<PlayerState>();
     }
+
+    
 }

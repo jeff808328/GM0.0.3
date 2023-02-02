@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e901682230c51bd4ca80c70f919f27f8, type: 3}
+  m_Name: TrapData
+  m_EditorClassIdentifier: 
+  MaxMoveSpeed: 0
+  AddSpeed: 0
+  MinusSpeed: 0
+  Gravity: 2
+  JumpSpeed: 10
+  AirJumpTimes: 0
+  HP: 1
+  Atk: 12
+  Def: 0
+  AtkCD: 1
+  RollCD: 0

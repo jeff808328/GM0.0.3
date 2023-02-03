@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : CommonMove
 {
-    private PlayerState PlayerState;
+    private PlayerState PlayerState; 
 
     void Start()
     {
@@ -22,7 +22,8 @@ public class PlayerMove : CommonMove
 
     private void PlayerInitComponentSet()
     {
-        PlayerState = GetComponent<PlayerState>();
+        CommonState = this.GetComponent<PlayerState>();
+        PlayerState = this.GetComponent<PlayerState>();
     }
 
     

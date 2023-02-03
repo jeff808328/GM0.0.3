@@ -47,8 +47,9 @@ public class CommonMove : MonoBehaviour
 
     #region 組件
 
-    public ChatacterData ChatacterData;
+    public ChatacterData CharacterData;
     protected Rigidbody2D Rd;
+    protected CommonState CommonState;
 
     #endregion
 
@@ -56,13 +57,13 @@ public class CommonMove : MonoBehaviour
     {
         LastMoveDirection = 0;
 
-        HorizonSpeedMax = ChatacterData.MaxMoveSpeed;
-        VerticalSpeedMax = ChatacterData.JumpSpeed;
+        HorizonSpeedMax = CharacterData.MaxMoveSpeed;
+        VerticalSpeedMax = CharacterData.JumpSpeed;
 
-        AddSpeed = ChatacterData.AddSpeed;
-        MinusSpeed = ChatacterData.MinusSpeed;
+        AddSpeed = CharacterData.AddSpeed;
+        MinusSpeed = CharacterData.MinusSpeed;
 
-        GravityValue = ChatacterData.Gravity;
+        GravityValue = CharacterData.Gravity;
 
         OriginAddSpeedAdjust = AddSpeedAdjust;
         OriginMinusSpeedAdjust = MinusSpeedAdjust;
@@ -73,8 +74,10 @@ public class CommonMove : MonoBehaviour
         Rd = this.GetComponent<Rigidbody2D>();
     }
 
-    protected void Run(int Direction)
+    protected void Run(int Direction) // 加速 // 在可操控情況下可用
     {
+        CommonState.ActionLayerNow = 1;
+
         if (Direction != LastMoveDirection)
             Flip(Direction);
 
@@ -84,22 +87,24 @@ public class CommonMove : MonoBehaviour
         LastMoveDirection = Direction; // 紀錄當前移動方向,轉向和減速用
     }
 
-    protected void Flip(int Direction)
+    protected void Flip(int Direction) // 翻面 // Run的備註
     {
         if (Direction >= 0)
         {
             this.transform.localScale = new Vector3(1, 1, 1);
-            this.transform.eulerAngles = new Vector3(135, 0, 0);
+        //    this.transform.eulerAngles = new Vector3(135, 0, 0);
         }
         else
         {
             this.transform.localScale = new Vector3(-1, 1, 1);
-            this.transform.eulerAngles = new Vector3(55, 0, 0);
+       //     this.transform.eulerAngles = new Vector3(55, 0, 0);
         }
     }
 
-    protected void Brake()
+    protected void Brake() // 在玩家無輸入且非無敵狀況時可用
     {
+        CommonState.ActionLayerNow = 0;
+
         HorizonSpeed -= MinusSpeed * LastMoveDirection * Time.deltaTime * MinusSpeedAdjust;
 
         if (LastMoveDirection == 1)
@@ -114,6 +119,8 @@ public class CommonMove : MonoBehaviour
 
     protected void Jump()
     {
+        CommonState.ActionLayerNow = 1;
+
         VerticalSpeed = VerticalSpeedMax;
     }
 
@@ -124,18 +131,53 @@ public class CommonMove : MonoBehaviour
         VerticalSpeed = Mathf.Clamp(VerticalSpeed, GravityMax, VerticalSpeedMax);
     }
 
-    protected void Roll(float Length)
+    protected IEnumerator Roll(int Direction, float Length, float Speed)
     {
+        CommonState.IsUnbreakable = true;
+        CommonState.ActionLayerNow = 3;
+        CommonState.AttackAble = false;
+        CommonState.MoveAble = false;
 
+        HorizonSpeedMax *= 2;
+
+        BeforeDashSpeed = HorizonSpeed;
+        HorizonSpeed = Speed;
+
+        yield return new WaitForSecondsRealtime(Length);
+
+        if(LastMoveDirection == Direction)
+        {
+            HorizonSpeed = BeforeDashSpeed;
+        }
+        else
+        {
+            HorizonSpeed = 0;
+        }
+
+        HorizonSpeedMax = CharacterData.MaxMoveSpeed;
+
+        CommonState.AttackAble = true;
+        CommonState.MoveAble = true;
+        CommonState.ActionLayerNow = 0;
+        CommonState.IsUnbreakable = false;
     }
 
-    protected void SuddenlyBrake(float Length)
+    protected IEnumerator SuddenlyBrake(float Length)
     {
+        HorizonSpeed = 0;
+        AddSpeed = 0;
 
+        yield return new WaitForSecondsRealtime(Length);
+
+        AddSpeed = CharacterData.AddSpeed;
     }
 
-    protected void Lock(float Length)
+    protected IEnumerator Lock(float Length)
     {
+        GravityValue = 0;
 
+        yield return new WaitForSecondsRealtime(Length);
+
+        GravityValue = CharacterData.Gravity;
     }
 }

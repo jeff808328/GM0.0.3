@@ -22,5 +22,4 @@ public class ChatacterData : ScriptableObject
 
     public float AtkCD;
     public float RollCD;
-    public float InvincibleLength; // 無敵時間長度
 }

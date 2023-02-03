@@ -39,6 +39,9 @@ public class CommonState : MonoBehaviour
     public float AttackCD;
     public float AttackAniLength;
 
+    [Header("²¾°Ê³]©w")]
+    public bool MoveAble;
+
     protected void InitValueSet()
     {
         ActionLayerNow = 0;
@@ -50,6 +53,8 @@ public class CommonState : MonoBehaviour
 
         AttackAble = true;
         AttackIng = false;
+
+        MoveAble = true;
     }
 
     public void InitComponmentSet()

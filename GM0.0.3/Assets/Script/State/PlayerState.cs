@@ -15,8 +15,7 @@ public class PlayerState : CommonState
     public int JumpTime;
     public bool JumpAble;
 
-    [Header("²¾°Ê±±¨î")]
-    public bool MoveAble;
+
 
     private void PlayerInitValueSet()
     {
@@ -25,8 +24,6 @@ public class PlayerState : CommonState
 
         MaxJumpTime = CharacterData.AirJumpTimes;
         JumpAble = true;
-
-        MoveAble = true;
     }
 
     void Start()

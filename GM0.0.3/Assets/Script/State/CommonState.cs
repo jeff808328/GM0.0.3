@@ -39,8 +39,15 @@ public class CommonState : MonoBehaviour
     public float AttackCD;
     public float AttackAniLength;
 
+    [Header("翻滾設定")]
+    public float RollCD;
+    public float RollAniLength;
+    public bool RollAble;
+    public bool Rolling;
+
     [Header("移動設定")]
     public bool MoveAble;
+    public bool Moveing;
 
     protected void InitValueSet()
     {
@@ -54,11 +61,25 @@ public class CommonState : MonoBehaviour
         AttackAble = true;
         AttackIng = false;
 
+        RollAble = true;
+        Rolling = false;
+
         MoveAble = true;
+        Moveing = false;
     }
 
     public void InitComponmentSet()
     {
 
+    }
+
+    public IEnumerator Roll()
+    {
+        yield return new WaitForSecondsRealtime(RollCD);
+    }
+
+    public IEnumerator Attack()
+    {
+        yield return new WaitForSecondsRealtime(AttackCD);
     }
 }

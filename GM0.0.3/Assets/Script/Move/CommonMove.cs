@@ -33,15 +33,15 @@ public class CommonMove : MonoBehaviour
 
     private bool GroundTouching; // 地板偵測
 
-    protected int JumpTime;
     #endregion
 
     #region 速度控制
 
-    [SerializeField] protected Vector2 FinalMoveSpeed;
-
     private float BeforeDashSpeed;
     private float BeforeDahsMoveDirection;
+    public float DashAdjust;
+
+    [SerializeField] protected Vector2 FinalMoveSpeed;
 
     #endregion 
 
@@ -92,12 +92,12 @@ public class CommonMove : MonoBehaviour
         if (Direction >= 0)
         {
             this.transform.localScale = new Vector3(1, 1, 1);
-        //    this.transform.eulerAngles = new Vector3(135, 0, 0);
+            //    this.transform.eulerAngles = new Vector3(135, 0, 0);
         }
         else
         {
             this.transform.localScale = new Vector3(-1, 1, 1);
-       //     this.transform.eulerAngles = new Vector3(55, 0, 0);
+            //     this.transform.eulerAngles = new Vector3(55, 0, 0);
         }
     }
 
@@ -117,13 +117,6 @@ public class CommonMove : MonoBehaviour
         }
     }
 
-    protected void Jump()
-    {
-        CommonState.ActionLayerNow = 1;
-
-        VerticalSpeed = VerticalSpeedMax;
-    }
-
     protected void Gravity()
     {
         VerticalSpeed -= GravityValue * Time.deltaTime * GravityAdjust;
@@ -138,14 +131,14 @@ public class CommonMove : MonoBehaviour
         CommonState.AttackAble = false;
         CommonState.MoveAble = false;
 
-        HorizonSpeedMax *= 2;
+        HorizonSpeedMax *= Speed;
 
         BeforeDashSpeed = HorizonSpeed;
         HorizonSpeed = Speed;
 
         yield return new WaitForSecondsRealtime(Length);
 
-        if(LastMoveDirection == Direction)
+        if (LastMoveDirection == Direction)
         {
             HorizonSpeed = BeforeDashSpeed;
         }

@@ -17,7 +17,45 @@ public class PlayerMove : CommonMove
 
     void Update()
     {
-        
+        if(PlayerState.MoveAble)
+        {
+            if (PlayerState.ActionLayerNow < 3)
+            {
+                if(Input.GetKeyDown(KeyCode.R) & PlayerState.RollAble)
+                {
+                    Roll(LastMoveDirection,PlayerState.RollAniLength,CharacterData.MaxMoveSpeed * DashAdjust);
+                }
+            }
+
+            if(PlayerState.ActionLayerNow <= 1)
+            {
+                if(Input.GetKeyDown(KeyCode.Escape) & PlayerState.JumpTime < PlayerState.MaxJumpTime)
+                {
+                    Jump();
+                }
+
+                if((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) & PlayerState.GroundTouching)
+                {
+                    Run(-1);
+                }
+                else if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) & PlayerState.GroundTouching)
+                {
+                    Run(1);
+                } 
+                else
+                {
+                    PlayerState.Moveing = false;
+                }
+            }
+        }
+
+        if(!PlayerState.Moveing)
+        {
+            Brake();
+        }
+
+        FinalMoveSpeed = new Vector2(HorizonSpeed, VerticalSpeed);
+        Rd.velocity = FinalMoveSpeed;
     }
 
     private void PlayerInitComponentSet()
@@ -26,5 +64,13 @@ public class PlayerMove : CommonMove
         PlayerState = this.GetComponent<PlayerState>();
     }
 
-    
+    private void Jump()
+    {
+        PlayerState.ActionLayerNow = 1;
+
+        VerticalSpeed = VerticalSpeedMax;
+
+        PlayerState.JumpTime++;
+    }
+
 }

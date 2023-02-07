@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CommonMove : MonoBehaviour
 {
+
     #region 水平速度控制
 
     private float HorizonSpeedMax = 0; //速度上限
@@ -22,6 +23,7 @@ public class CommonMove : MonoBehaviour
     #endregion
 
     #region 垂直速度控制
+
     protected float VerticalSpeedMax = 0; //速度上限
     public float VerticalSpeed = 0; // 運算用 & 當前值
 

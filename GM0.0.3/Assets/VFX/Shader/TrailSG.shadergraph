@@ -1768,7 +1768,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "x": -1.5,
+        "x": -3.0,
         "y": 0.0,
         "z": 0.0,
         "w": 0.0
@@ -2072,7 +2072,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "x": -1.0,
+        "x": -3.0,
         "y": 0.0,
         "z": 0.0,
         "w": 0.0

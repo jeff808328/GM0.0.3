@@ -29,9 +29,9 @@ Material:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     m_Colors:
-    - _Color01: {r: 28.159996, g: 63.999992, b: 46.549103, a: 0}
+    - _Color01: {r: 14.240836, g: 31.999996, b: 23.287956, a: 0}
     - _Color02: {r: 30.151781, g: 34.740093, b: 41.73181, a: 0}
-    - _MainTexSpd: {r: 1.5, g: 0, b: 0, a: 0}
+    - _MainTexSpd: {r: 0.6, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8699881008020295197
 MonoBehaviour:

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class InkAnim : MonoBehaviour
 {
+    //存取CharacterController
+    public CharacterController InkController;
+    
     //地面檢測參數
     public Transform groundCheck;
     public LayerMask groundMask;
@@ -12,9 +15,6 @@ public class InkAnim : MonoBehaviour
     //存取Animator
     public Animator anim;
 
-    //存取CharacterController
-    public CharacterController InkController;
-
     //移動類Hash
     int jumpHash = Animator.StringToHash("Jump");
     int dashHash = Animator.StringToHash("Dash");
@@ -22,25 +22,35 @@ public class InkAnim : MonoBehaviour
     int VelocityYHash = Animator.StringToHash("VelocityY"); 
     //觸地Bool的Hash
     int TouchGroundHash = Animator.StringToHash("TouchGround");
-    
     //掉落類Hash
     int fallStateHash = Animator.StringToHash("Base Layer.Falling");
     int isFallingHash = Animator.StringToHash("isFalling");
     
-    //斬擊Tirgger
-    int SlashHash = Animator.StringToHash("Slash");
+    //斬擊Value
+    int SlashValueHash = Animator.StringToHash("SlashValue");
+    public float slashOriginValue = 10f;
+    float slashValue;
+    public float slashValueDecrease = 0.1f;
+
     //攻擊動畫狀態Hash
     int Slash1StateHash = Animator.StringToHash("Base Layer.Slash1");
     int Slash2StateHash = Animator.StringToHash("Base Layer.Slash2");
     int SlashJumpTo2StateHash = Animator.StringToHash("Base Layer.SlashJumpTo2");
     int Slash3StateHash = Animator.StringToHash("Base Layer.Slash3");
-    //攻擊中Bool的Hash
+    //攻擊中BoolHash
     int isAttackingHash = Animator.StringToHash("isAttacking");
+    //紀錄攻擊階段
+    int attackRound = 1;
+    int AttackRoundHash = Animator.StringToHash("AttackRound");
     
+    //存取動畫階段
+    AnimatorStateInfo stateInfo;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        slashValue = slashOriginValue;
+       
     }
 
     // Update is called once per frame
@@ -89,7 +99,7 @@ public class InkAnim : MonoBehaviour
         }
 
         //調取動畫階段
-        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        stateInfo = anim.GetCurrentAnimatorStateInfo(0);
         //根據動畫階段調整下落Bool
         if(stateInfo.fullPathHash == fallStateHash)
         {
@@ -101,24 +111,47 @@ public class InkAnim : MonoBehaviour
             anim.SetBool(isFallingHash,false);
         }
         
-        //根據動畫階段調整攻擊Bool
+        //根據動畫階段調整攻擊Bool,攻擊時設為true
         if(stateInfo.fullPathHash == Slash1StateHash || stateInfo.fullPathHash == Slash2StateHash || stateInfo.fullPathHash == SlashJumpTo2StateHash || stateInfo.fullPathHash == Slash3StateHash)
         {
             anim.SetBool(isAttackingHash,true);
         }
-
+        //不攻擊時，攻擊Bool設為false，同時重置攻擊階段為1
         if(stateInfo.fullPathHash != Slash1StateHash && stateInfo.fullPathHash != Slash2StateHash && stateInfo.fullPathHash != SlashJumpTo2StateHash && stateInfo.fullPathHash != Slash3StateHash)
         {
             anim.SetBool(isAttackingHash,false);
+            attackRound = 1;
+            anim.SetInteger(AttackRoundHash,attackRound);
         }
 
+        //隨時間減少連擊預備值，Animator設定為低於定值不觸發斬擊
+        if(slashValue>0)
+        {
+            slashValue -= slashValueDecrease;
+               
+        }
+
+        anim.SetFloat(SlashValueHash, slashValue);
 
     }
     
     //攻擊程式
     void Attack()
     {
-        anim.SetTrigger(SlashHash);
+        slashValue = slashOriginValue;
+        
+        //攻擊階段符合時，把連擊數增加，Animator使用增加後的連擊數當下一段攻擊之條件
+        if(stateInfo.fullPathHash == Slash1StateHash)
+        {
+            attackRound = 2;
+            anim.SetInteger(AttackRoundHash,attackRound);
+        }
+        if(stateInfo.fullPathHash == Slash2StateHash)
+        {
+            attackRound = 3;
+            anim.SetInteger(AttackRoundHash,attackRound);
+        }
+        
     }
 
     

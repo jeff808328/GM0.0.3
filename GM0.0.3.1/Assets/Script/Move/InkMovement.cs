@@ -5,11 +5,14 @@ using UnityEngine;
 public class InkMovement : MonoBehaviour
 {
     public CharacterController controller;
+        
     
+    //地面檢測參數
     public Transform groundCheck;
     public LayerMask groundMask;
     public float groundDistance = 0.4f;
-    
+    bool isGrounded;
+    //移動參數
     public float speed = 6f;
     public float gravity = -9.8f;
     public float turnSmoothTime = 0.1f;
@@ -17,14 +20,14 @@ public class InkMovement : MonoBehaviour
     
     float turnSmoothVelocity;
     Vector3 velocity;
-    bool isGrounded;
+    
 
     // Update is called once per frame
     void Update()
     {
         
         
-        //獲取水平(X軸)與垂直(Y軸)輸入
+        //獲取水平(X軸)與垂直(Z軸)輸入
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 

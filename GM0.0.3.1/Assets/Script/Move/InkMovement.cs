@@ -14,6 +14,9 @@ public class InkMovement : MonoBehaviour
     bool isGrounded;
     //移動參數
     public float speed = 6f;
+    public float DashMultiplier = 2f;
+    public float DashDrag = 0.1f;
+    float realSpeed;
     public float gravity = -9.8f;
     public float turnSmoothTime = 0.1f;
     public float jumpHeight = 3f;
@@ -21,6 +24,10 @@ public class InkMovement : MonoBehaviour
     float turnSmoothVelocity;
     Vector3 velocity;
     
+    void Start()
+    {
+        realSpeed = speed;
+    }
 
     // Update is called once per frame
     void Update()
@@ -43,7 +50,7 @@ public class InkMovement : MonoBehaviour
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle,ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
             
-            controller.Move(moveDirection * speed * Time.deltaTime);
+            controller.Move(moveDirection * realSpeed * Time.deltaTime);
         }
 
         //重力加速度
@@ -65,5 +72,16 @@ public class InkMovement : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
+        //衝刺
+        if(Input.GetButtonDown("Dash"))
+        {
+            realSpeed = speed * DashMultiplier;                
+        }
+
+        //衝刺後減速
+        if(realSpeed > speed)
+        {
+            realSpeed -= DashDrag;
+        }
     }
 }

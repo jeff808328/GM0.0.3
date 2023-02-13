@@ -51,7 +51,7 @@ public class InkAnim : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        slashValue = slashOriginValue;
+       
        
     }
 
@@ -129,7 +129,7 @@ public class InkAnim : MonoBehaviour
         //隨時間減少連擊預備值，Animator設定為低於定值不觸發斬擊
         if(slashValue>0)
         {
-            slashValue -= slashValueDecrease;
+            slashValue -= slashValueDecrease * Time.deltaTime;
                
         }
 

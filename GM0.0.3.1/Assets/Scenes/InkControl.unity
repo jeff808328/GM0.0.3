@@ -10710,7 +10710,7 @@ MonoBehaviour:
   groundDistance: 0.6
   anim: {fileID: 6550388339450881068}
   slashOriginValue: 10
-  slashValueDecrease: 0.1
+  slashValueDecrease: 10
 --- !u!1 &6593264516521960720
 GameObject:
   m_ObjectHideFlags: 0

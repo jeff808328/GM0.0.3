@@ -15,6 +15,9 @@ public class InkAnim : MonoBehaviour
     //存取Animator
     public Animator anim;
 
+    //存取動畫階段
+    AnimatorStateInfo stateInfo;
+
     //移動類Hash
     int jumpHash = Animator.StringToHash("Jump");
     int dashHash = Animator.StringToHash("Dash");
@@ -43,8 +46,7 @@ public class InkAnim : MonoBehaviour
     int attackRound = 1;
     int AttackRoundHash = Animator.StringToHash("AttackRound");
     
-    //存取動畫階段
-    AnimatorStateInfo stateInfo;
+    
 
     // Start is called before the first frame update
     void Start()

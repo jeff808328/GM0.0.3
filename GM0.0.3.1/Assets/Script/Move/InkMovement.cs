@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class InkMovement : MonoBehaviour
 {
+    //取得角色控制器
     public CharacterController controller;
-        
+    //存取Ink Animator
+    public Animator inkAnimator;
+
+    //存取動畫階段
+    AnimatorStateInfo stateInfo;
+
+
+    //動畫參數轉Hash
+    int isAttackingHash = Animator.StringToHash("isAttacking");
+
+    //動畫階段轉Hash
+    int DashStateHash = Animator.StringToHash("Base Layer.Dash");
     
     //地面檢測參數
     public Transform groundCheck;
@@ -45,12 +57,16 @@ public class InkMovement : MonoBehaviour
         //向量大於0.1時，移動物件
         if(moveDirection.magnitude >= 0.1f)
         {
+            
             //取得角度(Rad)後，轉換為Degree，並旋轉
             float targetAngle = Mathf.Atan2(faceDirection.x, faceDirection.z) * Mathf.Rad2Deg;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle,ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
             
             controller.Move(moveDirection * realSpeed * Time.deltaTime);
+            
+
+            
         }
 
         //重力加速度
@@ -73,7 +89,7 @@ public class InkMovement : MonoBehaviour
         }
 
         //衝刺
-        if(Input.GetButtonDown("Dash"))
+        if(Input.GetButtonDown("Dash") && stateInfo.fullPathHash != DashStateHash)
         {
             realSpeed = speed * DashMultiplier;                
         }
@@ -81,7 +97,7 @@ public class InkMovement : MonoBehaviour
         //衝刺後減速
         if(realSpeed > speed)
         {
-            realSpeed -= DashDrag;
+            realSpeed -= DashDrag * Time.deltaTime;
         }
     }
 }

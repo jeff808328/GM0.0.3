@@ -7,18 +7,26 @@ public class InkMovement : MonoBehaviour
     //取得角色控制器
     public CharacterController controller;
     //存取Ink Animator
-    public Animator inkAnimator;
+    public Animator anim;
 
     //存取動畫階段
     AnimatorStateInfo stateInfo;
-
+    AnimatorTransitionInfo transitionInfo;
 
     //動畫參數轉Hash
     int isAttackingHash = Animator.StringToHash("isAttacking");
+    //動畫轉場轉Hash
+    int DashToSlash3Hash = Animator.StringToHash("Base Layer.DashToSlash3");
 
     //動畫階段轉Hash
     int DashStateHash = Animator.StringToHash("Base Layer.Dash");
-    
+    int Slash1StateHash = Animator.StringToHash("Base Layer.Slash1");
+    int Slash3StateHash = Animator.StringToHash("Base Layer.Slash3");
+    //動畫參數
+    bool isAttackingBool;
+    int AttackRoundHash = Animator.StringToHash("AttackRound");
+    int attackRound = 1;
+
     //地面檢測參數
     public Transform groundCheck;
     public LayerMask groundMask;
@@ -44,7 +52,18 @@ public class InkMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //測試，AnimatorTransitionInfo
         
+
+        //調取動畫階段
+        stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        //transitionInfo = anim.GetCurrentAnimatorInfo(0);
+
+
+        
+        
+        //取得，正在攻擊，Bool
+        isAttackingBool = anim.GetBool("isAttacking");
         
         //獲取水平(X軸)與垂直(Z軸)輸入
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -54,8 +73,11 @@ public class InkMovement : MonoBehaviour
         Vector2 moveDirection = new Vector2(horizontal, 0f).normalized;
         Vector3 faceDirection = new Vector3(horizontal, 0f, vertical).normalized;
 
-        //向量大於0.1時，移動物件
-        if(moveDirection.magnitude >= 0.1f)
+        //取得玩家斬擊階段
+        attackRound = anim.GetInteger(AttackRoundHash);
+
+        //向量大於0.1時，且當前非斬擊時，移動物件
+        if(moveDirection.magnitude >= 0.1f && !isAttackingBool)
         {
             
             //取得角度(Rad)後，轉換為Degree，並旋轉
@@ -63,11 +85,24 @@ public class InkMovement : MonoBehaviour
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle,ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
             
-            controller.Move(moveDirection * realSpeed * Time.deltaTime);
-            
-
-            
+            controller.Move(moveDirection * realSpeed * Time.deltaTime);   
         }
+
+        //測試，衝刺斬擊獨立移動
+
+        if(moveDirection.magnitude >= 0.1f && stateInfo.fullPathHash == Slash3StateHash && !isGrounded)
+        {
+            controller.Move(moveDirection * realSpeed * Time.deltaTime);
+            velocity.y = -5f; 
+        }
+        // if(transitionInfo.fullPathHash == DashToSlash3Hash)
+        // {
+        //     //取得角度(Rad)後，轉換為Degree，並旋轉
+        //     Debug.Log("SPSlash");          
+        //     controller.Move(moveDirection * realSpeed * Time.deltaTime);
+        // }
+
+
 
         //重力加速度
         velocity.y += gravity * Time.deltaTime;

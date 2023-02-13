@@ -35,6 +35,11 @@ public class InkAnim : MonoBehaviour
     float slashValue;
     public float slashValueDecrease = 0.1f;
 
+    //衝刺動畫狀態Hash
+    int DashStateHash = Animator.StringToHash("Base Layer.Dash");
+    //斬擊動畫判定BoolHash
+    int isDashingHash = Animator.StringToHash("isDashing");
+    bool isDashing = false;
     //攻擊動畫狀態Hash
     int Slash1StateHash = Animator.StringToHash("Base Layer.Slash1");
     int Slash2StateHash = Animator.StringToHash("Base Layer.Slash2");
@@ -62,6 +67,9 @@ public class InkAnim : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
+        //調取動畫階段
+        stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        
         //跑步
         anim.SetFloat(MoveHorizontalHash,Mathf.Abs(horizontal));
         
@@ -72,18 +80,26 @@ public class InkAnim : MonoBehaviour
         if(Input.GetButtonDown("Jump") && isGrounded)
         {
             anim.SetTrigger(jumpHash);
+            slashValue = 0;
         }
         
         //衝刺
-        if(Input.GetButtonDown("Dash"))
+        if(Input.GetButtonDown("Dash") && stateInfo.fullPathHash != DashStateHash)
         {
             anim.SetTrigger(dashHash);
+            slashValue = 0;
         }
-        
-        //攻擊
-        if(Input.GetButtonDown("Slash"))
+        //衝刺動畫Bool切換
+        if(stateInfo.fullPathHash == DashStateHash)
         {
-            Attack();
+            anim.SetBool(isDashingHash,true);
+            isDashing = true;
+        }
+
+        else
+        {
+            anim.SetBool(isDashingHash,false);
+            isDashing = false;
         }
         
         //落下
@@ -100,8 +116,7 @@ public class InkAnim : MonoBehaviour
             anim.SetBool(TouchGroundHash,false);
         }
 
-        //調取動畫階段
-        stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        
         //根據動畫階段調整下落Bool
         if(stateInfo.fullPathHash == fallStateHash)
         {
@@ -125,6 +140,13 @@ public class InkAnim : MonoBehaviour
             attackRound = 1;
             anim.SetInteger(AttackRoundHash,attackRound);
         }
+
+        //攻擊
+        if(Input.GetButtonDown("Slash"))
+        {
+            Attack();           
+        }
+        
 
         //隨時間減少連擊預備值，Animator設定為低於定值不觸發斬擊
         if(slashValue>0)
@@ -153,7 +175,12 @@ public class InkAnim : MonoBehaviour
             attackRound = 3;
             anim.SetInteger(AttackRoundHash,attackRound);
         }
-        
+        //衝刺動畫可強制啟動環形斬
+        if(isDashing)
+        {
+            attackRound = 3;
+            anim.SetInteger(AttackRoundHash,attackRound);
+        }
     }
 
     

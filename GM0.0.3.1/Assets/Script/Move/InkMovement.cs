@@ -37,6 +37,7 @@ public class InkMovement : MonoBehaviour
     public float DashMultiplier = 2f;
     public float DashDrag = 0.1f;
     float realSpeed;
+    float speedStored;
     public float gravity = -9.8f;
     public float turnSmoothTime = 0.1f;
     public float jumpHeight = 3f;
@@ -79,7 +80,8 @@ public class InkMovement : MonoBehaviour
         //向量大於0.1時，且當前非斬擊時，移動物件
         if(moveDirection.magnitude >= 0.1f && !isAttackingBool)
         {
-            
+            //重置儲存的速度
+            speedStored = realSpeed;
             //取得角度(Rad)後，轉換為Degree，並旋轉
             float targetAngle = Mathf.Atan2(faceDirection.x, faceDirection.z) * Mathf.Rad2Deg;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle,ref turnSmoothVelocity, turnSmoothTime);
@@ -88,22 +90,22 @@ public class InkMovement : MonoBehaviour
             controller.Move(moveDirection * realSpeed * Time.deltaTime);   
         }
 
-        //測試，衝刺斬擊獨立移動
+        //衝刺斬擊獨立移動
 
         if(moveDirection.magnitude >= 0.1f && stateInfo.fullPathHash == Slash3StateHash && !isGrounded)
         {
             controller.Move(moveDirection * realSpeed * Time.deltaTime);
             velocity.y = -5f; 
         }
-        // if(transitionInfo.fullPathHash == DashToSlash3Hash)
-        // {
-        //     //取得角度(Rad)後，轉換為Degree，並旋轉
-        //     Debug.Log("SPSlash");          
-        //     controller.Move(moveDirection * realSpeed * Time.deltaTime);
-        // }
-
-
-
+        if(moveDirection.magnitude >= 0.1f && stateInfo.fullPathHash == Slash3StateHash && isGrounded)
+        {
+            if(speedStored >= 0)
+            {
+                speedStored -= DashDrag * Time.deltaTime;
+            } 
+            controller.Move(moveDirection * speedStored * Time.deltaTime);
+        }
+        
         //重力加速度
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);

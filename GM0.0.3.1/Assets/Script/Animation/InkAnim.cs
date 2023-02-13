@@ -7,6 +7,11 @@ public class InkAnim : MonoBehaviour
     //存取CharacterController
     public CharacterController InkController;
     
+    //存取大劍
+    public GameObject greatSwordHand;
+    public GameObject greatSwordBack;
+    //大劍在手中Bool
+    
     //地面檢測參數
     public Transform groundCheck;
     public LayerMask groundMask;
@@ -23,10 +28,10 @@ public class InkAnim : MonoBehaviour
     int dashHash = Animator.StringToHash("Dash");
     int MoveHorizontalHash = Animator.StringToHash("MoveHorizontal");
     int VelocityYHash = Animator.StringToHash("VelocityY"); 
-    //觸地Bool的Hash
+    //觸地BoolHash
     int TouchGroundHash = Animator.StringToHash("TouchGround");
-    //掉落類Hash
-    int fallStateHash = Animator.StringToHash("Base Layer.Falling");
+    //掉落類BoolHash
+    
     int isFallingHash = Animator.StringToHash("isFalling");
     
     //斬擊Value
@@ -35,16 +40,21 @@ public class InkAnim : MonoBehaviour
     float slashValue;
     public float slashValueDecrease = 0.1f;
 
-    //衝刺動畫狀態Hash
-    int DashStateHash = Animator.StringToHash("Base Layer.Dash");
     //斬擊動畫判定BoolHash
     int isDashingHash = Animator.StringToHash("isDashing");
     bool isDashing = false;
-    //攻擊動畫狀態Hash
-    int Slash1StateHash = Animator.StringToHash("Base Layer.Slash1");
-    int Slash2StateHash = Animator.StringToHash("Base Layer.Slash2");
+    //動畫狀態Hash
+    int DashStateHash    = Animator.StringToHash("Base Layer.Dash");
+    int fallingStateHash = Animator.StringToHash("Base Layer.Falling");
+    int fallStateHash    = Animator.StringToHash("Base Layer.Fall");
+    int LTHurtStateHash  = Animator.StringToHash("Base Layer.LTHurt");
+    int HVHurtStateHash  = Animator.StringToHash("Base Layer.HVHurt");
+    int JumpStateHash  = Animator.StringToHash("Base Layer.Jump");
+    int Idle1StateHash  = Animator.StringToHash("Base Layer.Idle1");
+    int Slash1StateHash  = Animator.StringToHash("Base Layer.Slash1");
+    int Slash2StateHash  = Animator.StringToHash("Base Layer.Slash2");
     int SlashJumpTo2StateHash = Animator.StringToHash("Base Layer.SlashJumpTo2");
-    int Slash3StateHash = Animator.StringToHash("Base Layer.Slash3");
+    int Slash3StateHash  = Animator.StringToHash("Base Layer.Slash3");
     //攻擊中BoolHash
     int isAttackingHash = Animator.StringToHash("isAttacking");
     //紀錄攻擊階段
@@ -63,6 +73,19 @@ public class InkAnim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //偵測動畫狀態Tag,並依此啟動、停用背上和手中的劍
+        if(stateInfo.IsTag("InHand"))
+        {
+            greatSwordHand.SetActive(true);
+            greatSwordBack.SetActive(false);
+        }
+        else
+        {
+            greatSwordHand.SetActive(false);
+            greatSwordBack.SetActive(true); 
+        }
+
+        
         //獲取水平(X軸)與垂直(Z軸)輸入
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
@@ -118,12 +141,12 @@ public class InkAnim : MonoBehaviour
 
         
         //根據動畫階段調整下落Bool
-        if(stateInfo.fullPathHash == fallStateHash)
+        if(stateInfo.fullPathHash == fallingStateHash)
         {
             anim.SetBool(isFallingHash,true);
         }
 
-        if(stateInfo.fullPathHash != fallStateHash)
+        if(stateInfo.fullPathHash != fallingStateHash)
         {
             anim.SetBool(isFallingHash,false);
         }
@@ -133,6 +156,7 @@ public class InkAnim : MonoBehaviour
         {
             anim.SetBool(isAttackingHash,true);
         }
+        
         //不攻擊時，攻擊Bool設為false，同時重置攻擊階段為1
         if(stateInfo.fullPathHash != Slash1StateHash && stateInfo.fullPathHash != Slash2StateHash && stateInfo.fullPathHash != SlashJumpTo2StateHash && stateInfo.fullPathHash != Slash3StateHash)
         {
@@ -146,15 +170,12 @@ public class InkAnim : MonoBehaviour
         {
             Attack();           
         }
-        
-
+    
         //隨時間減少連擊預備值，Animator設定為低於定值不觸發斬擊
         if(slashValue>0)
         {
-            slashValue -= slashValueDecrease * Time.deltaTime;
-               
+            slashValue -= slashValueDecrease * Time.deltaTime;           
         }
-
         anim.SetFloat(SlashValueHash, slashValue);
 
     }

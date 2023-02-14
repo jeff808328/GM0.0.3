@@ -7,10 +7,13 @@ public class InkAnim : MonoBehaviour
     //存取CharacterController
     public CharacterController InkController;
     
+    //存取Particle
+
+    public ParticleSystem swordParticle;
+
     //存取大劍
     public GameObject greatSwordHand;
     public GameObject greatSwordBack;
-    //大劍在手中Bool
     
     //地面檢測參數
     public Transform groundCheck;
@@ -22,6 +25,10 @@ public class InkAnim : MonoBehaviour
 
     //存取動畫階段
     AnimatorStateInfo stateInfo;
+
+    //儲存移動輸入
+    float horizontal;
+    float vertical;
 
     //移動類Hash
     int jumpHash = Animator.StringToHash("Jump");
@@ -42,6 +49,7 @@ public class InkAnim : MonoBehaviour
 
     //斬擊動畫判定BoolHash
     int isDashingHash = Animator.StringToHash("isDashing");
+    //衝刺BoolHash
     bool isDashing = false;
     //動畫狀態Hash
     int DashStateHash    = Animator.StringToHash("Base Layer.Dash");
@@ -73,6 +81,66 @@ public class InkAnim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //設定大劍啟用
+        SetActiveOfSword();
+        
+        //測試 設定大劍特效
+        if(stateInfo.fullPathHash == Idle1StateHash)
+        {
+            swordParticle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        }
+        else if(!swordParticle.isEmitting)
+        {   
+            swordParticle.Play(true);
+        }
+
+        
+
+        //獲取輸入與讀取動畫資訊
+        GetInfo();
+        
+        //確認碰觸地面
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+        //基礎移動(跑步、跳躍、衝刺)
+        CharacterStandardMove();
+        
+        //調整衝刺狀態Bool
+        AdjustIsDashingBool();
+        
+        //落下
+        float speedY = InkController.velocity.y;
+        anim.SetFloat(VelocityYHash,speedY);
+        
+        //調整觸地Bool
+        AdjustTouchGroundBool();
+
+        //調整下落Bool
+        AdjustFallingBool();
+        
+        //調整攻擊Bool
+        AdjustAttackBool();
+        
+        //攻擊
+        if(Input.GetButtonDown("Slash"))
+        {
+            Attack();           
+        }
+    
+        //隨時間減少攻擊值，Animator設定為低於定值不觸發斬擊
+        if(slashValue>0)
+        {
+            slashValue -= slashValueDecrease * Time.deltaTime;           
+        }
+        //同步攻擊值
+        anim.SetFloat(SlashValueHash, slashValue);
+
+    }
+    
+    
+    //設定大劍啟用
+    void SetActiveOfSword()
+    {
         //偵測動畫狀態Tag,並依此啟動、停用背上和手中的劍
         if(stateInfo.IsTag("InHand"))
         {
@@ -84,20 +152,27 @@ public class InkAnim : MonoBehaviour
             greatSwordHand.SetActive(false);
             greatSwordBack.SetActive(true); 
         }
+    }
+    
+    //調整觸地Bool
+    void AdjustTouchGroundBool()
+    {
+        //依據是否碰觸地面，調整Bool
+        if(isGrounded)
+        {
+            anim.SetBool(TouchGroundHash,true);
+        }
+        else
+        {
+            anim.SetBool(TouchGroundHash,false);
+        }
+    }
 
-        
-        //獲取水平(X軸)與垂直(Z軸)輸入
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-
-        //調取動畫階段
-        stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-        
+    //基礎移動(跑步、跳躍、衝刺)
+    void CharacterStandardMove()
+    {
         //跑步
-        anim.SetFloat(MoveHorizontalHash,Mathf.Abs(horizontal));
-        
-        //確認碰觸地面
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        anim.SetFloat(MoveHorizontalHash,Mathf.Abs(horizontal));          
         
         //跳躍
         if(Input.GetButtonDown("Jump") && isGrounded)
@@ -112,45 +187,41 @@ public class InkAnim : MonoBehaviour
             anim.SetTrigger(dashHash);
             slashValue = 0;
         }
+    }
+
+    //調整衝刺狀態Bool
+    void AdjustIsDashingBool()
+    {
         //衝刺動畫Bool切換
         if(stateInfo.fullPathHash == DashStateHash)
         {
             anim.SetBool(isDashingHash,true);
             isDashing = true;
         }
-
         else
         {
             anim.SetBool(isDashingHash,false);
             isDashing = false;
         }
-        
-        //落下
-        float speedY = InkController.velocity.y;
-        anim.SetFloat(VelocityYHash,speedY);
-        
-        //依據是否碰觸地面，調整Bool
-        if(isGrounded)
-        {
-            anim.SetBool(TouchGroundHash,true);
-        }
-        if(!isGrounded)
-        {
-            anim.SetBool(TouchGroundHash,false);
-        }
+    }
 
-        
+    //調整下落Bool
+    void AdjustFallingBool()
+    {
         //根據動畫階段調整下落Bool
         if(stateInfo.fullPathHash == fallingStateHash)
         {
             anim.SetBool(isFallingHash,true);
         }
-
-        if(stateInfo.fullPathHash != fallingStateHash)
+        else
         {
             anim.SetBool(isFallingHash,false);
         }
-        
+    }
+
+    //調整攻擊Bool
+    void AdjustAttackBool()
+    {
         //根據動畫階段調整攻擊Bool,攻擊時設為true
         if(stateInfo.fullPathHash == Slash1StateHash || stateInfo.fullPathHash == Slash2StateHash || stateInfo.fullPathHash == SlashJumpTo2StateHash || stateInfo.fullPathHash == Slash3StateHash)
         {
@@ -158,28 +229,14 @@ public class InkAnim : MonoBehaviour
         }
         
         //不攻擊時，攻擊Bool設為false，同時重置攻擊階段為1
-        if(stateInfo.fullPathHash != Slash1StateHash && stateInfo.fullPathHash != Slash2StateHash && stateInfo.fullPathHash != SlashJumpTo2StateHash && stateInfo.fullPathHash != Slash3StateHash)
+        else
         {
             anim.SetBool(isAttackingHash,false);
             attackRound = 1;
             anim.SetInteger(AttackRoundHash,attackRound);
         }
-
-        //攻擊
-        if(Input.GetButtonDown("Slash"))
-        {
-            Attack();           
-        }
-    
-        //隨時間減少連擊預備值，Animator設定為低於定值不觸發斬擊
-        if(slashValue>0)
-        {
-            slashValue -= slashValueDecrease * Time.deltaTime;           
-        }
-        anim.SetFloat(SlashValueHash, slashValue);
-
     }
-    
+
     //攻擊程式
     void Attack()
     {
@@ -204,5 +261,15 @@ public class InkAnim : MonoBehaviour
         }
     }
 
-    
+    //獲取輸入與讀取動畫資訊
+    void GetInfo()
+    {
+        //獲取水平(X軸)與垂直(Z軸)輸入
+        horizontal = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
+
+        //調取動畫階段
+        stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+    }
+
 }

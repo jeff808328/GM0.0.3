@@ -77,7 +77,7 @@ public class InkMovement : MonoBehaviour
         //取得玩家斬擊階段
         attackRound = anim.GetInteger(AttackRoundHash);
 
-        //向量大於0.1時，且當前非斬擊時，移動物件
+        //(向量大於0.1時，且當前非斬擊時) 或 在衝刺時 ，移動物件
         if(moveDirection.magnitude >= 0.1f && !isAttackingBool)
         {
             //重置儲存的速度

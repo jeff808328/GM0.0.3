@@ -29,6 +29,7 @@ public class CommonMove : MonoBehaviour
 
     private float GravityValue; // 重力初始值
     public float GravityAdjust; // 重力調整值 
+    protected float OriGravityAdjust;
     public float GravityMax; // 重力最大值
 
     protected int MaxJumpTimes; // 最大跳躍次數
@@ -69,6 +70,8 @@ public class CommonMove : MonoBehaviour
 
         OriginAddSpeedAdjust = AddSpeedAdjust;
         OriginMinusSpeedAdjust = MinusSpeedAdjust;
+
+        OriGravityAdjust = GravityAdjust;
     }
 
     protected void InitComponmentSet()
@@ -79,6 +82,7 @@ public class CommonMove : MonoBehaviour
     protected void Run(int Direction) // 加速 // 在可操控情況下可用
     {
         CommonState.ActionLayerNow = 1;
+        CommonState.Moveing = true;
 
         if (Direction != LastMoveDirection)
             Flip(Direction);
@@ -121,6 +125,8 @@ public class CommonMove : MonoBehaviour
 
     protected void Gravity()
     {
+        GravityAdjust = OriGravityAdjust;
+
         VerticalSpeed -= GravityValue * Time.deltaTime * GravityAdjust;
 
         VerticalSpeed = Mathf.Clamp(VerticalSpeed, GravityMax, VerticalSpeedMax);

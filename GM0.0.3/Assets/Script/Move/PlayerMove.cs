@@ -44,15 +44,24 @@ public class PlayerMove : CommonMove
                 } 
                 else
                 {
+                    Brake();
                     PlayerState.Moveing = false;
                 }
             }
         }
 
-        if(!PlayerState.Moveing)
+        if(!PlayerState.GroundTouching)
         {
-            Brake();
+            PlayerState.ActionLayerNow = 1;
+            
         }
+        else
+        {
+            PlayerState.JumpTime = 0;
+            GravityAdjust = 0;
+        }
+
+        Gravity();
 
         FinalMoveSpeed = new Vector2(HorizonSpeed, VerticalSpeed);
         Rd.velocity = FinalMoveSpeed;

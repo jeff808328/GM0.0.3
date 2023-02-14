@@ -505,6 +505,9 @@ GameObject:
   - component: {fileID: 357006625}
   - component: {fileID: 357006626}
   - component: {fileID: 357006627}
+  - component: {fileID: 357006630}
+  - component: {fileID: 357006629}
+  - component: {fileID: 357006628}
   m_Layer: 0
   m_Name: Ink
   m_TagString: Untagged
@@ -565,6 +568,89 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 1}
   m_Size: {x: 0.7, y: 2}
   m_Direction: 0
+--- !u!114 &357006628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357006624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cab6b44c0557a147be49103a047ab8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ground:
+    serializedVersion: 2
+    m_Bits: 64
+  Wall:
+    serializedVersion: 2
+    m_Bits: 128
+  WallBoxHeight: 2
+  WallBoxWidth: 0.25
+  WallBoxHeightOffset: 0.85
+  WallBoxWidthOffset: 0.5
+  GroundBoxHeight: 0.25
+  GroundBoxWidth: 0.75
+  GroundBoxHeightOffset: -0.15
+  GroundBoxWidthOffset: 0
+--- !u!114 &357006629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357006624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eefd290986108854cb7c3945f49757df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HorizonSpeed: 0
+  AddSpeedAdjust: 5
+  MinusSpeedAdjust: 6
+  VerticalSpeed: 0
+  GravityAdjust: 5
+  GravityMax: 0
+  DashAdjust: 0
+  FinalMoveSpeed: {x: 0, y: 0}
+  CharacterData: {fileID: 11400000, guid: 8ce237187275f8c4096810829bf0c1a3, type: 2}
+--- !u!114 &357006630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357006624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e41c82c63b280e4cb6e4ab6b42636c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterData: {fileID: 11400000, guid: 8ce237187275f8c4096810829bf0c1a3, type: 2}
+  ActionLayerNow: 0
+  GroundTouching: 0
+  WallTouching: 0
+  IsUnbreakable: 0
+  UnbreakableLength: 0
+  Hurting: 0
+  LightHurtAniLength: 0
+  HeavyHurtAniLength: 0
+  AttackAble: 0
+  AttackIng: 0
+  AttackCD: 0
+  AttackAniLength: 0
+  RollCD: 0
+  RollAniLength: 0
+  RollAble: 0
+  Rolling: 0
+  MoveAble: 0
+  Moveing: 0
+  MaxJumpTime: 0
+  JumpTime: 0
+  JumpAble: 0
+  ComboAttackAble: 0
+  Combo: 0
 --- !u!1 &1144151464
 GameObject:
   m_ObjectHideFlags: 0

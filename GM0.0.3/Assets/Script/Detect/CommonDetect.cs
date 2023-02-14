@@ -41,7 +41,15 @@ public class CommonDetect : MonoBehaviour
         GroundBoxPos = new Vector2(this.transform.position.x + GroundBoxWidthOffset, this.transform.position.y + GroundBoxHeightOffset);
 
         CommonState.GroundTouching = Physics2D.OverlapBox(GroundBoxPos, GroundBoxSize, 0, Ground);
-        CommonState.WallTouching = (Physics2D.OverlapBox(LeftWallBoxPos, WallBoxSize, 0, Ground) || (Physics2D.OverlapBox(RightWallBoxPos, WallBoxSize, 0, Ground)) ? true : false);
+        CommonState.WallTouching = (Physics2D.OverlapBox(LeftWallBoxPos, WallBoxSize, 0, Wall) || (Physics2D.OverlapBox(RightWallBoxPos, WallBoxSize, 0,Wall)) ? true : false);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(GroundBoxPos, GroundBoxSize);
+        Gizmos.DrawWireCube(RightWallBoxPos, WallBoxSize);
+        Gizmos.DrawWireCube(LeftWallBoxPos, WallBoxSize);
     }
 
 }

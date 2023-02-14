@@ -46,7 +46,15 @@ public class CommonMove : MonoBehaviour
 
     [SerializeField] protected Vector2 FinalMoveSpeed;
 
-    #endregion 
+    #endregion
+
+
+    #region 角度控制
+
+    public float RightAngle;
+    public float LeftAngle;
+
+    #endregion
 
     #region 組件
 
@@ -72,6 +80,8 @@ public class CommonMove : MonoBehaviour
         OriginMinusSpeedAdjust = MinusSpeedAdjust;
 
         OriGravityAdjust = GravityAdjust;
+
+        this.transform.eulerAngles = new Vector3(0, RightAngle, 0);
     }
 
     protected void InitComponmentSet()
@@ -98,12 +108,12 @@ public class CommonMove : MonoBehaviour
         if (Direction >= 0)
         {
             this.transform.localScale = new Vector3(1, 1, 1);
-            //    this.transform.eulerAngles = new Vector3(135, 0, 0);
+            this.transform.eulerAngles = new Vector3(0, RightAngle, 0);
         }
         else
         {
             this.transform.localScale = new Vector3(-1, 1, 1);
-            //     this.transform.eulerAngles = new Vector3(55, 0, 0);
+            this.transform.eulerAngles = new Vector3(0, LeftAngle, 0);
         }
     }
 
@@ -125,8 +135,6 @@ public class CommonMove : MonoBehaviour
 
     protected void Gravity()
     {
-        GravityAdjust = OriGravityAdjust;
-
         VerticalSpeed -= GravityValue * Time.deltaTime * GravityAdjust;
 
         VerticalSpeed = Mathf.Clamp(VerticalSpeed, GravityMax, VerticalSpeedMax);

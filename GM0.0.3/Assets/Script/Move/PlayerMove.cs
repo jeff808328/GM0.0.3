@@ -29,7 +29,7 @@ public class PlayerMove : CommonMove
 
             if(PlayerState.ActionLayerNow <= 1)
             {
-                if(Input.GetKeyDown(KeyCode.Escape) & PlayerState.JumpTime < PlayerState.MaxJumpTime)
+                if(Input.GetKeyDown(KeyCode.J) & PlayerState.JumpTime < PlayerState.MaxJumpTime)
                 {
                     Jump();
                 }
@@ -53,7 +53,7 @@ public class PlayerMove : CommonMove
         if(!PlayerState.GroundTouching)
         {
             PlayerState.ActionLayerNow = 1;
-            
+            GravityAdjust = OriGravityAdjust;
         }
         else
         {

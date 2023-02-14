@@ -551,7 +551,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &357006627
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -611,9 +611,11 @@ MonoBehaviour:
   MinusSpeedAdjust: 6
   VerticalSpeed: 0
   GravityAdjust: 5
-  GravityMax: 0
+  GravityMax: -20
   DashAdjust: 0
   FinalMoveSpeed: {x: 0, y: 0}
+  RightAngle: 100
+  LeftAngle: 260
   CharacterData: {fileID: 11400000, guid: 8ce237187275f8c4096810829bf0c1a3, type: 2}
 --- !u!114 &357006630
 MonoBehaviour:

@@ -48,6 +48,7 @@ public class CommonState : MonoBehaviour
     [Header("²¾°Ê³]©w")]
     public bool MoveAble;
     public bool Moveing;
+    public float RunAniLength;
 
     protected void InitValueSet()
     {

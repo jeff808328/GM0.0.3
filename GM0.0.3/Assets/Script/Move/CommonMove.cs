@@ -7,7 +7,7 @@ public class CommonMove : MonoBehaviour
 
     #region 水平速度控制
 
-    private float HorizonSpeedMax = 0; //速度上限
+    protected float HorizonSpeedMax = 0; //速度上限
     public float HorizonSpeed = 0; // 運算用 & 當前值
 
     public float AddSpeedAdjust; // 移動速度控制, 直接用 Time.DeltaTime 值太小
@@ -120,6 +120,7 @@ public class CommonMove : MonoBehaviour
     protected void Brake() // 在玩家無輸入且非無敵狀況時可用
     {
         CommonState.ActionLayerNow = 0;
+        CommonState.Moveing = false;
 
         HorizonSpeed -= MinusSpeed * LastMoveDirection * Time.deltaTime * MinusSpeedAdjust;
 

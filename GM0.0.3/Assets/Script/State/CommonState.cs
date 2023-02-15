@@ -37,7 +37,7 @@ public class CommonState : MonoBehaviour
     public bool AttackAble;
     public bool AttackIng;
     public float AttackCD;
-    public float AttackAniLength;
+    public float[] AttackAniLength;
 
     [Header("翻滾設定")]
     public float RollCD;
@@ -49,6 +49,11 @@ public class CommonState : MonoBehaviour
     public bool MoveAble;
     public bool Moveing;
     public float RunAniLength;
+
+    [Header("跳躍設定")]
+    public int MaxJumpTime;
+    public int JumpTime;
+    public bool JumpAble;
 
     protected void InitValueSet()
     {
@@ -67,6 +72,10 @@ public class CommonState : MonoBehaviour
 
         MoveAble = true;
         Moveing = false;
+
+        MaxJumpTime = CharacterData.AirJumpTimes;
+        JumpTime = 0;
+        JumpAble = true;
     }
 
     public void InitComponmentSet()

@@ -41,37 +41,14 @@ public class PlayerMove : CommonMove
                 {
                     Run(-1);
 
-                    if (Mathf.Abs(HorizonSpeed) < HorizonSpeedMax * 0.5f & LastMoveAni + PlayerState.RunAniLength < Time.time)
-                    {
-                        LastMoveAni = Time.time;
-                        CommonAnimation.PlayAnimation(1, 0, 0.4f);
-                    }
-                    else if (Mathf.Abs(HorizonSpeed) > HorizonSpeedMax * 0.5f & LastMoveAni + PlayerState.RunAniLength < Time.time)
-                    {
-                        LastMoveAni = Time.time;
-                        CommonAnimation.PlayAnimation(2, 0.2f, 0.5f);
-                    }
                 }
                 else if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) & PlayerState.GroundTouching)
                 {
                     Run(1);
-
-                    if (Mathf.Abs(HorizonSpeed) < HorizonSpeedMax & LastMoveAni + PlayerState.RunAniLength < Time.time)
-                    {
-                        LastMoveAni = Time.time;
-                        CommonAnimation.PlayAnimation(1, 0, 0.4f);
-                    }
-                    else if (Mathf.Abs(HorizonSpeed) > HorizonSpeedMax  & LastMoveAni + PlayerState.RunAniLength < Time.time)
-                    {
-                        LastMoveAni = Time.time;
-                        CommonAnimation.PlayAnimation(2, 0.2f, 0.5f);
-                    }
                 }
                 else
                 {
-                    CommonAnimation.PlayAnimation(0, 0, 1.3f);
                     Brake();
-                    PlayerState.Moveing = false;
                 }
 
 
@@ -105,13 +82,6 @@ public class PlayerMove : CommonMove
         LastMoveAni = Time.time;
     }
 
-    private void Jump()
-    {
-        PlayerState.ActionLayerNow = 1;
 
-        VerticalSpeed = VerticalSpeedMax;
-
-        PlayerState.JumpTime++;
-    }
 
 }

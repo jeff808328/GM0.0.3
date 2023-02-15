@@ -523,7 +523,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 357006624}
-  m_LocalRotation: {x: 0, y: 0.92387956, z: 0, w: 0.38268343}
+  m_LocalRotation: {x: 0, y: 0.76604444, z: 0, w: 0.64278764}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -531,7 +531,7 @@ Transform:
   - {fileID: 5885210556279094929}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 100, z: 0}
 --- !u!50 &357006626
 Rigidbody2D:
   serializedVersion: 4
@@ -567,7 +567,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 1}
-  m_Size: {x: 0.7, y: 2}
+  m_Size: {x: 2, y: 2}
   m_Direction: 0
 --- !u!114 &357006628
 MonoBehaviour:
@@ -615,8 +615,8 @@ MonoBehaviour:
   GravityMax: -20
   DashAdjust: 0
   FinalMoveSpeed: {x: 0, y: 0}
-  RightAngle: 135
-  LeftAngle: 225
+  RightAngle: 100
+  LeftAngle: 260
   CharacterData: {fileID: 11400000, guid: 8ce237187275f8c4096810829bf0c1a3, type: 2}
 --- !u!114 &357006630
 MonoBehaviour:
@@ -642,9 +642,12 @@ MonoBehaviour:
   AttackAble: 0
   AttackIng: 0
   AttackCD: 0
-  AttackAniLength: 0
-  RollCD: 0
-  RollAniLength: 0
+  AttackAniLength:
+  - 1
+  - 0.9
+  - 1.5
+  RollCD: 0.2
+  RollAniLength: 0.5
   RollAble: 0
   Rolling: 0
   MoveAble: 0
@@ -668,6 +671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationName:
+  - Idle
   - RunPreCycle
   - RunCycle
 --- !u!1 &1144151464
@@ -1614,7 +1618,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279853738641043446}
   m_LocalRotation: {x: 0.00000009362675, y: 0.00000009362675, z: -8.7659685e-15, w: 1}
-  m_LocalPosition: {x: -0.0037566423, y: -0.38088036, z: -0.0025422475}
+  m_LocalPosition: {x: -0.0037568212, y: -0.38088036, z: -0.0025422475}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

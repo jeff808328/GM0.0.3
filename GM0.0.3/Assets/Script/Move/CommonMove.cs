@@ -103,6 +103,15 @@ public class CommonMove : MonoBehaviour
         LastMoveDirection = Direction; // 紀錄當前移動方向,轉向和減速用
     }
 
+    protected void Jump()
+    {
+        CommonState.ActionLayerNow = 1;
+
+        VerticalSpeed = VerticalSpeedMax;
+
+        CommonState.JumpTime++;
+    }
+
     protected void Flip(int Direction) // 翻面 // Run的備註
     {
         if (Direction >= 0)

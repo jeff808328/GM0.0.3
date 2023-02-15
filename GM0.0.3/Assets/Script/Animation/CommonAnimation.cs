@@ -10,14 +10,6 @@ public class CommonAnimation : MonoBehaviour
     void Start()
     {
         Animator = GetComponentInChildren<Animator>();
-
-        PlayAnimation(0, 0, 1.3f);
     }
 
-
-
-    public void PlayAnimation(int AnimationIndex, float TransDuration, float AnimationLength)
-    {
-        Animator.CrossFade(AnimationName[AnimationIndex], TransDuration, 0, AnimationLength);
-    }
 }

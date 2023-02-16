@@ -11,7 +11,7 @@ public class CommonMove : MonoBehaviour
     [HideInInspector] public float HorizonSpeed = 0; // 運算用 & 當前值
 
     public float AddSpeedAdjust; // 移動速度控制, 直接用 Time.DeltaTime 值太小
-    private float OriginAddSpeedAdjust;
+    protected float OriginAddSpeedAdjust;
 
     [SerializeField] protected float MinusSpeedAdjust; // 移動速度控制, 直接用 Time.DeltaTime 值太小
     private float OriginMinusSpeedAdjust;
@@ -107,6 +107,8 @@ public class CommonMove : MonoBehaviour
     {
         CommonState.ActionLayerNow = 1;
 
+        CommonState.Jumping = true;
+
         VerticalSpeed = VerticalSpeedMax;
 
         CommonState.JumpTime++;
@@ -116,13 +118,16 @@ public class CommonMove : MonoBehaviour
     {
         if (Direction >= 0)
         {
-            this.transform.localScale = new Vector3(1, 1, 1);
             this.transform.eulerAngles = new Vector3(0, RightAngle, 0);
         }
         else
         {
-            this.transform.localScale = new Vector3(-1, 1, 1);
             this.transform.eulerAngles = new Vector3(0, LeftAngle, 0);
+        }
+
+        if(!CommonState.GroundTouching)
+        {
+            HorizonSpeed *= -0.75f;
         }
     }
 

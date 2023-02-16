@@ -37,12 +37,12 @@ public class PlayerMove : CommonMove
                     Jump();
                 }
 
-                if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) & PlayerState.GroundTouching)
+                if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
                 {
                     Run(-1);
 
                 }
-                else if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) & PlayerState.GroundTouching)
+                else if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
                 {
                     Run(1);
                 }
@@ -50,20 +50,21 @@ public class PlayerMove : CommonMove
                 {
                     Brake();
                 }
-
-
             }
         }
 
         if (!PlayerState.GroundTouching)
         {
             PlayerState.ActionLayerNow = 1;
-            GravityAdjust = OriGravityAdjust;
+            GravityMax = -20;
+            AddSpeedAdjust *= 0.5f;
         }
         else
         {
+            AddSpeedAdjust = OriginAddSpeedAdjust;
             PlayerState.JumpTime = 0;
-            GravityAdjust = 0;
+            PlayerState.Jumping = false;
+            GravityMax = 0;
         }
 
         Gravity();

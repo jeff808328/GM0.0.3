@@ -8,7 +8,7 @@ public class CommonMove : MonoBehaviour
     #region 水平速度控制
 
     protected float HorizonSpeedMax = 0; //速度上限
-    public float HorizonSpeed = 0; // 運算用 & 當前值
+    [HideInInspector] public float HorizonSpeed = 0; // 運算用 & 當前值
 
     public float AddSpeedAdjust; // 移動速度控制, 直接用 Time.DeltaTime 值太小
     private float OriginAddSpeedAdjust;
@@ -25,7 +25,7 @@ public class CommonMove : MonoBehaviour
     #region 垂直速度控制
 
     protected float VerticalSpeedMax = 0; //速度上限
-    public float VerticalSpeed = 0; // 運算用 & 當前值
+    [HideInInspector] public float VerticalSpeed = 0; // 運算用 & 當前值
 
     private float GravityValue; // 重力初始值
     public float GravityAdjust; // 重力調整值 

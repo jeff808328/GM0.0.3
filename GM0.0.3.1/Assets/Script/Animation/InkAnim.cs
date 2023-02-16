@@ -46,6 +46,21 @@ public class InkAnim : MonoBehaviour
     public float slashOriginValue = 10f;
     float slashValue;
     public float slashValueDecrease = 0.1f;
+    //命中判定
+    public Transform attackPoint;
+
+    public float attackRange = 0.5f;
+    public Vector3 attackArea;
+    public LayerMask enemyLayers;
+    
+    //儲存動畫Hash值，在執行底端與當前動畫Hash值同步，用以確認動畫是否切換
+    
+    int storeCurrentAnimStateHash;
+
+
+    //命中Array儲存
+    Collider[] hitEnemies;
+    GameObject[] hittedEnemies;
 
     //斬擊動畫判定BoolHash
     int isDashingHash = Animator.StringToHash("isDashing");
@@ -84,17 +99,8 @@ public class InkAnim : MonoBehaviour
         //設定大劍啟用
         SetActiveOfSword();
         
-        //測試 設定大劍特效
-        if(stateInfo.fullPathHash == Idle1StateHash)
-        {
-            swordParticle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-        }
-        else if(!swordParticle.isEmitting)
-        {   
-            swordParticle.Play(true);
-        }
-
-        
+        //設定大劍特效
+        AdjustSwordEffect();
 
         //獲取輸入與讀取動畫資訊
         GetInfo();
@@ -121,11 +127,17 @@ public class InkAnim : MonoBehaviour
         //調整攻擊Bool
         AdjustAttackBool();
         
+        //重置受擊物件Tag
+        ReverseHittedTag();
+
         //攻擊
         if(Input.GetButtonDown("Slash"))
         {
             Attack();           
         }
+
+        //偵測攻擊
+        AttackDetect();
     
         //隨時間減少攻擊值，Animator設定為低於定值不觸發斬擊
         if(slashValue>0)
@@ -134,6 +146,9 @@ public class InkAnim : MonoBehaviour
         }
         //同步攻擊值
         anim.SetFloat(SlashValueHash, slashValue);
+
+        //同步當前動畫Hash值
+        storeCurrentAnimStateHash = stateInfo.fullPathHash;
 
     }
     
@@ -154,6 +169,20 @@ public class InkAnim : MonoBehaviour
         }
     }
     
+    //設定大劍特效
+    void AdjustSwordEffect()
+    {
+        //設定大劍特效
+        if(stateInfo.fullPathHash == Idle1StateHash)
+        {
+            swordParticle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        }
+        else if(!swordParticle.isEmitting)
+        {   
+            swordParticle.Play(true);
+        }
+    }
+
     //調整觸地Bool
     void AdjustTouchGroundBool()
     {
@@ -179,6 +208,7 @@ public class InkAnim : MonoBehaviour
         {
             anim.SetTrigger(jumpHash);
             slashValue = 0;
+
         }
         
         //衝刺
@@ -234,31 +264,103 @@ public class InkAnim : MonoBehaviour
             anim.SetBool(isAttackingHash,false);
             attackRound = 1;
             anim.SetInteger(AttackRoundHash,attackRound);
+
+            //恢復受擊目標Tag
+            hittedEnemies = GameObject.FindGameObjectsWithTag("Hitted");
+            foreach(GameObject enemy in hittedEnemies)
+            {
+                enemy.tag = "Untagged";
+            }
         }
     }
 
+    //恢復受擊物件的Tag，從Hitted變回Untagged
+    void ReverseHittedTag()
+    {
+        //Debug.Log(stateInfo.normalizedTime % 1.0f);
+
+        if(stateInfo.fullPathHash != storeCurrentAnimStateHash && anim.GetBool("isAttacking"))
+        {
+            Debug.Log("Reset");
+            
+            hittedEnemies = GameObject.FindGameObjectsWithTag("Hitted");
+            foreach(GameObject enemy in hittedEnemies)
+            {
+                enemy.tag = "Untagged";
+            }
+        }
+    }
+    
     //攻擊程式
     void Attack()
     {
+        //重置攻擊值
         slashValue = slashOriginValue;
-        
+
         //攻擊階段符合時，把連擊數增加，Animator使用增加後的連擊數當下一段攻擊之條件
-        if(stateInfo.fullPathHash == Slash1StateHash)
+        if(stateInfo.fullPathHash == Slash1StateHash && attackRound != 2)
         {
             attackRound = 2;
             anim.SetInteger(AttackRoundHash,attackRound);
+
+            
+
         }
-        if(stateInfo.fullPathHash == Slash2StateHash)
+        if(stateInfo.fullPathHash == Slash2StateHash && attackRound !=3)
         {
             attackRound = 3;
             anim.SetInteger(AttackRoundHash,attackRound);
+
+            
+        }
+
+        if(stateInfo.fullPathHash == Slash3StateHash )
+        {
+            
+            
         }
         //衝刺動畫可強制啟動環形斬
         if(isDashing)
         {
             attackRound = 3;
             anim.SetInteger(AttackRoundHash,attackRound);
+
+            
         }
+    }
+    
+    
+    
+    void AttackDetect()
+    {
+        
+        //在攻擊動畫期間執行
+        if(anim.GetBool("isAttacking"))
+        {
+            //偵測敵人
+            hitEnemies = Physics.OverlapBox(attackPoint.position, attackArea, greatSwordHand.transform.rotation, enemyLayers);
+        
+            //傷害敵人
+            foreach(Collider enemy in hitEnemies)
+            {
+                if(enemy.tag != "Hitted") 
+                {
+                    enemy.tag = "Hitted";
+                    //this.gameObject.tag = "Hitted";
+                    Debug.Log("We hit" + enemy.name);
+                }
+                
+            }
+        }
+    }
+
+    //繪製攻擊區域
+    void OnDrawGizmosSelected()
+    {
+        if(attackPoint == null)
+            return;
+
+        Gizmos.DrawWireCube(attackPoint.position,attackArea);        
     }
 
     //獲取輸入與讀取動畫資訊

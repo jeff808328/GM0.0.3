@@ -53,6 +53,7 @@ public class CommonMove : MonoBehaviour
 
     public float RightAngle;
     public float LeftAngle;
+    public float FlipLength;
 
     #endregion
 
@@ -95,7 +96,7 @@ public class CommonMove : MonoBehaviour
         CommonState.Moveing = true;
 
         if (Direction != LastMoveDirection)
-            Flip(Direction);
+            StartCoroutine(Flip(Direction));
 
         HorizonSpeed += AddSpeed * Direction * Time.deltaTime * AddSpeedAdjust; // v = v0 + at*調整值
         HorizonSpeed = Mathf.Clamp(HorizonSpeed, -HorizonSpeedMax, HorizonSpeedMax); // 避免超過速度上限
@@ -113,23 +114,52 @@ public class CommonMove : MonoBehaviour
 
         CommonState.JumpTime++;
     }
-
-    protected void Flip(int Direction) // 翻面 // Run的備註
+    protected IEnumerator Flip(int Direction)// 翻面 // Run的備註
     {
-        if (Direction >= 0)
-        {
-            this.transform.eulerAngles = new Vector3(0, RightAngle, 0);
-        }
-        else
-        {
-            this.transform.eulerAngles = new Vector3(0, LeftAngle, 0);
-        }
+        float t = 0;
+        float angle = 0;
+        float startangle = transform.rotation.y;
 
-        if(!CommonState.GroundTouching)
+        if (!CommonState.GroundTouching)
         {
             HorizonSpeed *= -0.75f;
         }
+
+
+        if(Direction >= 0)
+        {
+            while (t < FlipLength)
+            {
+                angle = Mathf.Lerp(startangle, RightAngle, t / FlipLength);
+
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, angle,0);
+
+                t += Time.deltaTime;
+
+                Debug.Log("r ing");
+            }
+
+        }
+        else
+        {
+            while (t < FlipLength)
+            {
+                angle = Mathf.Lerp(startangle, LeftAngle, t / FlipLength);
+
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, angle, 0);
+
+                t += Time.deltaTime;
+
+                Debug.Log("l ing");
+            }
+        }
+
+        yield return null;
+   
     }
+
+ 
+
 
     protected void Brake() // 在玩家無輸入且非無敵狀況時可用
     {

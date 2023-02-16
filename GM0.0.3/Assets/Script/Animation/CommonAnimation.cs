@@ -14,6 +14,9 @@ public class CommonAnimation : MonoBehaviour
 
     protected void CommonUpdate()
     {
+
+        Animator.SetBool("GroundTouching", CommonState.GroundTouching);
+
         if (CommonState.GroundTouching)
             Animator.SetBool("Moving", CommonState.Moveing);
 

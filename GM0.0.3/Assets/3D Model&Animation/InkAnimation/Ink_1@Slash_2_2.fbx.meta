@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 178cc4c137427bf4e87359766df027a3
+guid: 1bb144fa9017186428fad93854d53b24
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: Jump
+    second: Slash_1
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -36,11 +36,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Jump
+      name: Slash_1
       takeName: Take 001
       internalID: 0
-      firstFrame: 205
-      lastFrame: 219
+      firstFrame: -10
+      lastFrame: -4
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -63,7 +63,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 205
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []

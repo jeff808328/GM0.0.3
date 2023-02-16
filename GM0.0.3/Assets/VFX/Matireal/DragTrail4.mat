@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8813145778230824224
+--- !u!114 &-8392909659998280219
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DragTrail3
-  m_Shader: {fileID: -6465566751694194690, guid: b01c2ae647e18034ca96402445a7da84, type: 3}
+  m_Name: DragTrail4
+  m_Shader: {fileID: -6465566751694194690, guid: 8c36b512384a86f478b59adc8caa37aa, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -34,7 +34,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 9e61a2b6a3de9fb42bb75dd64cd854d7, type: 3}
+        m_Texture: {fileID: 2800000, guid: 84b76186e690c0e498870a5d124c044c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -43,8 +43,8 @@ Material:
     - _BUILTIN_QueueOffset: 0
     - _DissolveScale: 20
     m_Colors:
-    - _Color01: {r: 0, g: 29.508846, b: 23.551094, a: 0}
-    - _Color02: {r: 135.17154, g: 229.25093, b: 163.39536, a: 0}
-    - _DissolveSpd: {r: -0.3, g: 0, b: 0, a: 0}
-    - _MainTexSpd: {r: -0.5, g: 0, b: 0, a: 0}
+    - _Color01: {r: 21.118923, g: 45.254833, b: 40.640614, a: 0}
+    - _Color02: {r: 8.137072, g: 7.262841, b: 13.718699, a: 0}
+    - _DissolveSpd: {r: -0.6, g: 0, b: 0, a: 0}
+    - _MainTexSpd: {r: -2, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

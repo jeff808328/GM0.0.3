@@ -45,6 +45,6 @@ Material:
     m_Colors:
     - _Color01: {r: 102.75575, g: 8.069823, b: 22.595507, a: 0}
     - _Color02: {r: 1.8341395, g: 2.4251041, b: 42.654366, a: 0}
-    - _DissolveSpd: {r: -0.3, g: 0, b: 0, a: 0}
-    - _MainTexSpd: {r: -0.5, g: 0, b: 0, a: 0}
+    - _DissolveSpd: {r: -2, g: 0, b: 0, a: 0}
+    - _MainTexSpd: {r: -2, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

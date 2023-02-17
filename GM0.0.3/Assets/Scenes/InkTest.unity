@@ -2174,6 +2174,7 @@ MonoBehaviour:
   HorizonSpeed: 0
   AddSpeedAdjust: 3
   MinusSpeedAdjust: 8
+  LastMoveDirection: 0
   VerticalSpeed: 0
   GravityAdjust: 5
   GravityMax: -20
@@ -2198,6 +2199,7 @@ GameObject:
   - component: {fileID: 893559025449544393}
   - component: {fileID: 893559025449544392}
   - component: {fileID: 893559025449544386}
+  - component: {fileID: 2129114942283716862}
   m_Layer: 0
   m_Name: Ink
   m_TagString: Untagged
@@ -2277,8 +2279,8 @@ MonoBehaviour:
   IsUnbreakable: 0
   UnbreakableLength: 0
   Hurting: 0
-  LightHurtAniLength: 0
-  HeavyHurtAniLength: 0
+  LightHurtAniLength: 1.2
+  HeavyHurtAniLength: 2
   AttackAble: 0
   AttackIng: 0
   AttackCD: 0
@@ -4030,6 +4032,26 @@ Transform:
   m_Father: {fileID: 1154095676326186619}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 4.967852, y: 124.592995, z: -175.44357}
+--- !u!114 &2129114942283716862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893559025449544394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a55202e602d6bcc45a90cbcd759caf4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChatacterData: {fileID: 11400000, guid: 8ce237187275f8c4096810829bf0c1a3, type: 2}
+  Hp: 0
+  Def: 0
+  DamageAdjsut: 0
+  HvRollLength: 0
+  HvRollSpeed: 0
+  LtRollLength: 0
+  LtRollSpeed: 0
 --- !u!4 &2179116637606174894
 Transform:
   m_ObjectHideFlags: 0

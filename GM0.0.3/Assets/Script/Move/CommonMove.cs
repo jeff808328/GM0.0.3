@@ -185,12 +185,13 @@ public class CommonMove : MonoBehaviour
         VerticalSpeed = Mathf.Clamp(VerticalSpeed, GravityMax, VerticalSpeedMax);
     }
 
-    protected IEnumerator Roll(int Direction, float Length, float Speed)
+    public IEnumerator Roll(int Direction, float Length, float Speed)
     {
         CommonState.IsUnbreakable = true;
         CommonState.ActionLayerNow = 3;
         CommonState.AttackAble = false;
         CommonState.MoveAble = false;
+        CommonState.RollAble = false;
 
         HorizonSpeedMax = Speed;
 
@@ -210,6 +211,7 @@ public class CommonMove : MonoBehaviour
 
         HorizonSpeedMax = CharacterData.MaxMoveSpeed;
 
+        CommonState.RollAble = true;
         CommonState.AttackAble = true;
         CommonState.MoveAble = true;
         CommonState.ActionLayerNow = 0;

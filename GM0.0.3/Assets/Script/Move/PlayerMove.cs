@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMove : CommonMove
 {
     private PlayerState PlayerState;
-    private CommonAnimation CommonAnimation;
+    private PlayerAnimation PlayerAnimation;
 
     private float LastMoveAni;
 
@@ -26,15 +26,21 @@ public class PlayerMove : CommonMove
             {
                 if (Input.GetKeyDown(KeyCode.R) & PlayerState.RollAble)
                 {
-                    Roll(LastMoveDirection, PlayerState.RollAniLength, CharacterData.MaxMoveSpeed * DashAdjust);
+                    Debug.Log("Roll trigger");
+
+                    StartCoroutine(Roll(LastMoveDirection, PlayerState.RollAniLength, CharacterData.MaxMoveSpeed * DashAdjust));
+
+                    PlayerAnimation.Animator.SetTrigger("Dash");
                 }
             }
 
             if (PlayerState.ActionLayerNow <= 1)
             {
-                if (Input.GetKeyDown(KeyCode.J) & PlayerState.JumpTime < PlayerState.MaxJumpTime)
+                if (Input.GetKeyDown(KeyCode.Space) & PlayerState.JumpTime < PlayerState.MaxJumpTime)
                 {
-                    Jump();
+                    StartCoroutine(Jump());
+
+                    PlayerAnimation.Animator.SetTrigger("Jump");
                 }
 
                 if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
@@ -78,7 +84,7 @@ public class PlayerMove : CommonMove
         CommonState = this.GetComponent<PlayerState>();
         PlayerState = this.GetComponent<PlayerState>();
 
-        CommonAnimation = this.GetComponent<CommonAnimation>();
+        PlayerAnimation = this.GetComponent<PlayerAnimation>();
 
         LastMoveAni = Time.time;
     }

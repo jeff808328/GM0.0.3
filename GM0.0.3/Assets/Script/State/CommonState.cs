@@ -55,7 +55,8 @@ public class CommonState : MonoBehaviour
     public int JumpTime;
     public bool JumpAble;
     public bool Jumping;
-    public float JumpAniLength;
+    public float RaiseAniLength;
+    public float FallAniLength;
 
     protected void InitValueSet()
     {

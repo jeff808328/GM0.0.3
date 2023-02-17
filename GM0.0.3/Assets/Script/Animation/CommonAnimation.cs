@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CommonAnimation : MonoBehaviour
 {
-    private Animator Animator;
+    [HideInInspector] public Animator Animator;
     protected CommonState CommonState;
 
     protected void InitComponentSet()
@@ -16,12 +16,10 @@ public class CommonAnimation : MonoBehaviour
     {
 
         Animator.SetBool("GroundTouching", CommonState.GroundTouching);
+        Animator.SetBool("Jumping", CommonState.Jumping);
 
         if (CommonState.GroundTouching)
             Animator.SetBool("Moving", CommonState.Moveing);
-
-        if (!CommonState.GroundTouching & !CommonState.Hurting)
-            Animator.SetTrigger("Jump");
     }
 
 }

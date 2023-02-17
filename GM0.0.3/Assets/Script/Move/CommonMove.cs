@@ -19,7 +19,7 @@ public class CommonMove : MonoBehaviour
     private float AddSpeed; // 加速度初始值
     private float MinusSpeed; // 減速度初始值   
 
-    protected int LastMoveDirection; // 上次的移動方向 1朝右 -1朝左
+    [SerializeField] protected int LastMoveDirection; // 上次的移動方向 1朝右 -1朝左
     #endregion
 
     #region 垂直速度控制
@@ -67,7 +67,7 @@ public class CommonMove : MonoBehaviour
 
     protected void InitValueSet()
     {
-        LastMoveDirection = 0;
+        LastMoveDirection = 1;
 
         HorizonSpeedMax = CharacterData.MaxMoveSpeed;
         VerticalSpeedMax = CharacterData.JumpSpeed;
@@ -104,7 +104,8 @@ public class CommonMove : MonoBehaviour
         LastMoveDirection = Direction; // 紀錄當前移動方向,轉向和減速用
     }
 
-    protected void Jump()
+
+    protected IEnumerator Jump()
     {
         CommonState.ActionLayerNow = 1;
 
@@ -113,7 +114,13 @@ public class CommonMove : MonoBehaviour
         VerticalSpeed = VerticalSpeedMax;
 
         CommonState.JumpTime++;
+
+        yield return new WaitForSecondsRealtime(CommonState.RaiseAniLength);
+
+        CommonState.Jumping = false;
     }
+
+
     protected IEnumerator Flip(int Direction)// 翻面 // Run的備註
     {
         float t = 0;
@@ -135,8 +142,6 @@ public class CommonMove : MonoBehaviour
                 transform.eulerAngles = new Vector3(transform.eulerAngles.x, angle,0);
 
                 t += Time.deltaTime;
-
-                Debug.Log("r ing");
             }
 
         }
@@ -149,17 +154,12 @@ public class CommonMove : MonoBehaviour
                 transform.eulerAngles = new Vector3(transform.eulerAngles.x, angle, 0);
 
                 t += Time.deltaTime;
-
-                Debug.Log("l ing");
             }
         }
 
         yield return null;
    
     }
-
- 
-
 
     protected void Brake() // 在玩家無輸入且非無敵狀況時可用
     {
@@ -192,10 +192,10 @@ public class CommonMove : MonoBehaviour
         CommonState.AttackAble = false;
         CommonState.MoveAble = false;
 
-        HorizonSpeedMax *= Speed;
+        HorizonSpeedMax = Speed;
 
         BeforeDashSpeed = HorizonSpeed;
-        HorizonSpeed = Speed;
+        HorizonSpeed = Speed*LastMoveDirection;
 
         yield return new WaitForSecondsRealtime(Length);
 

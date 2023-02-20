@@ -19,11 +19,13 @@ public class CommonDetect : MonoBehaviour
     protected Rigidbody2D RightWallDetect;
     protected Rigidbody2D GroundDetect;
 
+    [Header("鲤砰盎代把计")]
     public float WallBoxHeight;
     public float WallBoxWidth;
     public float WallBoxHeightOffset;
     public float WallBoxWidthOffset;
 
+    [Header("狾盎代把计")]
     public float GroundBoxHeight;
     public float GroundBoxWidth;
     public float GroundBoxHeightOffset;

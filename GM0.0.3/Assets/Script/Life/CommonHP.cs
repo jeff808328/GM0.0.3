@@ -9,14 +9,16 @@ public class CommonHP : MonoBehaviour
     protected CommonState CommonState;
     protected CommonAnimation CommonAnimation;
 
+    [Header("傷害參數")]
+
     [SerializeField] protected float Hp;
     [SerializeField] protected float Def;
     [SerializeField] protected float DamageAdjsut;
 
-    public float HvRollLength;
+    [Header("擊飛動畫時間")]
     public float HvRollSpeed;
-    public float LtRollLength;
     public float LtRollSpeed;
+
 
     private int RollDirection;
 
@@ -30,7 +32,9 @@ public class CommonHP : MonoBehaviour
 
     public IEnumerator Hurt(float AttackerAtk, Vector2 AttackerPos, bool HeavyDamage)
     {
-        Hp -= AttackerAtk;
+        Hp -= AttackerAtk * DamageAdjsut;
+
+        DieCheck();
 
         RollDirection = ((AttackerPos.x > transform.position.x) ? -1 : 1);
 
@@ -45,7 +49,7 @@ public class CommonHP : MonoBehaviour
 
             yield return new WaitForSecondsRealtime(CommonState.HeavyHurtAniLength);
 
-            StartCoroutine(CommonMove.Roll(RollDirection, HvRollLength, HvRollSpeed));
+            StartCoroutine(CommonMove.Roll(RollDirection, CommonState.HeavyHurtAniLength, HvRollSpeed));
         }
 
         else
@@ -54,7 +58,7 @@ public class CommonHP : MonoBehaviour
 
             yield return new WaitForSecondsRealtime(CommonState.LightHurtAniLength);
 
-            StartCoroutine(CommonMove.Roll(RollDirection, LtRollLength, LtRollSpeed));
+            StartCoroutine(CommonMove.Roll(RollDirection, CommonState.LightHurtAniLength, LtRollSpeed));
         }
 
         CommonState.MoveAble = true;
@@ -80,7 +84,8 @@ public class CommonHP : MonoBehaviour
     {
         if (Hp < 0)
         {
-
+            Debug.Log(this.gameObject.name + "die");
+            Destroy(this.gameObject);
         }
     }
 

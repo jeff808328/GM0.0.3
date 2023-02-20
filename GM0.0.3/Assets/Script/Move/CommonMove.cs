@@ -5,8 +5,7 @@ using UnityEngine;
 public class CommonMove : MonoBehaviour
 {
 
-    #region 水平速度控制
-
+    [Header("水平速度控制")]
     protected float HorizonSpeedMax = 0; //速度上限
     [HideInInspector] public float HorizonSpeed = 0; // 運算用 & 當前值
 
@@ -20,10 +19,9 @@ public class CommonMove : MonoBehaviour
     private float MinusSpeed; // 減速度初始值   
 
     [SerializeField] protected int LastMoveDirection; // 上次的移動方向 1朝右 -1朝左
-    #endregion
 
-    #region 垂直速度控制
 
+    [Header("垂直速度控制")]
     protected float VerticalSpeedMax = 0; //速度上限
     [HideInInspector] public float VerticalSpeed = 0; // 運算用 & 當前值
 
@@ -36,34 +34,24 @@ public class CommonMove : MonoBehaviour
 
     private bool GroundTouching; // 地板偵測
 
-    #endregion
 
-    #region 速度控制
-
+    [Header("翻滾速度控制")]
     private float BeforeDashSpeed;
     private float BeforeDahsMoveDirection;
     public float DashAdjust;
 
+    [Header("實際速度")]
     [SerializeField] protected Vector2 FinalMoveSpeed;
 
-    #endregion
-
-
-    #region 角度控制
-
+    [Header("翻轉角度設定")]
     public float RightAngle;
     public float LeftAngle;
     public float FlipLength;
-
-    #endregion
-
-    #region 組件
 
     public ChatacterData CharacterData;
     protected Rigidbody2D Rd;
     protected CommonState CommonState;
 
-    #endregion
 
     protected void InitValueSet()
     {

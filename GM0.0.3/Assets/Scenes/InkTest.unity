@@ -2182,7 +2182,7 @@ MonoBehaviour:
   FinalMoveSpeed: {x: 0, y: 0}
   RightAngle: 100
   LeftAngle: 260
-  FlipLength: 1
+  FlipLength: 2
   CharacterData: {fileID: 11400000, guid: 8ce237187275f8c4096810829bf0c1a3, type: 2}
 --- !u!1 &893559025449544394
 GameObject:

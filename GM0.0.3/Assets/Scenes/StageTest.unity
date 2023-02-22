@@ -497,6 +497,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1431964360}
     m_Modifications:
+    - target: {fileID: 37796222122785365, guid: b100aa15bc54711458500dcf418357e6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3913887605fdba14ba6165bf25094a98, type: 2}
     - target: {fileID: 3885818590066567955, guid: b100aa15bc54711458500dcf418357e6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -545,6 +549,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoseWindow
       objectReference: {fileID: 0}
+    - target: {fileID: 7068796372440969473, guid: b100aa15bc54711458500dcf418357e6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3913887605fdba14ba6165bf25094a98, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b100aa15bc54711458500dcf418357e6, type: 3}
 --- !u!4 &982004205 stripped

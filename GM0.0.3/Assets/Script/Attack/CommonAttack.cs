@@ -52,7 +52,7 @@ public class CommonAttack : MonoBehaviour
 
         var AttackDetect = Physics2D.OverlapBoxAll(AttackBoxPos, AttackBoxSize, 0, AttackAble);
 
-        yield return new WaitForSecondsRealtime(CommonState.AttackAniLength[AttackIndex] - PreCast - BackSwing);
+        yield return new WaitForSecondsRealtime(CommonState.AttackAniLength[AttackIndex]);
 
         foreach(var Attacked in AttackDetect)
         {

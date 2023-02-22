@@ -2284,7 +2284,7 @@ MonoBehaviour:
   HeavyHurtAniLength: 2
   AttackAble: 0
   AttackIng: 0
-  AttackCD: 3
+  AttackCD: 2
   AttackAniLength:
   - 1
   - 0.9

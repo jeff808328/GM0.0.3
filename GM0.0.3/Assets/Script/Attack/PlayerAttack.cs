@@ -46,19 +46,23 @@ public class PlayerAttack : CommonAttack
             {
                 PlayerState.Combo = 1;
 
-                CallAttack();
+                CallComboAttack();
+
+                PlayerState.Combo = 4;
             }
             
             if (PlayerState.Rolling)
             {
                 PlayerState.Combo = 2;
 
-                CallAttack();
+                CallComboAttack();
+
+                PlayerState.Combo = 4;
             }
 
             if (PlayerState.AttackAble & PlayerState.Combo < 4)
             {
-                CallAttack();
+                CallComboAttack();
 
                 AttackStartTime = Time.time;
 
@@ -88,7 +92,7 @@ public class PlayerAttack : CommonAttack
     }
 
 
-    private void CallAttack()
+    private void CallComboAttack()
     {
         AttackStartTime = Time.time;
 
@@ -96,8 +100,11 @@ public class PlayerAttack : CommonAttack
         PlayerState.ComboIng = true;
 
         PlayerAnimation.Animator.SetTrigger("Atk" + PlayerState.Combo.ToString());
+
         StartCoroutine(Attack());
 
         //   Debug.Log("function work");
     }
+
+    
 }

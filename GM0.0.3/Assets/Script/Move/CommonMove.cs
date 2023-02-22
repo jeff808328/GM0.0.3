@@ -225,7 +225,7 @@ public class CommonMove : MonoBehaviour
 
         AddSpeed = CharacterData.AddSpeed;
     }
-
+ 
     protected IEnumerator Lock(float Length)
     {
         GravityValue = 0;

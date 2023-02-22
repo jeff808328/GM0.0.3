@@ -4,44 +4,94 @@ using UnityEngine;
 
 public class CommonState : MonoBehaviour
 {
-    // For control action layer and other state
-
+    // 控制動作階級用
     // three level of action layer
-
     // 3. Dash,Hurt
-
     // 2. Attack
-
     // 1. Run,Jump
-
     // 0. Idle
 
+    // 狀態控制用,提供各腳本參考
+    // 參數僅允許外部修改
+
+    [Header("SO")]
+    public ChatacterData CharacterData;
+
+    [Header("當前動作階級")]
     public int ActionLayerNow;
 
+    [Header("牆 & 地板碰撞判定")]
     public bool GroundTouching;
     public bool WallTouching;
 
-    void Start()
-    {
-        InitValueSet();
-    }
+    [Header("無敵設定")]
+    public bool IsUnbreakable;
+    public float UnbreakableLength;
 
-    // Update is called once per frame
-    void Update()
-    {
+    [Header("受傷設定")]
+    public bool Hurting;
+    public float LightHurtAniLength;
+    public float HeavyHurtAniLength;
 
-    }
+    [Header("攻擊設定")]
+    public bool AttackAble;
+    public bool AttackIng;
+    public float AttackCD;
+    public float[] AttackAniLength;
 
-    public void InitValueSet()
+    [Header("翻滾設定")]
+    public float RollCD;
+    public float RollAniLength;
+    public bool RollAble;
+    public bool Rolling;
+
+    [Header("移動設定")]
+    public bool MoveAble;
+    public bool Moveing;
+    public float RunAniLength;
+
+    [Header("跳躍設定")]
+    public int MaxJumpTime;
+    public int JumpTime;
+    public bool JumpAble;
+    public bool Jumping;
+    public float JumpAniLength;
+
+    protected void InitValueSet()
     {
         ActionLayerNow = 0;
 
         GroundTouching = false;
         WallTouching = false;
+
+        IsUnbreakable = false;
+
+        AttackAble = true;
+        AttackIng = false;
+
+        RollAble = true;
+        Rolling = false;
+
+        MoveAble = true;
+        Moveing = false;
+
+        MaxJumpTime = CharacterData.AirJumpTimes;
+        JumpTime = 0;
+        JumpAble = true;
     }
 
     public void InitComponmentSet()
     {
 
+    }
+
+    public IEnumerator Roll()
+    {
+        yield return new WaitForSecondsRealtime(RollCD);
+    }
+
+    public IEnumerator Attack()
+    {
+        yield return new WaitForSecondsRealtime(AttackCD);
     }
 }

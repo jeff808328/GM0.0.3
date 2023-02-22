@@ -33,7 +33,7 @@ public class CommonDetect : MonoBehaviour
 
     protected CommonState CommonState;
 
-    protected void BoxUpdate()
+    protected void BaseDetectBoxUpdate()
     {
         WallBoxSize = new Vector2(transform.lossyScale.x * WallBoxWidth, transform.lossyScale.y * WallBoxHeight);
         GroundBoxSize = new Vector2(transform.lossyScale.x * GroundBoxWidth, transform.lossyScale.y * GroundBoxHeight);

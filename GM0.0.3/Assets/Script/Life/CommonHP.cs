@@ -15,7 +15,7 @@ public class CommonHP : MonoBehaviour
     [SerializeField] protected float Def;
     [SerializeField] protected float DamageAdjsut;
 
-    [Header("擊飛動畫時間")]
+    [Header("擊飛動畫參數")]
     public float HvRollSpeed;
     public float LtRollSpeed;
 

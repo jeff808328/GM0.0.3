@@ -2200,6 +2200,7 @@ GameObject:
   - component: {fileID: 893559025449544392}
   - component: {fileID: 893559025449544386}
   - component: {fileID: 2129114942283716862}
+  - component: {fileID: 2129114942283716863}
   m_Layer: 0
   m_Name: Ink
   m_TagString: Untagged
@@ -2283,23 +2284,26 @@ MonoBehaviour:
   HeavyHurtAniLength: 2
   AttackAble: 0
   AttackIng: 0
-  AttackCD: 0
-  AttackAniLength: []
+  AttackCD: 3
+  AttackAniLength:
+  - 1
+  - 0.9
+  - 1.1
+  - 0.2
   RollCD: 0
   RollAniLength: 0.45
   RollAble: 0
   Rolling: 0
   MoveAble: 0
   Moveing: 0
-  RunAniLength: 0
   MaxJumpTime: 0
   JumpTime: 0
   JumpAble: 0
   Jumping: 0
   RaiseAniLength: 0.47
   FallAniLength: 0.2
-  ComboAttackAble: 0
   Combo: 0
+  ComboIng: 0
 --- !u!1 &893559026774084162
 GameObject:
   m_ObjectHideFlags: 0
@@ -4048,10 +4052,31 @@ MonoBehaviour:
   Hp: 0
   Def: 0
   DamageAdjsut: 0
-  HvRollLength: 0
-  HvRollSpeed: 0
-  LtRollLength: 0
-  LtRollSpeed: 0
+  HvRollSpeed: 1.5
+  LtRollSpeed: 0.8
+--- !u!114 &2129114942283716863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893559025449544394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d29dfaec93d2574db3b7087dc317cbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackAble:
+    serializedVersion: 2
+    m_Bits: 256
+  AttackBoxHeight: 2
+  AttackBoxWidth: 2
+  AttackBoxHeightOffset: 0.85
+  AttackBoxWidthOffset: 1.75
+  PreCast: 0.1
+  BackSwing: 0.1
+  ChatacterData: {fileID: 11400000, guid: 8ce237187275f8c4096810829bf0c1a3, type: 2}
+  ComboAdjust: 0.75
 --- !u!4 &2179116637606174894
 Transform:
   m_ObjectHideFlags: 0

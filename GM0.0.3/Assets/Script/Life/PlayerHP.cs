@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerHP : CommonHP
 {
-    // Start is called before the first frame update
     void Start()
     {
         InitValueSet();
@@ -14,7 +13,6 @@ public class PlayerHP : CommonHP
         CommonAnimation = this.GetComponent<PlayerAnimation>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         

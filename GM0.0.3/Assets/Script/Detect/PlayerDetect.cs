@@ -11,6 +11,6 @@ public class PlayerDetect : CommonDetect
 
     void Update()
     {
-        BoxUpdate();
+        BaseDetectBoxUpdate();
     }
 }

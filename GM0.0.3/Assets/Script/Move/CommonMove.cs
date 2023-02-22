@@ -177,11 +177,14 @@ public class CommonMove : MonoBehaviour
     {
         CommonState.IsUnbreakable = true;
         CommonState.ActionLayerNow = 3;
-        CommonState.AttackAble = false;
         CommonState.MoveAble = false;
         CommonState.RollAble = false;
+        CommonState.Rolling = true;
 
         HorizonSpeedMax = Speed;
+
+        GravityAdjust = 0;
+        VerticalSpeed = 1;
 
         BeforeDashSpeed = HorizonSpeed;
         HorizonSpeed = Speed*LastMoveDirection;
@@ -199,19 +202,26 @@ public class CommonMove : MonoBehaviour
 
         HorizonSpeedMax = CharacterData.MaxMoveSpeed;
 
+        GravityAdjust = OriGravityAdjust;
+
+        CommonState.Rolling = false;
         CommonState.RollAble = true;
-        CommonState.AttackAble = true;
         CommonState.MoveAble = true;
         CommonState.ActionLayerNow = 0;
         CommonState.IsUnbreakable = false;
     }
 
-    protected IEnumerator SuddenlyBrake(float Length)
+    public IEnumerator SuddenlyBrake(float Length)
     {
         HorizonSpeed = 0;
         AddSpeed = 0;
 
+        CommonState.Moveing = false;
+        CommonState.MoveAble = false;
+
         yield return new WaitForSecondsRealtime(Length);
+
+        CommonState.MoveAble = true;
 
         AddSpeed = CharacterData.AddSpeed;
     }

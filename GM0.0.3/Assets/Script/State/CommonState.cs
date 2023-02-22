@@ -48,7 +48,6 @@ public class CommonState : MonoBehaviour
     [Header("移動設定")]
     public bool MoveAble;
     public bool Moveing;
-    public float RunAniLength;
 
     [Header("跳躍設定")]
     public int MaxJumpTime;

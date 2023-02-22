@@ -6,13 +6,14 @@ public class PlayerState : CommonState
 {
 
     [Header("³sÀ»ª¬ºA")]
-    public bool ComboAttackAble;
     public int Combo;
+    public bool ComboIng;
 
     private void PlayerInitValueSet()
     {
-        ComboAttackAble = false;
         Combo = 0;
+
+        ComboIng = false;
     }
 
     void Start()

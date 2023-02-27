@@ -1078,7 +1078,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1039551661}
   - component: {fileID: 1039551660}
-  - component: {fileID: 1039551662}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -1140,22 +1139,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1039551662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1039551659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5eb80d8e62d9d145bb50fb783c0f731, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PositionMode: 0
-  m_RotationMode: 0
-  m_UpdateMethod: 2
-  m_Targets: []
 --- !u!1 &1117319101
 GameObject:
   m_ObjectHideFlags: 0
@@ -3236,6 +3219,7 @@ MonoBehaviour:
   VerticalSpeed: 0
   GravityAdjust: 5
   GravityMax: -20
+  JumpSpeedAdjust: 0
   DashAdjust: 2
   FinalMoveSpeed: {x: 0, y: 0}
   RightAngle: 100

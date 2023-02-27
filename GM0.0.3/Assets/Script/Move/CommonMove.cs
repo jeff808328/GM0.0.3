@@ -32,7 +32,7 @@ public class CommonMove : MonoBehaviour
 
     protected int MaxJumpTimes; // 最大跳躍次數
 
-    private bool GroundTouching; // 地板偵測
+    public float JumpSpeedAdjust;
 
 
     [Header("翻滾速度控制")]
@@ -51,6 +51,8 @@ public class CommonMove : MonoBehaviour
     public ChatacterData CharacterData;
     protected Rigidbody2D Rd;
     protected CommonState CommonState;
+
+    private float AniStartTime;
 
 
     protected void InitValueSet()
@@ -107,6 +109,7 @@ public class CommonMove : MonoBehaviour
 
         CommonState.Jumping = false;
     }
+
 
 
     protected IEnumerator Flip(int Direction)// 翻面 // Run的備註

@@ -40,26 +40,27 @@ public class CommonAttack : MonoBehaviour
                                      transform.position.y + AttackBoxHeightOffset);
     }
 
-    protected IEnumerator Attack()
+    protected IEnumerator Attack(bool UseSuddenlyBrake)
     {
         Debug.Log("function start");
 
         CommonState.AttackIng = true;
 
-        StartCoroutine(CommonMove.SuddenlyBrake(CommonState.AttackAniLength[AttackIndex]));
+        if (UseSuddenlyBrake)
+            StartCoroutine(CommonMove.SuddenlyBrake(CommonState.AttackAniLength[AttackIndex]));
 
-     //   yield return new WaitForSecondsRealtime(PreCast);
+        yield return new WaitForSecondsRealtime(PreCast);
 
         var AttackDetect = Physics2D.OverlapBoxAll(AttackBoxPos, AttackBoxSize, 0, AttackAble);
 
         yield return new WaitForSecondsRealtime(CommonState.AttackAniLength[AttackIndex]);
 
-        foreach(var Attacked in AttackDetect)
+        foreach (var Attacked in AttackDetect)
         {
-            Attacked.GetComponent<CommonHP>().Hurt(ChatacterData.Atk,this.transform.position,false);
+            Attacked.GetComponent<CommonHP>().Hurt(ChatacterData.Atk, this.transform.position, false);
         }
 
-    //    yield return new WaitForSecondsRealtime(BackSwing);
+        yield return new WaitForSecondsRealtime(BackSwing);
 
         CommonState.AttackIng = false;
 

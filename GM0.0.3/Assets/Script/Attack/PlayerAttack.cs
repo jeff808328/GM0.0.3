@@ -21,7 +21,7 @@ public class PlayerAttack : CommonAttack
         PlayerAnimation = this.GetComponent<PlayerAnimation>();
 
         AttackStartTime = 0;
-        CDStartTime = 0;
+        CDStartTime = Time.time - PlayerState.AttackCD;
     }
 
     void Update()
@@ -46,23 +46,23 @@ public class PlayerAttack : CommonAttack
             {
                 PlayerState.Combo = 1;
 
-                CallComboAttack();
+                CallComboAttack(true);
 
                 PlayerState.Combo = 4;
             }
-            
+
             if (PlayerState.Rolling)
             {
                 PlayerState.Combo = 2;
 
-                CallComboAttack();
+                CallComboAttack(false);
 
                 PlayerState.Combo = 4;
             }
 
             if (PlayerState.AttackAble & PlayerState.Combo < 4)
             {
-                CallComboAttack();
+                CallComboAttack(true);
 
                 AttackStartTime = Time.time;
 
@@ -92,7 +92,7 @@ public class PlayerAttack : CommonAttack
     }
 
 
-    private void CallComboAttack()
+    private void CallComboAttack(bool UseSuddenlyBrake)
     {
         AttackStartTime = Time.time;
 
@@ -101,10 +101,11 @@ public class PlayerAttack : CommonAttack
 
         PlayerAnimation.Animator.SetTrigger("Atk" + PlayerState.Combo.ToString());
 
-        StartCoroutine(Attack());
+
+        StartCoroutine(Attack(UseSuddenlyBrake));
 
         //   Debug.Log("function work");
     }
 
-    
+
 }

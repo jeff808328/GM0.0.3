@@ -16,7 +16,9 @@ public class CommonAnimation : MonoBehaviour
     {
 
         Animator.SetBool("GroundTouching", CommonState.GroundTouching);
-        Animator.SetBool("Jumping", CommonState.Jumping);
+
+
+        Animator.SetBool("Rolling", CommonState.Rolling);
 
         if (CommonState.GroundTouching)
             Animator.SetBool("Moving", CommonState.Moveing);

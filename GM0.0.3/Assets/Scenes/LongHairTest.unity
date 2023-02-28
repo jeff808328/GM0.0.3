@@ -282,7 +282,7 @@ MonoBehaviour:
   PlayerOnGround: 0
   PlayerDistanceIndex: 0
   PlayerNearing: 0
-  AttackMethodUsedTime: 
+  AttackMethodUsedTime: 00000000000000000000000000000000
   AttackMethodNow: 0
 --- !u!1 &286743014
 GameObject:

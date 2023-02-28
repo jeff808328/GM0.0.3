@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyDetect : CommonDetect
 {
     [Header("翻轉偵測")]
-    public float FlipDetectLength;
+    public float FlipDetectLength; // 碰牆翻轉
 
     [Header("角色視野設定")]
     public LayerMask Player;

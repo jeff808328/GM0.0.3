@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerState : CommonState
 {
-
     [Header("³sÀ»ª¬ºA")]
     public int Combo;
     public bool ComboIng;

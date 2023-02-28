@@ -134,6 +134,8 @@ GameObject:
   - component: {fileID: 198313347}
   - component: {fileID: 198313349}
   - component: {fileID: 198313348}
+  - component: {fileID: 198313351}
+  - component: {fileID: 198313350}
   m_Layer: 0
   m_Name: LongHair
   m_TagString: Untagged
@@ -194,6 +196,94 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &198313350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198313346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62b4381b383b96541b60923a55b9c64f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ground:
+    serializedVersion: 2
+    m_Bits: 0
+  Wall:
+    serializedVersion: 2
+    m_Bits: 0
+  WallBoxHeight: 0
+  WallBoxWidth: 0
+  WallBoxHeightOffset: 0
+  WallBoxWidthOffset: 0
+  GroundBoxHeight: 0
+  GroundBoxWidth: 0
+  GroundBoxHeightOffset: 0
+  GroundBoxWidthOffset: 0
+  FlipDetectLength: 0
+  Player:
+    serializedVersion: 2
+    m_Bits: 0
+  ViewBoxHeight: 0
+  ViewBoxWidth: 0
+  ViewBoxHeightOffset: 0
+  ViewBoxWidthOffset: 0
+  ViewFocusLength: 0
+  ViewBoxColor: {r: 0, g: 0, b: 0, a: 0}
+  MidMini: 0
+  MidMax: 0
+  RamdonValue: 0
+  Buffer: 0
+  AtkTriggerBoxHeight: 0
+  AtkTriggerBoxWidth: 0
+  AtkTriggerBoxHeightOffset: 0
+  AtkTriggerBoxWidthOffset: 0
+  AtkTriggerBoxColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &198313351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198313346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b125808156231a64382bd87d7bb510e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterData: {fileID: 0}
+  ActionLayerNow: 0
+  GroundTouching: 0
+  WallTouching: 0
+  IsUnbreakable: 0
+  UnbreakableLength: 0
+  Hurting: 0
+  LightHurtAniLength: 0
+  HeavyHurtAniLength: 0
+  AttackAble: 0
+  AttackIng: 0
+  AttackCD: 0
+  AttackAniLength: []
+  RollCD: 0
+  RollAniLength: 0
+  RollAble: 0
+  Rolling: 0
+  MoveAble: 0
+  Moveing: 0
+  MaxJumpTime: 0
+  JumpTime: 0
+  JumpAble: 0
+  Jumping: 0
+  RaiseAniLength: 0
+  FallAniLength: 0
+  PlayerInView: 0
+  PlayerOnGround: 0
+  PlayerDistanceIndex: 0
+  PlayerNearing: 0
+  AttackMethodUsedTime: 
+  AttackMethodNow: 0
 --- !u!1 &286743014
 GameObject:
   m_ObjectHideFlags: 0

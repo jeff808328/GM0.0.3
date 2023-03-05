@@ -94,7 +94,6 @@ public class CommonMove : MonoBehaviour
         LastMoveDirection = Direction; // 紀錄當前移動方向,轉向和減速用
     }
 
-
     protected IEnumerator Jump()
     {
         CommonState.ActionLayerNow = 1;
@@ -110,8 +109,6 @@ public class CommonMove : MonoBehaviour
         CommonState.Jumping = false;
     }
 
-
-
     protected IEnumerator Flip(int Direction)// 翻面 // Run的備註
     {
         float t = 0;
@@ -126,6 +123,8 @@ public class CommonMove : MonoBehaviour
 
         if(Direction >= 0)
         {
+            this.transform.localScale = new Vector3(1, 1, 1);
+
             while (t < FlipLength)
             {
                 angle = Mathf.Lerp(startangle, RightAngle, t / FlipLength);
@@ -138,6 +137,8 @@ public class CommonMove : MonoBehaviour
         }
         else
         {
+            this.transform.localScale = new Vector3(-1, 1, 1);
+
             while (t < FlipLength)
             {
                 angle = Mathf.Lerp(startangle, LeftAngle, t / FlipLength);

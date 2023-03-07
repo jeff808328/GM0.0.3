@@ -12,6 +12,9 @@ public class CommonHP : MonoBehaviour
     [Header("¶Ë®`°Ñ¼Æ")]
 
     [SerializeField] protected float Hp;
+
+    private float HpOri;
+
     [SerializeField] protected float Def;
     [SerializeField] protected float DamageAdjsut;
 
@@ -25,6 +28,7 @@ public class CommonHP : MonoBehaviour
     protected void InitValueSet()
     {
         Hp = ChatacterData.HP;
+        HpOri = Hp;
         Def = ChatacterData.Def;
 
         DamageAdjsut = 1f;

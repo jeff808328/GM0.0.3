@@ -22,11 +22,16 @@ public class CommonAttack : MonoBehaviour
     public float PreCast;
     public float BackSwing;
 
+    protected float AttackStartTime;
+    protected float CDStartTime;
+
     #region Component
 
+    [Header("²Õ¥ó")]
     public ChatacterData ChatacterData;
     protected CommonState CommonState;
     protected CommonMove CommonMove;
+    protected CommonAnimation CommonAnimation;
 
     #endregion
 
@@ -39,6 +44,23 @@ public class CommonAttack : MonoBehaviour
         AttackBoxPos = new Vector2(transform.position.x + AttackBoxWidthOffset * transform.lossyScale.x,
                                      transform.position.y + AttackBoxHeightOffset);
     }
+
+    protected void CallComboAttack(bool UseSuddenlyBrake)
+    {
+        AttackStartTime = Time.time;
+
+        CommonState.Combo++;
+        CommonState.ComboIng = true;
+
+        CommonAnimation.Animator.SetTrigger("Atk" + CommonState.Combo.ToString());
+
+
+        StartCoroutine(Attack(UseSuddenlyBrake));
+
+        //   Debug.Log("function work");
+    }
+
+
 
     protected IEnumerator Attack(bool UseSuddenlyBrake)
     {

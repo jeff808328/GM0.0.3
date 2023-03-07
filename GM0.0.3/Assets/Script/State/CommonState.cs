@@ -37,7 +37,12 @@ public class CommonState : MonoBehaviour
     public bool AttackAble;
     public bool AttackIng;
     public float AttackCD;
+    [HideInInspector] public float AttackCDOri;
     public float[] AttackAniLength;
+
+    [Header("³sÀ»ª¬ºA")]
+    public int Combo;
+    public bool ComboIng;
 
     [Header("Â½ºu³]©w")]
     public float RollCD;
@@ -68,6 +73,7 @@ public class CommonState : MonoBehaviour
 
         AttackAble = true;
         AttackIng = false;
+        AttackCDOri = AttackCD;
 
         RollAble = true;
         Rolling = false;
@@ -78,20 +84,9 @@ public class CommonState : MonoBehaviour
         MaxJumpTime = CharacterData.AirJumpTimes;
         JumpTime = 0;
         JumpAble = true;
+
+        Combo = 0;
+        ComboIng = false;
     }
 
-    public void InitComponmentSet()
-    {
-
-    }
-
-    public IEnumerator Roll()
-    {
-        yield return new WaitForSecondsRealtime(RollCD);
-    }
-
-    public IEnumerator Attack()
-    {
-        yield return new WaitForSecondsRealtime(AttackCD);
-    }
 }

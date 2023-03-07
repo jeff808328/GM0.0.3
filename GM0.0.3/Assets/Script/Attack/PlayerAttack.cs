@@ -5,20 +5,15 @@ using UnityEngine;
 public class PlayerAttack : CommonAttack
 {
     private PlayerState PlayerState;
-    private PlayerAnimation PlayerAnimation;
-
-    private float AttackStartTime;
-    private float CDStartTime;
-    public float ComboAdjust;
 
     // 0 -> idle, 1 -> atk1, .......
-
+  
     void Start()
     {
         PlayerState = this.GetComponent<PlayerState>();
         CommonState = this.GetComponent<PlayerState>();
         CommonMove = this.GetComponent<PlayerMove>();
-        PlayerAnimation = this.GetComponent<PlayerAnimation>();
+        CommonAnimation = this.GetComponent<PlayerAnimation>();
 
         AttackStartTime = 0;
         CDStartTime = Time.time - PlayerState.AttackCD;
@@ -36,7 +31,7 @@ public class PlayerAttack : CommonAttack
         {
             PlayerState.AttackAble = true;
 
-            Debug.Log("CD end");
+          //  Debug.Log("CD end");
         }
 
         if (Input.GetKeyDown(KeyCode.J))
@@ -46,6 +41,8 @@ public class PlayerAttack : CommonAttack
             {
                 PlayerState.Combo = 1;
 
+                PlayerState.AttackCD = PlayerState.AttackCDOri * 0.3f;
+
                 CallComboAttack(true);
 
                 PlayerState.Combo = 4;
@@ -54,6 +51,8 @@ public class PlayerAttack : CommonAttack
             if (PlayerState.Rolling)
             {
                 PlayerState.Combo = 2;
+
+                PlayerState.AttackCD = PlayerState.AttackCDOri * 0.3f;
 
                 CallComboAttack(false);
 
@@ -79,6 +78,8 @@ public class PlayerAttack : CommonAttack
 
             PlayerState.ComboIng = false;
 
+            PlayerState.AttackCD = PlayerState.AttackCDOri;
+
             CDStartTime = Time.time;
 
             PlayerState.Combo = 0;
@@ -92,20 +93,7 @@ public class PlayerAttack : CommonAttack
     }
 
 
-    private void CallComboAttack(bool UseSuddenlyBrake)
-    {
-        AttackStartTime = Time.time;
-
-        PlayerState.Combo++;
-        PlayerState.ComboIng = true;
-
-        PlayerAnimation.Animator.SetTrigger("Atk" + PlayerState.Combo.ToString());
-
-
-        StartCoroutine(Attack(UseSuddenlyBrake));
-
-        //   Debug.Log("function work");
-    }
+    //也許可以試試在attacking時 持續對範圍內的敵人造成傷害的寫法
 
 
 }

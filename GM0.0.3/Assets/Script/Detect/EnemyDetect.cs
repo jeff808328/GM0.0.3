@@ -130,7 +130,11 @@ public class EnemyDetect : CommonDetect
         {
             if(FlipDetect.collider.tag == "Wall")
             {
-                EnemyState.MoveDirection *= -1;
+                EnemyState.NearingWall = true;
+            }
+            else
+            {
+                EnemyState.NearingWall = false;
             }
         }
 

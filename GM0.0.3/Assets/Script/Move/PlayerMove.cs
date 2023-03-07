@@ -6,9 +6,6 @@ public class PlayerMove : CommonMove
 {
     private PlayerState PlayerState;
     private PlayerAnimation PlayerAnimation;
-
-    private float LastMoveAni;
-
     void Start()
     {
         InitValueSet();
@@ -85,8 +82,6 @@ public class PlayerMove : CommonMove
         PlayerState = this.GetComponent<PlayerState>();
 
         PlayerAnimation = this.GetComponent<PlayerAnimation>();
-
-        LastMoveAni = Time.time;
     }
 
 

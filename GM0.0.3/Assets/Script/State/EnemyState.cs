@@ -16,10 +16,13 @@ public class EnemyState : CommonState
 
     [Header("招式參數")]
     public int[] AttackMethodUsedTime;
+    public float[] SpAttackAniLength;
 
     [Header("行動控制")]
     public float ReactionTime;
+    public float FlipCD;
     public int MoveDirection;
+    public bool NearingWall;
     public int ActionIndex;
 
     void Start()

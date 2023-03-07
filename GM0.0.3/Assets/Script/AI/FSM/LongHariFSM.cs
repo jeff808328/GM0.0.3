@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerState : CommonState
+public class LongHariFSM : BaseFSM
 {
     void Start()
     {
-        InitValueSet();
+        
     }
-
-
+    void Update()
+    {
+        
+    }
 }

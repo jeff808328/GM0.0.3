@@ -4,12 +4,22 @@ using UnityEngine;
 
 public class EnemyHP : CommonHP
 {
+    private EnemyState EnemyState;
+
     void Start()
     {
         InitValueSet();
 
         CommonMove = this.GetComponent<EnemyMove>();
         CommonState = this.GetComponent<EnemyState>();
+        EnemyState = this.GetComponent<EnemyState>();
         CommonAnimation = this.GetComponent<EnemyAnimation>();
+
+        EnemyState.HPOri = Hp;
+    }
+
+    private void Update()
+    {
+        EnemyState.HP = Hp;
     }
 }

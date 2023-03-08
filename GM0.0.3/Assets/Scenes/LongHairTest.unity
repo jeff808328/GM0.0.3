@@ -136,6 +136,9 @@ GameObject:
   - component: {fileID: 198313352}
   - component: {fileID: 198313351}
   - component: {fileID: 198313350}
+  - component: {fileID: 198313356}
+  - component: {fileID: 198313355}
+  - component: {fileID: 198313354}
   - component: {fileID: 198313353}
   m_Layer: 0
   m_Name: LongHair
@@ -288,9 +291,11 @@ MonoBehaviour:
   AttackMethodUsedTime: 0000000000000000000000000000000000000000
   SpAttackAniLength: []
   ReactionTime: 0
+  FlipCD: 0
   MoveDirection: 0
   NearingWall: 0
-  ActionIndex: 0
+  HP: 0
+  HPOri: 0
 --- !u!70 &198313352
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -337,6 +342,63 @@ MonoBehaviour:
   UmiAttackBoxWidth: 0
   UmiAttackBoxHeightOffset: 0
   UmiAttackBoxWidthOffset: 0
+--- !u!114 &198313354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198313346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eb678b3faef9cc4e87a240072f19d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HorizonSpeed: 0
+  AddSpeedAdjust: 0
+  MinusSpeedAdjust: 0
+  LastMoveDirection: 0
+  VerticalSpeed: 0
+  GravityAdjust: 0
+  GravityMax: 0
+  JumpSpeedAdjust: 0
+  DashAdjust: 0
+  FinalMoveSpeed: {x: 0, y: 0}
+  RightAngle: 0
+  LeftAngle: 0
+  FlipLength: 0
+  CharacterData: {fileID: 0}
+--- !u!114 &198313355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198313346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06079caca14349f4d90f85e8ebec6bdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChatacterData: {fileID: 0}
+  Hp: 0
+  Def: 0
+  DamageAdjsut: 0
+  HvRollSpeed: 0
+  LtRollSpeed: 0
+--- !u!114 &198313356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198313346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e686f96067828974ab362e82fab7a353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 0}
 --- !u!1 &286743014
 GameObject:
   m_ObjectHideFlags: 0

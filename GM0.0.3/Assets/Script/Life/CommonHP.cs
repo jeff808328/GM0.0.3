@@ -13,8 +13,6 @@ public class CommonHP : MonoBehaviour
 
     [SerializeField] protected float Hp;
 
-    private float HpOri;
-
     [SerializeField] protected float Def;
     [SerializeField] protected float DamageAdjsut;
 
@@ -28,7 +26,6 @@ public class CommonHP : MonoBehaviour
     protected void InitValueSet()
     {
         Hp = ChatacterData.HP;
-        HpOri = Hp;
         Def = ChatacterData.Def;
 
         DamageAdjsut = 1f;
@@ -46,6 +43,7 @@ public class CommonHP : MonoBehaviour
 
         CommonState.MoveAble = false;
         CommonState.AttackAble = false;
+        CommonState.Hurting = true;
 
         if (HeavyDamage)
         {
@@ -65,8 +63,10 @@ public class CommonHP : MonoBehaviour
             StartCoroutine(CommonMove.Roll(RollDirection, CommonState.LightHurtAniLength, LtRollSpeed));
         }
 
+        CommonState.Hurting = false;
         CommonState.MoveAble = true;
         CommonState.AttackAble = true;
+
     }
 
     public IEnumerator DamageControl(float Value, float Time)

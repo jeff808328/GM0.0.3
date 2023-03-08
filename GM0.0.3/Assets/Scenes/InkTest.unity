@@ -3400,11 +3400,14 @@ MonoBehaviour:
   AttackAble: 0
   AttackIng: 0
   AttackCD: 2
+  AttackCDOri: 0
   AttackAniLength:
   - 1
   - 0.9
   - 1.1
   - 0.2
+  Combo: 0
+  ComboIng: 0
   RollCD: 0
   RollAniLength: 0.45
   RollAble: 0
@@ -3417,8 +3420,6 @@ MonoBehaviour:
   Jumping: 0
   RaiseAniLength: 0.47
   FallAniLength: 0.2
-  Combo: 0
-  ComboIng: 0
 --- !u!1 &893559026774084162
 GameObject:
   m_ObjectHideFlags: 0
@@ -5191,7 +5192,6 @@ MonoBehaviour:
   PreCast: 0.1
   BackSwing: 0.1
   ChatacterData: {fileID: 11400000, guid: 8ce237187275f8c4096810829bf0c1a3, type: 2}
-  ComboAdjust: 0.75
 --- !u!4 &2179116637606174894
 Transform:
   m_ObjectHideFlags: 0

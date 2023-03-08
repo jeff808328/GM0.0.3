@@ -23,6 +23,7 @@ public class LongHairAttack : CommonAttack
 
     private Vector2 UmiAttackBoxPos;
     private Vector2 UmiAttackBoxSize;
+
     private void EnemyInitSet()
     {
         CommonState = this.GetComponent<EnemyState>();
@@ -35,7 +36,7 @@ public class LongHairAttack : CommonAttack
         CDStartTime = Time.time - EnemyState.AttackCD;
     }
 
-    public void CallCommonAttack()
+    public void ComboAttack()
     {
         if (EnemyState.Combo >= 3)
         {
@@ -48,10 +49,28 @@ public class LongHairAttack : CommonAttack
 
         if (EnemyState.AttackAble)
         {
-            Attack(true);
+            CallComboAttack(true);
         }
     }
 
+    public IEnumerator ThronAttack()
+    {
+        yield return new WaitForSecondsRealtime(EnemyState.SpAttackAniLength[0]);
+    }
+
+    public void MutipleThronAttack()
+    {
+
+    }
+
+    // thron animation index 0
+
+    public void UmiAttack()
+    {
+
+    }
+
+    // Umi animation index 1
     void Start()
     {
         EnemyInitSet();

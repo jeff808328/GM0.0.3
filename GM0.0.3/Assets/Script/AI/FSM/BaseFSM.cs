@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class BaseFSM : MonoBehaviour
 {
-    protected EnemyState EnemyState;
-    protected EnemyDetect EnemyDetect;
-    protected EnemyMove EnemyMove;
-    protected EnemyAttack EnemyAttack;
-    protected EnemyAnimation EnemyAnimation;
-    protected EnemyHP EnemyHP;
+    [HideInInspector] public EnemyState EnemyState;
+    [HideInInspector] public EnemyDetect EnemyDetect;
+    [HideInInspector] public EnemyMove EnemyMove;
+    [HideInInspector] public EnemyAnimation EnemyAnimation;
+    [HideInInspector] public EnemyHP EnemyHP;
 
-    protected float LastFlipTime;
+    public float LastFlipTime;
 
     protected void BaseInitSet()
     {
         EnemyState = this.GetComponent<EnemyState>();   
         EnemyDetect = this.GetComponent<EnemyDetect>();
         EnemyMove = this.GetComponent<EnemyMove>();
-        EnemyAttack = this.GetComponent<EnemyAttack>();
         EnemyAnimation = this.GetComponent<EnemyAnimation>();
         EnemyHP = this.GetComponent<EnemyHP>();
 

@@ -23,7 +23,10 @@ public class EnemyState : CommonState
     public float FlipCD;
     public int MoveDirection;
     public bool NearingWall;
-    public int ActionIndex;
+
+    [HideInInspector] public float HP;
+    [HideInInspector] public float HPOri;
+
 
     void Start()
     {

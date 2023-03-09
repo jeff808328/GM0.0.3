@@ -65,9 +65,9 @@ public class LongHairAttack : CommonAttack
 
     // thron animation index 0
 
-    public void UmiAttack()
+    public IEnumerator UmiAttack()
     {
-
+        yield return new WaitForSecondsRealtime(EnemyState.SpAttackAniLength[1]);
     }
 
     // Umi animation index 1

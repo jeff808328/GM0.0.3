@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:GM0.0.3/Assets/3D Model&Animation/LHPRAnimation/LHPR_2.controller.meta
 guid: 1b42245036f9b2b4b9890ade5a4b70a0
+========
+guid: db88fdfc16f3ccb4aa0218f62616ad28
+>>>>>>>> ThreeDaySecond:GM0.0.3/Assets/3D Model&Animation/LHPRAnimation/LHPRAnimController.controller.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 9100000

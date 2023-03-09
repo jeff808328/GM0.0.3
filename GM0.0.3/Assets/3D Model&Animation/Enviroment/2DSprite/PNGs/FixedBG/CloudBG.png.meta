@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:GM0.0.3/Assets/3D Model&Animation/Enviroment/2DSprite/PNGs/FixedBG/CloudBG.png.meta
 guid: b474b33a53f8b664ba44dcd44b4a848e
+========
+guid: 7fb57fbcf3058f1459df5af5d4773979
+>>>>>>>> ThreeDaySecond:GM0.0.3/Assets/Environment/BackgroundPNG/Background_Tree_2.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

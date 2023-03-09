@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:GM0.0.3/Assets/3D Model&Animation/Enviroment/2DSprite/PNGs/FixedBG/Farground.png.meta
 guid: d48d4ceac42179f4e8755afcdcf25069
+========
+guid: 530b45dbe00115241a19fca4a40d2931
+>>>>>>>> ThreeDaySecond:GM0.0.3/Assets/Environment/BackgroundPNG/CloseTree_1.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

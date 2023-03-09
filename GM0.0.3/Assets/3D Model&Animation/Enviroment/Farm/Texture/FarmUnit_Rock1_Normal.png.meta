@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:GM0.0.3/Assets/3D Model&Animation/Enviroment/Farm/Texture/FarmUnit_Rock1_Normal.png.meta
 guid: 453f38c18c784b44aa113f7b0a7f853e
+========
+guid: 8d761c1db79c85849ab50762e5ae919e
+>>>>>>>> ThreeDaySecond:GM0.0.3/Assets/Environment/BackgroundPNG/Grond_Texture_Test.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

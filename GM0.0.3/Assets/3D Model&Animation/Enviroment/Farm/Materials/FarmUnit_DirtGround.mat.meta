@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:GM0.0.3/Assets/3D Model&Animation/Enviroment/Farm/Materials/FarmUnit_DirtGround.mat.meta
 guid: b7040a5bbe0e5634fae1a5291478e3f9
+========
+guid: 2cd113395e835984f9801386bec5c911
+>>>>>>>> ThreeDaySecond:GM0.0.3/Assets/Environment/Material/GroundMat_1.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000

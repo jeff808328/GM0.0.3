@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:GM0.0.3/Assets/3D Model&Animation/Enviroment/Tower/SideWalk/Materials.meta
 guid: 422d7714f1faa8240848e594904fa354
+========
+guid: 6153b2d3e16e1284a955a0fbf1239717
+>>>>>>>> ThreeDaySecond:GM0.0.3/Assets/Environment/Material.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

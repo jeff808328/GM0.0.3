@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:GM0.0.3/Assets/3D Model&Animation/Enviroment/2DSprite/Materials.meta
 guid: 186be6ff3ace75a40a4223e855223109
+========
+guid: 76d823fa24f57d64db74c036a0c0a232
+>>>>>>>> ThreeDaySecond:GM0.0.3/Assets/Environment/BackgroundPNG/Materials.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

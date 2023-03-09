@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:GM0.0.3/Assets/3D Model&Animation/Enviroment/Farm/Materials/FarmUnit_Rock1.mat.meta
 guid: df0451ae9b54af043991fcdccab07a08
+========
+guid: 22541625214644d49922912a6869e17e
+>>>>>>>> ThreeDaySecond:GM0.0.3/Assets/Environment/Material/SpriteShadow_2.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000

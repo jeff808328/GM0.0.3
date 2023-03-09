@@ -30,8 +30,8 @@ Material:
     - _BUILTIN_QueueOffset: 0
     - _DissolveScale: 20
     m_Colors:
-    - _Color01: {r: 2.484579, g: 19.699163, b: 33.89676, a: 0}
-    - _Color02: {r: 72.20598, g: 36.560413, b: 5.292582, a: 0}
+    - _Color01: {r: 33.89676, g: 33.89676, b: 33.89676, a: 0}
+    - _Color02: {r: 72.20598, g: 72.20598, b: 72.20598, a: 0}
     - _DissolveSpd: {r: -0.6, g: 0, b: 0, a: 0}
     - _MainTexSpd: {r: -2, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

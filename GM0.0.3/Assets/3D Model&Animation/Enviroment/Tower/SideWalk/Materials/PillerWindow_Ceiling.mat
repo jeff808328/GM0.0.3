@@ -7,13 +7,18 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<<< HEAD:GM0.0.3/Assets/3D Model&Animation/Enviroment/Tower/SideWalk/Materials/PillerWindow_Ceiling.mat
   m_Name: PillerWindow_Ceiling
+========
+  m_Name: ToonTreeTest
+>>>>>>>> ThreeDaySecond:GM0.0.3/Assets/Environment/Material/ToonTreeTest.mat
   m_Shader: {fileID: 4800000, guid: be891319084e9d147b09d89e80ce60e0, type: 3}
   m_ValidKeywords:
+  - _DISABLE_OUTLINE
   - _EMISSIVE_SIMPLE
   - _IS_ANGELRING_OFF
-  - _IS_CLIPPING_OFF
-  - _IS_OUTLINE_CLIPPING_NO
+  - _IS_CLIPPING_TRANSMODE
+  - _IS_OUTLINE_CLIPPING_YES
   - _OUTLINE_NML
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -22,7 +27,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap:
     IgnoreProjection: False
-    RenderType: Opaque
+    RenderType: TransparentCutout
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -68,7 +73,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ClippingMask:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 5b91b226dec85a44385c1e411e74aca8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CoatMaskMap:
@@ -124,7 +129,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
+<<<<<<<< HEAD:GM0.0.3/Assets/3D Model&Animation/Enviroment/Tower/SideWalk/Materials/PillerWindow_Ceiling.mat
         m_Texture: {fileID: 2800000, guid: 2342e129a631bdc4c9733b1802379d47, type: 3}
+========
+        m_Texture: {fileID: 2800000, guid: 5b91b226dec85a44385c1e411e74aca8, type: 3}
+>>>>>>>> ThreeDaySecond:GM0.0.3/Assets/Environment/Material/ToonTreeTest.mat
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
@@ -140,7 +149,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
+<<<<<<<< HEAD:GM0.0.3/Assets/3D Model&Animation/Enviroment/Tower/SideWalk/Materials/PillerWindow_Ceiling.mat
         m_Texture: {fileID: 2800000, guid: 0b6b55ecf98c6f142acfe21d62bfb8d0, type: 3}
+========
+        m_Texture: {fileID: 2800000, guid: a0ea50e7c2f8f844ba887b359b277f5a, type: 3}
+>>>>>>>> ThreeDaySecond:GM0.0.3/Assets/Environment/Material/ToonTreeTest.mat
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMapForMatCap:
@@ -219,9 +232,13 @@ Material:
     m_Floats:
     - _1st2nd_Shades_Feather: 0.0001
     - _1st_ShadeColor_Feather: 0.0001
-    - _1st_ShadeColor_Step: 0.5
+    - _1st_ShadeColor_Step: 0.211
     - _2nd_ShadeColor_Feather: 0.0001
+<<<<<<<< HEAD:GM0.0.3/Assets/3D Model&Animation/Enviroment/Tower/SideWalk/Materials/PillerWindow_Ceiling.mat
     - _2nd_ShadeColor_Step: 0.421
+========
+    - _2nd_ShadeColor_Step: 1
+>>>>>>>> ThreeDaySecond:GM0.0.3/Assets/Environment/Material/ToonTreeTest.mat
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ARSampler_AlphaOn: 0
@@ -249,7 +266,7 @@ Material:
     - _AutoRenderQueue: 1
     - _BaseColorOverridden: 0
     - _BaseColorVisible: 1
-    - _BaseColor_Step: 0.5
+    - _BaseColor_Step: 0.211
     - _BaseShade_Feather: 0.0001
     - _Base_Speed: 0
     - _BlendMode: 0
@@ -259,7 +276,7 @@ Material:
     - _BumpScaleMatcap: 1
     - _CameraRolling_Stabilizer: 0
     - _ClippingMatteMode: 0
-    - _ClippingMode: 0
+    - _ClippingMode: 2
     - _Clipping_Level: 0
     - _CoatMask: 0
     - _ColorShift_Speed: 0
@@ -329,10 +346,10 @@ Material:
     - _Ior: 1
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
-    - _IsBaseMapAlphaAsClippingMask: 0
-    - _Is_BLD: 0
+    - _IsBaseMapAlphaAsClippingMask: 1
+    - _Is_BLD: 1
     - _Is_BakedNormal: 0
-    - _Is_BlendAddToHiColor: 0
+    - _Is_BlendAddToHiColor: 1
     - _Is_BlendAddToMatCap: 1
     - _Is_BlendBaseColor: 0
     - _Is_ColorShift: 0
@@ -348,13 +365,13 @@ Material:
     - _Is_LightColor_Outline: 1
     - _Is_LightColor_RimLight: 1
     - _Is_NormalMapForMatCap: 0
-    - _Is_NormalMapToBase: 0
-    - _Is_NormalMapToHighColor: 0
+    - _Is_NormalMapToBase: 1
+    - _Is_NormalMapToHighColor: 1
     - _Is_NormalMapToRimLight: 0
     - _Is_Ortho: 0
     - _Is_OutlineTex: 0
     - _Is_PingPong_Base: 0
-    - _Is_SpecularToHighColor: 0
+    - _Is_SpecularToHighColor: 1
     - _Is_UseTweakHighColorOnShadow: 0
     - _Is_UseTweakMatCapOnShadow: 0
     - _Is_ViewCoord_Scroll: 0
@@ -371,12 +388,12 @@ Material:
     - _OUTLINE: 0
     - _ObjectSpaceUVMapping: 0
     - _OcclusionStrength: 1
-    - _Offset_X_Axis_BLD: -0.05
+    - _Offset_X_Axis_BLD: 0.24
     - _Offset_Y_Axis_BLD: 0.09
     - _Offset_Z: 0
     - _OutlineOverridden: 0
     - _OutlineVisible: 1
-    - _Outline_Width: 0
+    - _Outline_Width: 7.74
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
     - _PPDMinSamples: 5
@@ -385,12 +402,12 @@ Material:
     - _Parallax: 0.02
     - _ReceivesSSR: 1
     - _RefractionModel: 0
-    - _RimLight: 0
+    - _RimLight: 1
     - _RimLightOverridden: 0
     - _RimLightVisible: 1
     - _RimLight_FeatherOff: 0
     - _RimLight_InsideMask: 0.0001
-    - _RimLight_Power: 0.1
+    - _RimLight_Power: 0
     - _Rotate_EmissiveUV: 0
     - _Rotate_MatCapUV: 0
     - _Rotate_NormalMapForMatCapUV: 0
@@ -402,7 +419,11 @@ Material:
     - _SecondShadeOverridden: 0
     - _SecondShadeVisible: 1
     - _Set_SystemShadowsToBase: 1
+<<<<<<<< HEAD:GM0.0.3/Assets/3D Model&Animation/Enviroment/Tower/SideWalk/Materials/PillerWindow_Ceiling.mat
     - _ShadeColor_Step: 0.421
+========
+    - _ShadeColor_Step: 1
+>>>>>>>> ThreeDaySecond:GM0.0.3/Assets/Environment/Material/ToonTreeTest.mat
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
@@ -454,7 +475,7 @@ Material:
     - _Tweak_RimLightMaskLevel: 0
     - _Tweak_ShadingGradeMapLevel: 0
     - _Tweak_SystemShadowsLevel: 0
-    - _Tweak_transparency: 0
+    - _Tweak_transparency: 1
     - _UVBase: 0
     - _UVDetail: 0
     - _UVEmissive: 0
@@ -462,7 +483,11 @@ Material:
     - _Unlit_Intensity: 0
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
+<<<<<<<< HEAD:GM0.0.3/Assets/3D Model&Animation/Enviroment/Tower/SideWalk/Materials/PillerWindow_Ceiling.mat
     - _Use_1stAs2nd: 1
+========
+    - _Use_1stAs2nd: 0
+>>>>>>>> ThreeDaySecond:GM0.0.3/Assets/Environment/Material/ToonTreeTest.mat
     - _Use_BaseAs1st: 1
     - _ZOverDrawMode: 0
     - _ZTestDepthEqualForOpaque: 4
@@ -478,8 +503,13 @@ Material:
     - _utsVersionY: 8
     - _utsVersionZ: 3
     m_Colors:
+<<<<<<<< HEAD:GM0.0.3/Assets/3D Model&Animation/Enviroment/Tower/SideWalk/Materials/PillerWindow_Ceiling.mat
     - _1st_ShadeColor: {r: 0.735849, g: 0.735849, b: 0.735849, a: 1}
     - _2nd_ShadeColor: {r: 0.12375402, g: 0.18638182, b: 0.254717, a: 1}
+========
+    - _1st_ShadeColor: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 1}
+    - _2nd_ShadeColor: {r: 0.41509432, g: 0.41509432, b: 0.41509432, a: 1}
+>>>>>>>> ThreeDaySecond:GM0.0.3/Assets/Environment/Material/ToonTreeTest.mat
     - _AngelRingMaskColor: {r: 0, g: 1, b: 0, a: 1}
     - _AngelRing_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Ap_RimLightColor: {r: 1, g: 1, b: 1, a: 1}
@@ -493,9 +523,9 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
-    - _Emissive_Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Emissive_Color: {r: 0.00008425245, g: 0.000034466913, b: 0, a: 1}
     - _FirstShadeMaskColor: {r: 0, g: 1, b: 1, a: 1}
-    - _HighColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HighColor: {r: 0.504, g: 0.41505882, b: 0.15021175, a: 1}
     - _HighlightMaskColor: {r: 1, g: 1, b: 0, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}

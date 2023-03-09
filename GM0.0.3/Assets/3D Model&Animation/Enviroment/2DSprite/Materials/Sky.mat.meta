@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:GM0.0.3/Assets/3D Model&Animation/Enviroment/2DSprite/Materials/Sky.mat.meta
 guid: 907fbe0698201054cb9c4e389c4b8e00
+========
+guid: 51232f1de9acd7c4f8cb67cf19ffe657
+>>>>>>>> ThreeDaySecond:GM0.0.3/Assets/Environment/BackgroundPNG/Materials/CloseTree_1.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000

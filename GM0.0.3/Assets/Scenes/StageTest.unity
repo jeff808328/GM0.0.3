@@ -4812,6 +4812,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7285171500107897318, guid: c2fc4a0bde010d04bb2bf62794bcf190, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 2b9460e1078de244c97e7fd67ba0b48f, type: 2}
+    - target: {fileID: 7285171500107897318, guid: c2fc4a0bde010d04bb2bf62794bcf190, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6726979569546044603, guid: 2b9460e1078de244c97e7fd67ba0b48f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2fc4a0bde010d04bb2bf62794bcf190, type: 3}
 --- !u!1001 &1978353230215184561
@@ -4821,13 +4829,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1978353229771875502, guid: e47aee31da16b0543a208949cbf89141, type: 3}
+      propertyPath: m_Color.a
+      value: 0.5019608
+      objectReference: {fileID: 0}
     - target: {fileID: 1978353230168398960, guid: e47aee31da16b0543a208949cbf89141, type: 3}
       propertyPath: m_Name
       value: PauseCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 1978353230168398960, guid: e47aee31da16b0543a208949cbf89141, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1978353230168398964, guid: e47aee31da16b0543a208949cbf89141, type: 3}
       propertyPath: m_Pivot.x

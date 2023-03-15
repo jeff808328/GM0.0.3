@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: pen SDF
+  m_Name: BossCN
   m_EditorClassIdentifier: 
-  hashCode: -607002198
+  hashCode: -1581062752
   material: {fileID: 6726979569546044603}
-  materialHashCode: 115576138
+  materialHashCode: -1502506112
   m_Version: 1.1.0
   m_SourceFontFileGUID: 4abe16caf04d6264f8c5d329cc2d7786
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 4abe16caf04d6264f8c5d329cc2d7786, type: 3}
@@ -1086,7 +1086,7 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0.22
+    - _OutlineWidth: 0.2
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.9
@@ -1107,7 +1107,7 @@ Material:
     - _UnderlayDilate: 0
     - _UnderlayOffsetX: 0
     - _UnderlayOffsetY: 0
-    - _UnderlaySoftness: 1
+    - _UnderlaySoftness: 0.4
     - _VertexOffsetX: 0
     - _VertexOffsetY: 0
     - _WeightBold: 0.75
@@ -1118,9 +1118,9 @@ Material:
     - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
     - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
     - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
-    - _OutlineColor: {r: 0.7264151, g: 0.58935565, b: 0.58935565, a: 0}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
-    - _UnderlayColor: {r: 1.4980392, g: 1.3803922, b: 0.43137255, a: 0.05882353}
+    - _UnderlayColor: {r: 1.4142135, g: 1.2977489, b: 0.7043338, a: 0.5019608}
   m_BuildTextureStacks: []

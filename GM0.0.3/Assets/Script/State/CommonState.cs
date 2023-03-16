@@ -37,6 +37,7 @@ public class CommonState : MonoBehaviour
     public bool AttackAble;
     public bool AttackIng;
     public float AttackCD;
+    [HideInInspector] public float LastAttackTime;
     [HideInInspector] public float AttackCDOri;
     public float[] AttackAniLength;
 
@@ -74,6 +75,7 @@ public class CommonState : MonoBehaviour
         AttackAble = true;
         AttackIng = false;
         AttackCDOri = AttackCD;
+        LastAttackTime = Time.time - AttackCDOri;
 
         RollAble = true;
         Rolling = false;

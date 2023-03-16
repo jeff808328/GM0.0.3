@@ -54,7 +54,7 @@ public class PlayerAttack : CommonAttack
 
                 PlayerState.AttackCD = PlayerState.AttackCDOri * 0.3f;
 
-                CallComboAttack(false);
+                CallComboAttack(true);
 
                 PlayerState.Combo = 4;
             }
@@ -72,7 +72,7 @@ public class PlayerAttack : CommonAttack
         }
 
 
-        if (PlayerState.Combo > 3 || Time.time > AttackStartTime + PlayerState.AttackAniLength[PlayerState.Combo] & PlayerState.AttackIng)
+        if (PlayerState.Combo > 2 || Time.time > AttackStartTime + PlayerState.AttackAniLength[PlayerState.Combo] & PlayerState.AttackIng)
         {
             PlayerState.AttackAble = false;
 
@@ -84,12 +84,17 @@ public class PlayerAttack : CommonAttack
 
             PlayerState.Combo = 0;
 
-            Debug.Log("CD start");
+       //     Debug.Log("CD start");
         }
         else
         {
             PlayerState.AttackAble = true;
         }
+
+        if (PlayerState.AttackIng)
+            DealDamage();
+
+        ResetCombo();
     }
 
 

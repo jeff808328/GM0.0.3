@@ -19,8 +19,7 @@ MonoBehaviour:
   JumpSpeed: 10
   AirJumpTimes: 1
   HP: 100
-  Atk: 30
+  Atk: 0
   Def: 10
   AtkCD: 0
   RollCD: 0
-  InvincibleLength: 0.2

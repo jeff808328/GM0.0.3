@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CommonHP : MonoBehaviour
 {
@@ -20,7 +21,11 @@ public class CommonHP : MonoBehaviour
     public float HvRollSpeed;
     public float LtRollSpeed;
 
+    [Header("HP bar")]
+    public Image BarImage;
+  
 
+    private float LastHurtTime;
     private int RollDirection;
 
     protected void InitValueSet()
@@ -33,7 +38,12 @@ public class CommonHP : MonoBehaviour
 
     public IEnumerator Hurt(float AttackerAtk, Vector2 AttackerPos, bool HeavyDamage)
     {
+        CommonState.MoveAble = false;
+        CommonState.AttackAble = false;
+        CommonState.Hurting = true;
+
         Hp -= AttackerAtk * DamageAdjsut;
+        BarImage.fillAmount = Hp * 0.01f;
 
         DieCheck();
 
@@ -41,26 +51,32 @@ public class CommonHP : MonoBehaviour
 
         StartCoroutine(DamageControl(0, CommonState.UnbreakableLength));
 
-        CommonState.MoveAble = false;
-        CommonState.AttackAble = false;
-        CommonState.Hurting = true;
-
-        if (HeavyDamage)
+        if (HeavyDamage & Time.time > LastHurtTime + CommonState.HeavyHurtAniLength) // 避免重複觸發受傷動畫,待優化,也許跟isunbraekable混在一起用
         {
+         //   Debug.Log(this.gameObject.name + " is heavy hurt");
+
+            LastHurtTime = Time.time + CommonState.HeavyHurtAniLength;
+
             CommonAnimation.Animator.SetTrigger("HeavyHurt");
 
-            yield return new WaitForSecondsRealtime(CommonState.HeavyHurtAniLength);
-
+            StartCoroutine(DamageControl(0, CommonState.HeavyHurtAniLength));
             StartCoroutine(CommonMove.Roll(RollDirection, CommonState.HeavyHurtAniLength, HvRollSpeed));
+
+            yield return new WaitForSecondsRealtime(CommonState.HeavyHurtAniLength);
         }
 
-        else
+        else if (Time.time > LastHurtTime + 0.05f)
         {
+        //    Debug.Log(this.gameObject.name + " is light hurt");
+
+            LastHurtTime = Time.time + CommonState.LightHurtAniLength;
+
             CommonAnimation.Animator.SetTrigger("LightHurt");
 
-            yield return new WaitForSecondsRealtime(CommonState.LightHurtAniLength);
-
+            StartCoroutine(DamageControl(0, CommonState.LightHurtAniLength));
             StartCoroutine(CommonMove.Roll(RollDirection, CommonState.LightHurtAniLength, LtRollSpeed));
+
+            yield return new WaitForSecondsRealtime(CommonState.LightHurtAniLength);
         }
 
         CommonState.Hurting = false;

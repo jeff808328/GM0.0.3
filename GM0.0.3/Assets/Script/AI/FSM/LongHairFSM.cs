@@ -32,6 +32,8 @@ public class LongHairFSM : BaseFSM
 
         EnemyAttack = this.GetComponent<LongHairAttack>();
 
+        CurrentState = Idle;
+
     }
 
     // Update is called once per frame
@@ -55,4 +57,14 @@ public class LongHairFSM : BaseFSM
         LastUmiAttackTime = Time.time - UmiCD;
         LastThronAttackTime = Time.time - ThronAttackCD;
     }
+
+    public void CallBrake(float Length)
+    {
+        StartCoroutine(EnemyMove.SuddenlyBrake(Length));
+    }
+
+    // 待優化,action layer的設定完全沒有用到
+
+    // flip CD應該調整, 戰鬥狀態下0.3 非戰鬥3 
+
 }

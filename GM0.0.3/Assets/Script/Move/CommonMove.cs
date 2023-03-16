@@ -7,7 +7,7 @@ public class CommonMove : MonoBehaviour
 
     [Header("水平速度控制")]
     protected float HorizonSpeedMax = 0; //速度上限
-    [HideInInspector] public float HorizonSpeed = 0; // 運算用 & 當前值
+    public float HorizonSpeed = 0; // 運算用 & 當前值
 
     public float AddSpeedAdjust; // 移動速度控制, 直接用 Time.DeltaTime 值太小
     protected float OriginAddSpeedAdjust;
@@ -23,7 +23,7 @@ public class CommonMove : MonoBehaviour
 
     [Header("垂直速度控制")]
     protected float VerticalSpeedMax = 0; //速度上限
-    [HideInInspector] public float VerticalSpeed = 0; // 運算用 & 當前值
+    public float VerticalSpeed = 0; // 運算用 & 當前值
 
     private float GravityValue; // 重力初始值
     public float GravityAdjust; // 重力調整值 
@@ -86,7 +86,7 @@ public class CommonMove : MonoBehaviour
         CommonState.Moveing = true;
 
         if (Direction != LastMoveDirection)
-            StartCoroutine(Flip(Direction));
+            Flip(Direction);
 
         HorizonSpeed += AddSpeed * Direction * Time.deltaTime * AddSpeedAdjust; // v = v0 + at*調整值
         HorizonSpeed = Mathf.Clamp(HorizonSpeed, -HorizonSpeedMax, HorizonSpeedMax); // 避免超過速度上限
@@ -94,7 +94,7 @@ public class CommonMove : MonoBehaviour
         LastMoveDirection = Direction; // 紀錄當前移動方向,轉向和減速用
     }
 
-    protected IEnumerator Jump()
+    public IEnumerator Jump()
     {
         CommonState.ActionLayerNow = 1;
 
@@ -109,7 +109,7 @@ public class CommonMove : MonoBehaviour
         CommonState.Jumping = false;
     }
 
-    protected IEnumerator Flip(int Direction)// 翻面 // Run的備註
+    protected void Flip(int Direction)// 翻面 // Run的備註
     {
         float t = 0;
         float angle = 0;
@@ -121,7 +121,7 @@ public class CommonMove : MonoBehaviour
         }
 
 
-        if(Direction >= 0)
+        if (Direction >= 0)
         {
             this.transform.localScale = new Vector3(1, 1, 1);
 
@@ -129,7 +129,7 @@ public class CommonMove : MonoBehaviour
             {
                 angle = Mathf.Lerp(startangle, RightAngle, t / FlipLength);
 
-                transform.eulerAngles = new Vector3(transform.eulerAngles.x, angle,0);
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, angle, 0);
 
                 t += Time.deltaTime;
             }
@@ -149,8 +149,7 @@ public class CommonMove : MonoBehaviour
             }
         }
 
-        yield return null;
-   
+        Debug.Log("true flip");
     }
 
     protected void Brake() // 在玩家無輸入且非無敵狀況時可用
@@ -184,14 +183,15 @@ public class CommonMove : MonoBehaviour
         CommonState.MoveAble = false;
         CommonState.RollAble = false;
         CommonState.Rolling = true;
+        CommonState.AttackAble = true;
 
         HorizonSpeedMax = Speed;
 
         GravityAdjust = 0;
-        VerticalSpeed = 1;
+        //   VerticalSpeed = 1;
 
         BeforeDashSpeed = HorizonSpeed;
-        HorizonSpeed = Speed*LastMoveDirection;
+        HorizonSpeed = Speed * Direction;
 
         yield return new WaitForSecondsRealtime(Length);
 
@@ -229,7 +229,7 @@ public class CommonMove : MonoBehaviour
 
         AddSpeed = CharacterData.AddSpeed;
     }
- 
+
     protected IEnumerator Lock(float Length)
     {
         GravityValue = 0;

@@ -4,22 +4,31 @@ using UnityEngine;
 
 public class LongHairIdle : LongHairBaseState
 {
+    private float StateStartTime;
+
     public override void EnterState(LongHairFSM StateManager)
     {
-        Debug.Log("In Idle");
+    //    Debug.Log(StateManager.gameObject.name + "In Idle");
+
+        StateStartTime = Time.time;
     }
 
     public override void UpdateState(LongHairFSM StateManager)
     {
-        HurtTrigger(StateManager);
 
-        AttackTrigger(StateManager);
+        if (Time.time > StateStartTime + StateManager.EnemyState.ReactionTime)
+        {
+            HurtTrigger(StateManager);
 
-        SPAttackTrigger(StateManager);
+            AttackTrigger(StateManager);
 
-        FlipTrigger(StateManager);
+            SPAttackTrigger(StateManager);
 
-        SwitchAction(StateManager);
+            FlipTrigger(StateManager);
+
+            SwitchAction(StateManager);
+        }
+
     }
 
     private void SwitchAction(LongHairFSM StateManager)

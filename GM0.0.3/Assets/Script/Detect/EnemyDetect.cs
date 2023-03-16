@@ -99,13 +99,13 @@ public class EnemyDetect : CommonDetect
 
     private void EnemyDetectBoxUpdate()
     {
-        ViewBoxSize = new Vector2(transform.lossyScale.x * ViewBoxWidth, transform.lossyScale.y * ViewBoxHeight);
-        AtkTriggerBoxSize = new Vector2(transform.lossyScale.x * AtkTriggerBoxWidth, transform.lossyScale.y * AtkTriggerBoxHeight);
-        SpTriggerBoxSize = new Vector2(transform.lossyScale.x * SpTriggerBoxWidth, transform.lossyScale.y * SpTriggerBoxHeight);
+        ViewBoxSize = new Vector2(ViewBoxWidth, transform.lossyScale.y * ViewBoxHeight);
+        AtkTriggerBoxSize = new Vector2(AtkTriggerBoxWidth, transform.lossyScale.y * AtkTriggerBoxHeight);
+        SpTriggerBoxSize = new Vector2(SpTriggerBoxWidth, transform.lossyScale.y * SpTriggerBoxHeight);
 
-        ViewBoxPos = new Vector2(this.transform.position.x + ViewBoxWidthOffset * transform.lossyScale.x, this.transform.position.y + ViewBoxHeightOffset);
-        AtkTriggerBoxPos = new Vector2(this.transform.position.x + AtkTriggerBoxWidthOffset * transform.lossyScale.x, this.transform.position.y + AtkTriggerBoxHeightOffset);
-        SpTriggerBoxPos = new Vector2(this.transform.position.x + SpTriggerBoxWidthOffset * transform.lossyScale.x, this.transform.position.y + SpTriggerBoxHeightOffset);
+        ViewBoxPos = new Vector2(this.transform.position.x + ViewBoxWidthOffset * EnemyState.MoveDirection, this.transform.position.y + ViewBoxHeightOffset);
+        AtkTriggerBoxPos = new Vector2(this.transform.position.x + AtkTriggerBoxWidthOffset * EnemyState.MoveDirection, this.transform.position.y + AtkTriggerBoxHeightOffset);
+        SpTriggerBoxPos = new Vector2(this.transform.position.x + SpTriggerBoxWidthOffset * EnemyState.MoveDirection, this.transform.position.y + SpTriggerBoxHeightOffset);
 
         EnemyState.PlayerInView = Physics2D.OverlapBox(ViewBoxPos, ViewBoxSize, 0, Player);
         EnemyState.PlayerInAttakRange = Physics2D.OverlapBox(AtkTriggerBoxPos, AtkTriggerBoxSize, 0, Player);
@@ -116,15 +116,21 @@ public class EnemyDetect : CommonDetect
             var pos = Physics2D.OverlapBox(ViewBoxPos, ViewBoxSize, 0, Player);
 
             PlayerPos = pos.gameObject.transform.position;
+
+      //      Debug.Log("find player");
+        }
+        else
+        {
+     //       Debug.Log("lost player");
         }
     }
 
     private void EnemyDetectRayUpdate()
     {
         // 牆壁偵測 
-        FlipDetectSource = new Vector2(transform.position.x + FlipDetectXrayOffset, transform.position.y + FlipDetectYrayOffset);
+        FlipDetectSource = new Vector2(transform.position.x + FlipDetectXrayOffset * EnemyState.MoveDirection, transform.position.y + FlipDetectYrayOffset);
 
-        RaycastHit2D FlipDetect = Physics2D.Raycast(FlipDetectSource, new Vector2(transform.localScale.x, 0), 1);
+        RaycastHit2D FlipDetect = Physics2D.Raycast(FlipDetectSource, new Vector2(EnemyState.MoveDirection, 0), 1);
 
         if(FlipDetect.collider != null)
         {
@@ -138,12 +144,12 @@ public class EnemyDetect : CommonDetect
             }
         }
 
-        Debug.DrawRay(FlipDetectSource, new Vector2(FlipDetectLength, 0), Color.white, 0.1f);
+        Debug.DrawRay(FlipDetectSource, new Vector2(FlipDetectLength * EnemyState.MoveDirection, 0), Color.white, 0.1f);
 
         // 玩家觸地偵測
-        PlayerDetectSource = new Vector2(transform.position.x + PlayerDetectXrayOffset, transform.position.y + PlayerDetectYrayOffset);
+        PlayerDetectSource = new Vector2(transform.position.x + PlayerDetectXrayOffset * EnemyState.MoveDirection, transform.position.y + PlayerDetectYrayOffset);
 
-        RaycastHit2D PlayerGroundDetect = Physics2D.Raycast(PlayerDetectSource, new Vector2(transform.localScale.x, 0), Mathf.Infinity);
+        RaycastHit2D PlayerGroundDetect = Physics2D.Raycast(PlayerDetectSource, new Vector2(EnemyState.MoveDirection, 0), Mathf.Infinity);
 
         if (PlayerGroundDetect.collider.tag == "Player")
         {
@@ -154,7 +160,7 @@ public class EnemyDetect : CommonDetect
             EnemyState.PlayerOnGround = false;
         }
 
-        Debug.DrawRay(PlayerDetectSource, new Vector3(PlayerDetectLength, 0, 0), Color.green, 0.1f);
+        Debug.DrawRay(PlayerDetectSource, new Vector3(PlayerDetectLength * EnemyState.MoveDirection, 0, 0), Color.green, 0.1f);
 
         // caldistance的drawray還是要有
     }

@@ -10,7 +10,7 @@ public class BaseFSM : MonoBehaviour
     [HideInInspector] public EnemyAnimation EnemyAnimation;
     [HideInInspector] public EnemyHP EnemyHP;
 
-    public float LastFlipTime;
+    [HideInInspector] public float LastFlipTime;
 
     protected void BaseInitSet()
     {

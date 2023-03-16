@@ -40,12 +40,12 @@ public class PlayerMove : CommonMove
                     PlayerAnimation.Animator.SetTrigger("Jump");
                 }
 
-                if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
+                if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) & PlayerState.MoveAble)
                 {
                     Run(-1);
 
                 }
-                else if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
+                else if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) & PlayerState.MoveAble)
                 {
                     Run(1);
                 }
@@ -68,6 +68,11 @@ public class PlayerMove : CommonMove
             PlayerState.JumpTime = 0;
             PlayerState.Jumping = false;
             GravityMax = 0;
+        }
+
+        if(PlayerState.Rolling)
+        {
+            VerticalSpeed = 1.5f; // 避免衝刺時角色落下,待優化進dash,也許在dash時,ridgbody的gravity = 0吧
         }
 
         Gravity();

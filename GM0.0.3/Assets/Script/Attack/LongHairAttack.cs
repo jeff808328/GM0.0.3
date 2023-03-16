@@ -11,6 +11,7 @@ public class LongHairAttack : CommonAttack
     public float ThronAttackBoxWidth;
     public float ThronAttackBoxHeightOffset;
     public float ThronAttackBoxWidthOffset;
+    public GameObject Thron;
 
     private Vector2 ThronAttackBoxPos;
     private Vector2 ThronAttackBoxSize;
@@ -20,6 +21,7 @@ public class LongHairAttack : CommonAttack
     public float UmiAttackBoxWidth;
     public float UmiAttackBoxHeightOffset;
     public float UmiAttackBoxWidthOffset;
+    public GameObject Umi;
 
     private Vector2 UmiAttackBoxPos;
     private Vector2 UmiAttackBoxSize;
@@ -41,16 +43,18 @@ public class LongHairAttack : CommonAttack
         if (EnemyState.Combo >= 3)
         {
             EnemyState.Combo = 0;
+
         }
         else
         {
             EnemyState.Combo++;
         }
 
-        if (EnemyState.AttackAble)
-        {
-            CallComboAttack(true);
-        }
+        CallComboAttack(true);
+
+        AttackStartTime = Time.time;
+
+        CDStartTime = Time.time;
     }
 
     public IEnumerator ThronAttack()
@@ -88,5 +92,10 @@ public class LongHairAttack : CommonAttack
         {
             EnemyState.AttackAble = false;
         }
+
+        if (EnemyState.AttackIng)
+            DealDamage();
+
+        ResetCombo();
     }
 }

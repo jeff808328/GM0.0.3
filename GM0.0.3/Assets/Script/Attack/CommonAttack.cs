@@ -20,10 +20,12 @@ public class CommonAttack : MonoBehaviour
     [Header("§ðÀ»µwª½")]
 
     public float PreCast;
+    protected float PreCastOri;
     public float BackSwing;
+    protected float BackSwingOri;
 
     protected float AttackStartTime;
-    protected float CDStartTime;
+    public float CDStartTime;
 
     private float LastAttackTime;
     public float AttackResetTime;
@@ -58,7 +60,9 @@ public class CommonAttack : MonoBehaviour
         CommonAnimation.Animator.SetTrigger("Atk" + CommonState.Combo.ToString());
 
 
-        StartCoroutine(AttackStateTrigger(UseSuddenlyBrake));
+        //   StartCoroutine(AttackStateTrigger(UseSuddenlyBrake));
+
+        StartCoroutine(Attack(UseSuddenlyBrake));
 
         //   Debug.Log("function work");
     }
@@ -113,29 +117,34 @@ public class CommonAttack : MonoBehaviour
 
     protected IEnumerator Attack(bool UseSuddenlyBrake)
     {
-        //  Debug.Log("function start");
-
+     //   Debug.Log("function start");
+        CommonState.AttackAble = false;
         CommonState.AttackIng = true;
 
+        LastAttackTime = Time.time;
+
         if (UseSuddenlyBrake)
-            StartCoroutine(CommonMove.SuddenlyBrake(CommonState.AttackAniLength[CommonState.Combo]));
+            StartCoroutine(CommonMove.SuddenlyBrake(CommonState.AttackAniLength[CommonState.Combo] * 0.75f));
 
         yield return new WaitForSecondsRealtime(PreCast);
 
         var AttackDetect = Physics2D.OverlapBoxAll(AttackBoxPos, AttackBoxSize, 0, AttackAble);
-
-        yield return new WaitForSecondsRealtime(CommonState.AttackAniLength[CommonState.Combo]);
 
         foreach (var Attacked in AttackDetect)
         {
             StartCoroutine(Attacked.GetComponent<CommonHP>().Hurt(ChatacterData.Atk, this.transform.position, false));
         }
 
-        yield return new WaitForSecondsRealtime(BackSwing);
+        yield return new WaitForSecondsRealtime(CommonState.AttackAniLength[CommonState.Combo]);
 
         CommonState.AttackIng = false;
+        CommonState.AttackAble = true;
 
-        Debug.Log("function end");
+        PreCast = PreCastOri;
+
+        yield return new WaitForSecondsRealtime(BackSwing);
+
+  //      Debug.Log("function end");
     }
 
     private void OnDrawGizmos()

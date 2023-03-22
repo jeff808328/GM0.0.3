@@ -13,11 +13,22 @@ public class EnemyMove : CommonMove
 
         EnemyState = this.GetComponent<EnemyState>();
         CommonState = this.GetComponent<EnemyState>();
+
+        DashCDStartTime = Time.time - EnemyState.RollCD;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (Time.time < DashCDStartTime + EnemyState.RollCD)
+        {
+            EnemyState.RollAble = false;
+        }
+        else
+        {
+            EnemyState.RollAble = true;
+        }
+
+
         if (EnemyState.MoveAble)
         {
             if (EnemyState.MoveDirection != 0)

@@ -13,17 +13,30 @@ public class PlayerMove : CommonMove
         InitComponmentSet();
 
         PlayerInitComponentSet();
+
+        DashCDStartTime = Time.time - CommonState.RollCD;
+
+        transform.localEulerAngles = new Vector3(0, 100, 0);
     }
 
     void Update()
     {
+        if (Time.time < DashCDStartTime + PlayerState.RollCD)
+        {
+            PlayerState.RollAble = false;
+        }
+        else
+        {
+            PlayerState.RollAble = true;
+        }
+
         if (PlayerState.MoveAble)
         {
             if (PlayerState.ActionLayerNow < 3)
             {
                 if (Input.GetKeyDown(KeyCode.R) & PlayerState.RollAble)
                 {
-                    Debug.Log("Roll trigger");
+                    //  Debug.Log("Roll trigger");
 
                     StartCoroutine(Roll(LastMoveDirection, PlayerState.RollAniLength, CharacterData.MaxMoveSpeed * DashAdjust));
 
@@ -65,12 +78,15 @@ public class PlayerMove : CommonMove
         else
         {
             AddSpeedAdjust = OriginAddSpeedAdjust;
+
             PlayerState.JumpTime = 0;
             PlayerState.Jumping = false;
+
             GravityMax = 0;
+            GravityAdjust = OriGravityAdjust;
         }
 
-        if(PlayerState.Rolling)
+        if (PlayerState.Rolling)
         {
             VerticalSpeed = 1.5f; // 避免衝刺時角色落下,待優化進dash,也許在dash時,ridgbody的gravity = 0吧
         }

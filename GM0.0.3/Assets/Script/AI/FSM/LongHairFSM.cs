@@ -63,6 +63,11 @@ public class LongHairFSM : BaseFSM
         StartCoroutine(EnemyMove.SuddenlyBrake(Length));
     }
 
+    public void CallDash()
+    {
+        StartCoroutine(EnemyMove.Roll(EnemyState.MoveDirection,EnemyState.RollAniLength, EnemyMove.CharacterData.MaxMoveSpeed * EnemyMove.DashAdjust));
+    }
+
     // 待優化,action layer的設定完全沒有用到
 
     // flip CD應該調整, 戰鬥狀態下0.3 非戰鬥3 

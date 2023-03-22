@@ -176,7 +176,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -211,7 +211,7 @@ MonoBehaviour:
   GroundBoxWidth: 0.75
   GroundBoxHeightOffset: -0.25
   GroundBoxWidthOffset: 0
-  FlipDetectLength: 1
+  FlipDetectLength: 0.3
   FlipDetectXrayOffset: 0.75
   FlipDetectYrayOffset: 1
   FlipDetectSource: {x: 0, y: 0}
@@ -222,13 +222,14 @@ MonoBehaviour:
   PlayerDetectXrayOffset: 0.7
   PlayerDetectYrayOffset: 0.5
   ViewBoxHeight: 5
-  ViewBoxWidth: 20
+  ViewBoxWidth: 15
   ViewBoxHeightOffset: 2.5
   ViewBoxWidthOffset: 8
   MidMini: 5
-  MidMax: 10
-  RamdonValue: 3
-  Buffer: 3
+  MidMax: 8
+  RamdonValue: 0
+  Buffer: 0
+  Distance: 0
   AtkTriggerBoxHeight: 1
   AtkTriggerBoxWidth: 3
   AtkTriggerBoxHeightOffset: 0.7
@@ -260,8 +261,7 @@ MonoBehaviour:
   HeavyHurtAniLength: 2
   AttackAble: 0
   AttackIng: 0
-  AttackCD: 1
-  LastAttackTime: 0
+  AttackCD: 2
   AttackCDOri: 0
   AttackAniLength:
   - 1
@@ -272,8 +272,8 @@ MonoBehaviour:
   - 2
   Combo: 0
   ComboIng: 0
-  RollCD: 0.2
-  RollAniLength: 0.45
+  RollCD: 3
+  RollAniLength: 0.9
   RollAble: 0
   Rolling: 0
   MoveAble: 0
@@ -293,8 +293,8 @@ MonoBehaviour:
   AttackMethodUsedTime: 000000000000000000000000000000000000000000000000
   AttackMethodHitTime: 
   SpAttackAniLength: []
-  ReactionTime: 3
-  FlipCD: 1
+  ReactionTime: 0.5
+  FlipCD: 0.1
   MoveDirection: 0
   NearingWall: 0
   HP: 0
@@ -330,18 +330,18 @@ MonoBehaviour:
   AttackAble:
     serializedVersion: 2
     m_Bits: 512
-  AttackBoxHeight: 1
+  AttackBoxHeight: 1.2
   AttackBoxWidth: 2
-  AttackBoxHeightOffset: 0.85
-  AttackBoxWidthOffset: 1.75
-  PreCast: 0
-  BackSwing: 0
+  AttackBoxHeightOffset: 0.6
+  AttackBoxWidthOffset: 1.3
+  PreCast: 0.5
+  BackSwing: 0.5
+  CDStartTime: 0
   AttackResetTime: 0
   ChatacterData: {fileID: 11400000, guid: 87305ac2d81815640bfeffdee079f100, type: 2}
   ThronAttackBoxHeight: 0
   ThronAttackBoxWidth: 0
   ThronAttackBoxHeightOffset: 0
-  ThronAttackBoxWidthOffset: 0
   Thron: {fileID: 0}
   UmiAttackBoxHeight: 0
   UmiAttackBoxWidth: 0
@@ -361,18 +361,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HorizonSpeed: 0
-  AddSpeedAdjust: 0.5
+  AddSpeedAdjust: 0.3
   MinusSpeedAdjust: 8
   LastMoveDirection: 0
   VerticalSpeed: 0
   GravityAdjust: 5
   GravityMax: -20
   JumpSpeedAdjust: 0
-  DashAdjust: 2
+  DashAdjust: 0.8
   FinalMoveSpeed: {x: 0, y: 0}
   RightAngle: 90
   LeftAngle: 270
-  FlipLength: 0.3
+  FlipLength: 1
   CharacterData: {fileID: 11400000, guid: 8ce237187275f8c4096810829bf0c1a3, type: 2}
 --- !u!114 &198313355
 MonoBehaviour:
@@ -391,7 +391,7 @@ MonoBehaviour:
   Def: 0
   DamageAdjsut: 0
   HvRollSpeed: 1.5
-  LtRollSpeed: 3
+  LtRollSpeed: 2
   BarImage: {fileID: 1584732329}
 --- !u!114 &198313356
 MonoBehaviour:
@@ -930,7 +930,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 198313347}
+  m_Follow: {fileID: 8395818096734189060}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 2.18
@@ -957,7 +957,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390063436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.73, y: -0.38, z: -11}
+  m_LocalPosition: {x: 1, y: -0.89, z: -11.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1232,7 +1232,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1112513915}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.73, y: -0.38, z: -11}
+  m_LocalPosition: {x: 1, y: -0.89, z: -11.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18834,6 +18834,7 @@ MonoBehaviour:
   AttackBoxWidthOffset: 1.25
   PreCast: 0.1
   BackSwing: 0.1
+  CDStartTime: 0
   AttackResetTime: 2
   ChatacterData: {fileID: 11400000, guid: 8ce237187275f8c4096810829bf0c1a3, type: 2}
 --- !u!114 &7307475095959405617
@@ -22045,17 +22046,16 @@ MonoBehaviour:
   HeavyHurtAniLength: 2
   AttackAble: 0
   AttackIng: 0
-  AttackCD: 0.5
-  LastAttackTime: 0
+  AttackCD: 2
   AttackCDOri: 0
   AttackAniLength:
-  - 1
-  - 1
-  - 1.1
+  - 0.8
+  - 0.8
+  - 0.9
   - 0.2
   Combo: 0
   ComboIng: 0
-  RollCD: 0
+  RollCD: 0.6
   RollAniLength: 0.45
   RollAble: 0
   Rolling: 0
@@ -22164,7 +22164,7 @@ MonoBehaviour:
   GravityAdjust: 5
   GravityMax: -20
   JumpSpeedAdjust: 0
-  DashAdjust: 1.5
+  DashAdjust: 1
   FinalMoveSpeed: {x: 0, y: 0}
   RightAngle: 100
   LeftAngle: 260

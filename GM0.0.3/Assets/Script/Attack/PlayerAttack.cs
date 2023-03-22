@@ -5,15 +5,17 @@ using UnityEngine;
 public class PlayerAttack : CommonAttack
 {
     private PlayerState PlayerState;
-
     // 0 -> idle, 1 -> atk1, .......
-  
+
     void Start()
     {
         PlayerState = this.GetComponent<PlayerState>();
         CommonState = this.GetComponent<PlayerState>();
         CommonMove = this.GetComponent<PlayerMove>();
         CommonAnimation = this.GetComponent<PlayerAnimation>();
+
+        PreCastOri = PreCast;
+        BackSwingOri = BackSwing;
 
         AttackStartTime = 0;
         CDStartTime = Time.time - PlayerState.AttackCD;
@@ -25,13 +27,15 @@ public class PlayerAttack : CommonAttack
 
         if (Time.time < CDStartTime + PlayerState.AttackCD)
         {
+         //   Debug.Log("CDing");
             PlayerState.AttackAble = false;
         }
         else
         {
+        //    Debug.Log("CD end");
             PlayerState.AttackAble = true;
 
-          //  Debug.Log("CD end");
+            //  Debug.Log("CD end");
         }
 
         if (Input.GetKeyDown(KeyCode.J))
@@ -43,12 +47,16 @@ public class PlayerAttack : CommonAttack
 
                 PlayerState.AttackCD = PlayerState.AttackCDOri * 0.3f;
 
+                CommonMove.GravityAdjust *= 2;
+
+                PreCast *= 3;
+
                 CallComboAttack(true);
 
                 PlayerState.Combo = 4;
             }
 
-            if (PlayerState.Rolling)
+            else if (PlayerState.Rolling)
             {
                 PlayerState.Combo = 2;
 
@@ -59,8 +67,10 @@ public class PlayerAttack : CommonAttack
                 PlayerState.Combo = 4;
             }
 
-            if (PlayerState.AttackAble & PlayerState.Combo < 4)
+            else if (PlayerState.AttackAble & PlayerState.Combo < 4)
             {
+                //  Debug.Log("common attack");
+
                 CallComboAttack(true);
 
                 AttackStartTime = Time.time;
@@ -84,15 +94,15 @@ public class PlayerAttack : CommonAttack
 
             PlayerState.Combo = 0;
 
-       //     Debug.Log("CD start");
+            //     Debug.Log("CD start");
         }
         else
         {
             PlayerState.AttackAble = true;
         }
 
-        if (PlayerState.AttackIng)
-            DealDamage();
+        //if (PlayerState.AttackIng)
+        //    DealDamage();
 
         ResetCombo();
     }

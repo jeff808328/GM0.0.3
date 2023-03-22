@@ -38,7 +38,7 @@ public class EnemyDetect : CommonDetect
     public float Buffer; // 中間段長度最小值
 
     private Vector3 PlayerPos;
-    private float Distance;
+    [SerializeField] private float Distance;
 
     private Vector3 MidMiniPos;
     private Vector3 MidMaxPos; //show 距離偵測狀態
@@ -77,16 +77,24 @@ public class EnemyDetect : CommonDetect
 
     void Update()
     {
+        CalculationPlayerDistance();
+
         BaseDetectBoxUpdate();
 
         EnemyDetectBoxUpdate();
 
         EnemyDetectRayUpdate();
 
-        if (EnemyState.PlayerInView & LastReactTime + EnemyState.ReactionTime < Time.time)
-        {
-            CalculationPlayerDistance();
-        }
+        //if (EnemyState.PlayerInView & LastReactTime + EnemyState.ReactionTime < Time.time)
+        //{
+        //    CalculationPlayerDistance();
+        //}
+
+
+
+        Debug.DrawRay(FlipDetectSource, new Vector2(FlipDetectLength * EnemyState.MoveDirection, 0), Color.white, 0.1f);
+
+        Debug.DrawRay(PlayerDetectSource, new Vector3(PlayerDetectLength * EnemyState.MoveDirection, 0, 0), Color.green, 0.1f);
     }
 
     private void EnemyInitSet()
@@ -117,11 +125,11 @@ public class EnemyDetect : CommonDetect
 
             PlayerPos = pos.gameObject.transform.position;
 
-      //      Debug.Log("find player");
+            //   Debug.Log("find player");
         }
         else
         {
-     //       Debug.Log("lost player");
+            Debug.Log("lost player");
         }
     }
 
@@ -130,21 +138,17 @@ public class EnemyDetect : CommonDetect
         // 牆壁偵測 
         FlipDetectSource = new Vector2(transform.position.x + FlipDetectXrayOffset * EnemyState.MoveDirection, transform.position.y + FlipDetectYrayOffset);
 
-        RaycastHit2D FlipDetect = Physics2D.Raycast(FlipDetectSource, new Vector2(EnemyState.MoveDirection, 0), 1);
+        RaycastHit2D FlipDetect = Physics2D.Raycast(FlipDetectSource, new Vector2(EnemyState.MoveDirection * FlipDetectLength, 0), 1);
 
-        if(FlipDetect.collider != null)
+
+        if (FlipDetect.collider.tag == "Wall" & FlipDetect.collider.gameObject != null )
         {
-            if(FlipDetect.collider.tag == "Wall")
-            {
-                EnemyState.NearingWall = true;
-            }
-            else
-            {
-                EnemyState.NearingWall = false;
-            }
+            EnemyState.NearingWall = true;
         }
-
-        Debug.DrawRay(FlipDetectSource, new Vector2(FlipDetectLength * EnemyState.MoveDirection, 0), Color.white, 0.1f);
+        else
+        {
+            EnemyState.NearingWall = false;
+        }
 
         // 玩家觸地偵測
         PlayerDetectSource = new Vector2(transform.position.x + PlayerDetectXrayOffset * EnemyState.MoveDirection, transform.position.y + PlayerDetectYrayOffset);
@@ -159,14 +163,13 @@ public class EnemyDetect : CommonDetect
         {
             EnemyState.PlayerOnGround = false;
         }
-
-        Debug.DrawRay(PlayerDetectSource, new Vector3(PlayerDetectLength * EnemyState.MoveDirection, 0, 0), Color.green, 0.1f);
-
         // caldistance的drawray還是要有
     }
 
     private void CalculationPlayerDistance()
     {
+       // Debug.Log("rr");
+
         MidMax = MidMax + Random.Range(-RamdonValue - 1, RamdonValue + 1);
         MidMini = MidMini + Random.Range(-RamdonValue - 1, RamdonValue + 1);
 
@@ -182,7 +185,7 @@ public class EnemyDetect : CommonDetect
         MidMax = MidMaxOri;
         MidMini = MidMiniOri;
     }
-      
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;

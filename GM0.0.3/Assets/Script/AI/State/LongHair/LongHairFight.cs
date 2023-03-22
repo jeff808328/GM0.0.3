@@ -14,10 +14,10 @@ public class LongHairFight : LongHairBaseState
 
         //     Debug.Log(StateManager.gameObject.name + " start attack state");
 
-        if (StateManager.EnemyState.AttackAble & Time.time > StateManager.EnemyState.LastAttackTime + StateManager.EnemyState.AttackCD)
+        if (StateManager.EnemyState.AttackAble & Time.time > StateManager.EnemyAttack.CDStartTime + StateManager.EnemyState.AttackCD)
             StateManager.EnemyAttack.ComboAttack();
 
-        StateManager.EnemyState.LastAttackTime = Time.time;
+        StateManager.EnemyAttack.CDStartTime = Time.time;
 
         StateManager.EnemyState.AttackMethodUsedTime[StateManager.EnemyState.Combo]++;
 

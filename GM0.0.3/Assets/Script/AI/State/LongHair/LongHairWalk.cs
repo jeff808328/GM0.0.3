@@ -6,17 +6,12 @@ public class LongHairWalk : LongHairBaseState
 {
     public override void EnterState(LongHairFSM StateManager)
     {
-      //  Debug.Log(StateManager.gameObject.name + " is in walk state");
+        Debug.Log(StateManager.gameObject.name + " is in walk state");
     }
 
     public override void UpdateState(LongHairFSM StateManager)
     {
-        if (StateManager.EnemyState.PlayerInView)
-            StateManager.EnemyState.MoveAble = true;
-        else
-            StateManager.EnemyState.MoveAble = false;
-
-
+     
         HurtTrigger(StateManager);
 
         AttackTrigger(StateManager);
@@ -24,5 +19,10 @@ public class LongHairWalk : LongHairBaseState
         SPAttackTrigger(StateManager);
 
         FlipTrigger(StateManager);
+
+        if (StateManager.EnemyState.PlayerDistanceIndex > 1 && StateManager.EnemyState.RollAble)
+        {
+            StateManager.StateSwitch(StateManager.Dash);
+        }
     }
 }

@@ -19,7 +19,7 @@ MonoBehaviour:
   JumpSpeed: 10
   AirJumpTimes: 1
   HP: 100
-  Atk: 0
-  Def: 10
+  Atk: 15
+  Def: 0
   AtkCD: 0
   RollCD: 0

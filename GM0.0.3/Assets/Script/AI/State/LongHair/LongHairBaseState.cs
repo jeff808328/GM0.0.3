@@ -19,21 +19,25 @@ public abstract class LongHairBaseState
     protected void AttackTrigger(LongHairFSM StateManager)
     {
 
-        Debug.Log("attack trigger");
+        //  Debug.Log("attack trigger");
 
 
         if (StateManager.EnemyState.PlayerInAttakRange)
-            StateManager.CallBrake(0.01f);
+        {
+           // StateManager.EnemyState.MoveAble = false;
+            Debug.Log("player in attack range");
+        }
+
 
         //if (StateManager.EnemyState.HPOri * 0.25f * (3 - StateManager.EnemyState.AttackMethodUsedTime[0]) > StateManager.EnemyState.HP)
         //{
         //    StateManager.StateSwitch(StateManager.MultipleThron);
         //}
 
-        //if (StateManager.EnemyState.PlayerInAttakRange & StateManager.EnemyState.AttackAble)
-        //{
-        //    StateManager.StateSwitch(StateManager.Attack);
-        //}
+        if (StateManager.EnemyState.PlayerInAttakRange & StateManager.EnemyState.AttackAble)
+        {
+            StateManager.StateSwitch(StateManager.Attack);
+        }
 
         //if (StateManager.EnemyState.PlayerDistanceIndex == 2 & StateManager.EnemyState.AttackAble & StateManager.EnemyState.AttackMethodUsedTime[5] < 2)
         //{
@@ -63,25 +67,24 @@ public abstract class LongHairBaseState
     {
         if (!StateManager.EnemyState.PlayerInView & StateManager.LastFlipTime + StateManager.EnemyState.FlipCD < Time.time)
         {
-            StateManager.CallBrake(0.01f);
+            StateManager.CallBrake(0.1f);
 
             StateManager.EnemyState.MoveDirection *= -1;
 
-            StateManager.LastFlipTime = Time.time;
+           // StateManager.LastFlipTime = Time.time;
 
-            Debug.Log("Flip");
+            Debug.Log("Flip because player not in view");
         }
 
-        if (StateManager.EnemyState.NearingWall & StateManager.LastFlipTime + StateManager.EnemyState.FlipCD < Time.time)
+        else if (StateManager.EnemyState.NearingWall & StateManager.LastFlipTime + StateManager.EnemyState.FlipCD*3 < Time.time)
         {
-            StateManager.CallBrake(0.01f);
-
             StateManager.EnemyState.MoveDirection *= -1;
 
             StateManager.LastFlipTime = Time.time;
 
-            Debug.Log("Flip");
+            Debug.Log("Flip because nearing wall");
         }
-    }
 
+
+    }
 }

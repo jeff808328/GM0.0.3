@@ -10,7 +10,6 @@ public class LongHairAttack : CommonAttack
     public float ThronAttackBoxHeight;
     public float ThronAttackBoxWidth;
     public float ThronAttackBoxHeightOffset;
-    public float ThronAttackBoxWidthOffset;
     public GameObject Thron;
 
     private Vector2 ThronAttackBoxPos;
@@ -57,9 +56,26 @@ public class LongHairAttack : CommonAttack
         CDStartTime = Time.time;
     }
 
-    public IEnumerator ThronAttack()
+    public IEnumerator ThronAttack(float XrayOffset)
     {
-        yield return new WaitForSecondsRealtime(EnemyState.SpAttackAniLength[0]);
+        CommonState.AttackAble = false;
+        CommonState.AttackIng = true;
+
+        ThronAttackBoxSize = new Vector2(ThronAttackBoxWidth, ThronAttackBoxHeight);
+
+        ThronAttackBoxPos = new Vector2(transform.position.x + XrayOffset, transform.position.y + ThronAttackBoxHeightOffset);
+
+        yield return new WaitForSecondsRealtime(EnemyState.SpAttackAniLength[0]); // 等待生長的時間
+
+        var AttackDetect = Physics2D.OverlapBoxAll(ThronAttackBoxPos, ThronAttackBoxSize, 0, AttackAble);
+
+        foreach (var Attacked in AttackDetect)
+        {
+            StartCoroutine(Attacked.GetComponent<CommonHP>().Hurt(ChatacterData.Atk, this.transform.position, true));
+        }
+
+        CommonState.AttackIng = false;
+        CommonState.AttackAble = true;
     }
 
     public void MutipleThronAttack()
@@ -93,8 +109,8 @@ public class LongHairAttack : CommonAttack
             EnemyState.AttackAble = false;
         }
 
-        if (EnemyState.AttackIng)
-            DealDamage();
+        //if (EnemyState.AttackIng)
+        //    DealDamage();
 
         ResetCombo();
     }

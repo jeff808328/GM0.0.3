@@ -39,6 +39,7 @@ public class CommonMove : MonoBehaviour
     private float BeforeDashSpeed;
     private float BeforeDahsMoveDirection;
     public float DashAdjust;
+    protected float DashCDStartTime;
 
     [Header("實際速度")]
     [SerializeField] protected Vector2 FinalMoveSpeed;
@@ -111,8 +112,6 @@ public class CommonMove : MonoBehaviour
 
     protected void Flip(int Direction)// 翻面 // Run的備註
     {
-        float t = 0;
-        float angle = 0;
         float startangle = transform.rotation.y;
 
         if (!CommonState.GroundTouching)
@@ -125,31 +124,36 @@ public class CommonMove : MonoBehaviour
         {
             this.transform.localScale = new Vector3(1, 1, 1);
 
-            while (t < FlipLength)
-            {
-                angle = Mathf.Lerp(startangle, RightAngle, t / FlipLength);
+            //while (t < FlipLength)
+            //{
+            //    angle = Mathf.Lerp(startangle, RightAngle, t / FlipLength);
 
-                transform.eulerAngles = new Vector3(transform.eulerAngles.x, angle, 0);
+            //    transform.eulerAngles = new Vector3(transform.eulerAngles.x, angle, 0);
 
-                t += Time.deltaTime;
-            }
+            //    t += Time.deltaTime;
+            //}
+
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, RightAngle, 0);
 
         }
         else
         {
             this.transform.localScale = new Vector3(-1, 1, 1);
 
-            while (t < FlipLength)
-            {
-                angle = Mathf.Lerp(startangle, LeftAngle, t / FlipLength);
+            //while (t < FlipLength)
+            //{
+            //    angle = Mathf.Lerp(startangle, LeftAngle, t / FlipLength);
 
-                transform.eulerAngles = new Vector3(transform.eulerAngles.x, angle, 0);
+            //    transform.eulerAngles = new Vector3(transform.eulerAngles.x, angle, 0);
 
-                t += Time.deltaTime;
-            }
+            //    t += Time.deltaTime;
+            //}
+
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, LeftAngle, 0);
+
         }
 
-        Debug.Log("true flip");
+     //   Debug.Log("true flip");
     }
 
     protected void Brake() // 在玩家無輸入且非無敵狀況時可用
@@ -213,10 +217,14 @@ public class CommonMove : MonoBehaviour
         CommonState.MoveAble = true;
         CommonState.ActionLayerNow = 0;
         CommonState.IsUnbreakable = false;
+
+        DashCDStartTime = Time.time;
     }
 
     public IEnumerator SuddenlyBrake(float Length)
     {
+        Debug.Log("suddenly brake");
+
         HorizonSpeed = 0;
         AddSpeed = 0;
 

@@ -37,7 +37,7 @@ public class LongHairFSM : BaseFSM
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         CurrentState.UpdateState(this);
     }

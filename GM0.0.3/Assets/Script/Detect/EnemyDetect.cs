@@ -75,7 +75,7 @@ public class EnemyDetect : CommonDetect
         EnemyInitSet();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         CalculationPlayerDistance();
 

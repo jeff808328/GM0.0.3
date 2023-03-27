@@ -6,7 +6,7 @@ public class LongHairWalk : LongHairBaseState
 {
     public override void EnterState(LongHairFSM StateManager)
     {
-        Debug.Log(StateManager.gameObject.name + " is in walk state");
+      //  Debug.Log(StateManager.gameObject.name + " is in walk state");
     }
 
     public override void UpdateState(LongHairFSM StateManager)

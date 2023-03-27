@@ -24,8 +24,15 @@ public abstract class LongHairBaseState
 
         if (StateManager.EnemyState.PlayerInAttakRange)
         {
-           // StateManager.EnemyState.MoveAble = false;
-            Debug.Log("player in attack range");
+            // StateManager.EnemyState.MoveAble = false;
+            //  Debug.Log("player in attack range");
+
+            if (StateManager.EnemyState.AttackAble &
+                    Time.time > StateManager.EnemyAttack.CDStartTime + StateManager.EnemyState.AttackCD &
+                         !StateManager.EnemyState.AttackIng)
+            {
+                StateManager.StateSwitch(StateManager.Attack);
+            }
         }
 
 
@@ -34,10 +41,7 @@ public abstract class LongHairBaseState
         //    StateManager.StateSwitch(StateManager.MultipleThron);
         //}
 
-        if (StateManager.EnemyState.PlayerInAttakRange & StateManager.EnemyState.AttackAble)
-        {
-            StateManager.StateSwitch(StateManager.Attack);
-        }
+
 
         //if (StateManager.EnemyState.PlayerDistanceIndex == 2 & StateManager.EnemyState.AttackAble & StateManager.EnemyState.AttackMethodUsedTime[5] < 2)
         //{
@@ -71,12 +75,12 @@ public abstract class LongHairBaseState
 
             StateManager.EnemyState.MoveDirection *= -1;
 
-           // StateManager.LastFlipTime = Time.time;
+            // StateManager.LastFlipTime = Time.time;
 
             Debug.Log("Flip because player not in view");
         }
 
-        else if (StateManager.EnemyState.NearingWall & StateManager.LastFlipTime + StateManager.EnemyState.FlipCD*3 < Time.time)
+        else if (StateManager.EnemyState.NearingWall & StateManager.LastFlipTime + StateManager.EnemyState.FlipCD * 3 < Time.time)
         {
             StateManager.EnemyState.MoveDirection *= -1;
 

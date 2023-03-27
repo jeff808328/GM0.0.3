@@ -8,7 +8,7 @@ public class LongHairIdle : LongHairBaseState
 
     public override void EnterState(LongHairFSM StateManager)
     {
-            Debug.Log(StateManager.gameObject.name + "In Idle");
+      //      Debug.Log(StateManager.gameObject.name + "In Idle");
 
         StateStartTime = Time.time;
     }

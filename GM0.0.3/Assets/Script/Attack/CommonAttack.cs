@@ -57,9 +57,9 @@ public class CommonAttack : MonoBehaviour
         CommonState.Combo++;
         CommonState.ComboIng = true;
 
-        CommonAnimation.Animator.SetTrigger("Atk" + CommonState.Combo.ToString());
+   //     Debug.Log(CommonState.Combo);
 
-
+     //   Debug.Log("call attack");
         //   StartCoroutine(AttackStateTrigger(UseSuddenlyBrake));
 
         StartCoroutine(Attack(UseSuddenlyBrake));
@@ -110,21 +110,27 @@ public class CommonAttack : MonoBehaviour
     protected void ResetCombo()
     {
         if (Time.time > LastAttackTime + AttackResetTime)
+        {
             CommonState.Combo = 0;
+        //    Debug.Log("combo reset");
+        }
+
     }
     // 過久沒有攻擊,則將combo重設為0
 
 
     protected IEnumerator Attack(bool UseSuddenlyBrake)
     {
-     //   Debug.Log("function start");
+        Debug.Log("function start");
         CommonState.AttackAble = false;
         CommonState.AttackIng = true;
 
         LastAttackTime = Time.time;
 
         if (UseSuddenlyBrake)
-            StartCoroutine(CommonMove.SuddenlyBrake(CommonState.AttackAniLength[CommonState.Combo] * 0.75f));
+            StartCoroutine(CommonMove.SuddenlyBrake(CommonState.AttackAniLength[CommonState.Combo]*0.75f));
+
+        CommonAnimation.Animator.SetTrigger("Atk" + CommonState.Combo.ToString());
 
         yield return new WaitForSecondsRealtime(PreCast);
 
@@ -132,10 +138,13 @@ public class CommonAttack : MonoBehaviour
 
         foreach (var Attacked in AttackDetect)
         {
+            Debug.Log(Attacked.gameObject.name);
             StartCoroutine(Attacked.GetComponent<CommonHP>().Hurt(ChatacterData.Atk, this.transform.position, false));
         }
 
-        yield return new WaitForSecondsRealtime(CommonState.AttackAniLength[CommonState.Combo]);
+        Debug.Log(CommonState.Combo);
+
+        yield return new WaitForSecondsRealtime(CommonState.AttackAniLength[CommonState.Combo] - PreCast);
 
         CommonState.AttackIng = false;
         CommonState.AttackAble = true;
@@ -144,7 +153,7 @@ public class CommonAttack : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(BackSwing);
 
-  //      Debug.Log("function end");
+        //      Debug.Log("function end");
     }
 
     private void OnDrawGizmos()

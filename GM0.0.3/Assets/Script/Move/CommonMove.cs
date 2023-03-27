@@ -223,7 +223,7 @@ public class CommonMove : MonoBehaviour
 
     public IEnumerator SuddenlyBrake(float Length)
     {
-        Debug.Log("suddenly brake");
+      //  Debug.Log("suddenly brake");
 
         HorizonSpeed = 0;
         AddSpeed = 0;

@@ -17,7 +17,7 @@ public class EnemyMove : CommonMove
         DashCDStartTime = Time.time - EnemyState.RollCD;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (Time.time < DashCDStartTime + EnemyState.RollCD)
         {

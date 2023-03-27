@@ -39,14 +39,14 @@ public class LongHairAttack : CommonAttack
 
     public void ComboAttack()
     {
-        if (EnemyState.Combo >= 3)
+        if (EnemyState.Combo == 3)
         {
             EnemyState.Combo = 0;
-
         }
-        else
+
+        if (EnemyState.Combo == 2)
         {
-            EnemyState.Combo++;
+            PreCast *= 1.5f;
         }
 
         CallComboAttack(true);
@@ -71,6 +71,7 @@ public class LongHairAttack : CommonAttack
 
         foreach (var Attacked in AttackDetect)
         {
+            Debug.Log(Attacked.gameObject.name);
             StartCoroutine(Attacked.GetComponent<CommonHP>().Hurt(ChatacterData.Atk, this.transform.position, true));
         }
 
@@ -91,14 +92,24 @@ public class LongHairAttack : CommonAttack
     }
 
     // Umi animation index 1
+
+
+    private void EnemyAttackBoxUpdate()
+    {
+        AttackBoxSize = new Vector2(transform.lossyScale.x * AttackBoxWidth, transform.lossyScale.y * AttackBoxHeight);
+
+        AttackBoxPos = new Vector2(transform.position.x + AttackBoxWidthOffset * EnemyState.MoveDirection,
+                                     transform.position.y + AttackBoxHeightOffset);
+    }
     void Start()
     {
         EnemyInitSet();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        BaseAttackBoxUpdate();
+        EnemyAttackBoxUpdate();
+
 
         if (Time.time > CDStartTime + EnemyState.AttackCD)
         {
@@ -112,6 +123,6 @@ public class LongHairAttack : CommonAttack
         //if (EnemyState.AttackIng)
         //    DealDamage();
 
-        ResetCombo();
+
     }
 }

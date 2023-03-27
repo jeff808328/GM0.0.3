@@ -6,6 +6,7 @@ public class PlayerMove : CommonMove
 {
     private PlayerState PlayerState;
     private PlayerAnimation PlayerAnimation;
+
     void Start()
     {
         InitValueSet();
@@ -14,9 +15,7 @@ public class PlayerMove : CommonMove
 
         PlayerInitComponentSet();
 
-        DashCDStartTime = Time.time - CommonState.RollCD;
-
-        transform.localEulerAngles = new Vector3(0, 100, 0);
+        DashCDStartTime = Time.time - CommonState.RollCD;    
     }
 
     void Update()

@@ -52,6 +52,7 @@ public class CommonMove : MonoBehaviour
     public ChatacterData CharacterData;
     protected Rigidbody2D Rd;
     protected CommonState CommonState;
+    protected Transform ModelTransform;
 
     private float AniStartTime;
 
@@ -73,7 +74,8 @@ public class CommonMove : MonoBehaviour
 
         OriGravityAdjust = GravityAdjust;
 
-        this.transform.eulerAngles = new Vector3(0, RightAngle, 0);
+        ModelTransform = transform.GetChild(0);
+        ModelTransform.localEulerAngles = new Vector3(0, RightAngle, 0);
     }
 
     protected void InitComponmentSet()
@@ -133,7 +135,7 @@ public class CommonMove : MonoBehaviour
             //    t += Time.deltaTime;
             //}
 
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, RightAngle, 0);
+            ModelTransform.localEulerAngles = new Vector3(transform.eulerAngles.x, RightAngle, 0);
 
         }
         else
@@ -149,7 +151,7 @@ public class CommonMove : MonoBehaviour
             //    t += Time.deltaTime;
             //}
 
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, LeftAngle, 0);
+            ModelTransform.localEulerAngles = new Vector3(transform.eulerAngles.x, RightAngle, 0);
 
         }
 

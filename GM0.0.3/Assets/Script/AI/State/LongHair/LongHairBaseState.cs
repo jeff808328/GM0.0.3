@@ -27,12 +27,18 @@ public abstract class LongHairBaseState
             // StateManager.EnemyState.MoveAble = false;
             //  Debug.Log("player in attack range");
 
+            StateManager.EnemyState.MoveAble = false;
+
             if (StateManager.EnemyState.AttackAble &
                     Time.time > StateManager.EnemyAttack.CDStartTime + StateManager.EnemyState.AttackCD &
                          !StateManager.EnemyState.AttackIng)
             {
                 StateManager.StateSwitch(StateManager.Attack);
             }
+        }
+        else
+        {
+            StateManager.EnemyState.MoveAble = false;
         }
 
 

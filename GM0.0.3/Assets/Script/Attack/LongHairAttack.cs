@@ -6,18 +6,16 @@ public class LongHairAttack : CommonAttack
 {
     private EnemyState EnemyState;
 
-    [Header("地刺攻擊判定")]
-    public float ThronAttackBoxHeight;
-    public float ThronAttackBoxWidth;
-    public float ThronAttackBoxHeightOffset;
+    [Header("普通攻擊設定")]
+    public float Atk3PreCast;
+
+    [Header("地刺攻擊設定")]
+    public float ThronPreCast;
+    public float ThronBackSwing;
     public GameObject Thron;
 
-    private Vector2 ThronAttackBoxPos;
-    private Vector2 ThronAttackBoxSize;
-
-    [Header("海膽攻擊判定")]
-    public float UmiAttackBoxHeight;
-    public float UmiAttackBoxWidth;
+    [Header("海膽攻擊設定")]
+    public float UmiAttackRadious;
     public float UmiAttackBoxHeightOffset;
     public float UmiAttackBoxWidthOffset;
     public GameObject Umi;
@@ -46,7 +44,7 @@ public class LongHairAttack : CommonAttack
 
         if (EnemyState.Combo == 2)
         {
-            PreCast *= 1.5f;
+            PreCast *= Atk3PreCast;
         }
 
         CallComboAttack(true);
@@ -58,25 +56,11 @@ public class LongHairAttack : CommonAttack
 
     public IEnumerator ThronAttack(float XrayOffset)
     {
-        CommonState.AttackAble = false;
-        CommonState.AttackIng = true;
+        yield return new WaitForSecondsRealtime(ThronPreCast);
 
-        ThronAttackBoxSize = new Vector2(ThronAttackBoxWidth, ThronAttackBoxHeight);
+        yield return new WaitForSecondsRealtime(EnemyState.AttackAniLength[5]);
 
-        ThronAttackBoxPos = new Vector2(transform.position.x + XrayOffset, transform.position.y + ThronAttackBoxHeightOffset);
-
-        yield return new WaitForSecondsRealtime(EnemyState.SpAttackAniLength[0]); // 等待生長的時間
-
-        var AttackDetect = Physics2D.OverlapBoxAll(ThronAttackBoxPos, ThronAttackBoxSize, 0, AttackAble);
-
-        foreach (var Attacked in AttackDetect)
-        {
-            Debug.Log(Attacked.gameObject.name);
-            StartCoroutine(Attacked.GetComponent<CommonHP>().Hurt(ChatacterData.Atk, this.transform.position, true));
-        }
-
-        CommonState.AttackIng = false;
-        CommonState.AttackAble = true;
+        yield return new WaitForSecondsRealtime(BackSwing);
     }
 
     public void MutipleThronAttack()

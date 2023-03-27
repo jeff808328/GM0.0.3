@@ -203,7 +203,7 @@ MonoBehaviour:
   Wall:
     serializedVersion: 2
     m_Bits: 128
-  WallBoxHeight: 2
+  WallBoxHeight: 2.5
   WallBoxWidth: 0.25
   WallBoxHeightOffset: 0.85
   WallBoxWidthOffset: 0.5
@@ -229,6 +229,7 @@ MonoBehaviour:
   MidMax: 8
   RamdonValue: 0
   Buffer: 0
+  PlayerPos: {x: 0, y: 0, z: 0}
   Distance: 0
   AtkTriggerBoxHeight: 1.2
   AtkTriggerBoxWidth: 2
@@ -255,7 +256,7 @@ MonoBehaviour:
   GroundTouching: 0
   WallTouching: 0
   IsUnbreakable: 0
-  UnbreakableLength: 0.3
+  UnbreakableLength: 1
   Hurting: 0
   LightHurtAniLength: 1.2
   HeavyHurtAniLength: 2
@@ -292,7 +293,10 @@ MonoBehaviour:
   PlayerNearing: 0
   AttackMethodUsedTime: 000000000000000000000000000000000000000000000000
   AttackMethodHitTime: 
-  SpAttackAniLength: []
+  SpAttackAniLength:
+  - 0
+  - 0
+  - 0
   ReactionTime: 0.1
   FlipCD: 0.1
   MoveDirection: 0
@@ -335,16 +339,14 @@ MonoBehaviour:
   AttackBoxHeightOffset: 0.6
   AttackBoxWidthOffset: 1.3
   PreCast: 2
-  BackSwing: 0
+  BackSwing: 1
   CDStartTime: 0
-  AttackResetTime: 0
+  AttackResetTime: 4
   ChatacterData: {fileID: 11400000, guid: 87305ac2d81815640bfeffdee079f100, type: 2}
-  ThronAttackBoxHeight: 0
-  ThronAttackBoxWidth: 0
-  ThronAttackBoxHeightOffset: 0
-  Thron: {fileID: 0}
-  UmiAttackBoxHeight: 0
-  UmiAttackBoxWidth: 0
+  Atk3PreCast: 2.5
+  ThronBackSwing: 0
+  Thron: {fileID: 5815134836377725314, guid: f9239c2c488aa0241a8d2ceea2f80862, type: 3}
+  UmiAttackRadious: 0
   UmiAttackBoxHeightOffset: 0
   UmiAttackBoxWidthOffset: 0
   Umi: {fileID: 0}
@@ -957,7 +959,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390063436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.33, y: -0.89, z: -10.21}
+  m_LocalPosition: {x: 6.47, y: -0.89, z: -10.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1232,7 +1234,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1112513915}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.33, y: -0.89, z: -10.21}
+  m_LocalPosition: {x: 6.47, y: -0.89, z: -10.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22040,7 +22042,7 @@ MonoBehaviour:
   GroundTouching: 0
   WallTouching: 0
   IsUnbreakable: 0
-  UnbreakableLength: 0
+  UnbreakableLength: 1
   Hurting: 0
   LightHurtAniLength: 0.5
   HeavyHurtAniLength: 2
@@ -22112,7 +22114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8395818096734189061}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.33, y: -1.89, z: 0.79}
+  m_LocalPosition: {x: 6.47, y: -1.89, z: 0.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

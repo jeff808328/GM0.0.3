@@ -33,11 +33,11 @@ public class LongHairIdle : LongHairBaseState
 
     private void SwitchAction(LongHairFSM StateManager)
     {
-        if (StateManager.EnemyState.PlayerDistanceIndex < 2)
+        if (StateManager.EnemyState.PlayerDistanceIndex == 0)
         {
             StateManager.StateSwitch(StateManager.Walk);
         }
-        else if(StateManager.EnemyState.RollAble)
+        else if(StateManager.EnemyState.RollAble & StateManager.EnemyState.PlayerDistanceIndex == 1)
         {
             StateManager.StateSwitch(StateManager.Dash);
         }

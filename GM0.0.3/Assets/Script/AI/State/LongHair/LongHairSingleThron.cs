@@ -8,8 +8,11 @@ public class LongHairSingleThron : LongHairBaseState
     {
         FlipTrigger(StateManager);
 
-     //   Debug.Log(StateManager.gameObject.name + " start thron attack state");
-      //  StateManager.EnemyAttack.ThronAttack();
+        Debug.Log(StateManager.gameObject.name + " start thron attack state");
+
+        //StateManager.EnemyAttack.ThronAttack(StateManager.EnemyDetect.PlayerPos.x);
+
+        StateManager.CallThronAttack();
 
         StateManager.EnemyState.AttackMethodUsedTime[5]++;
     }
@@ -18,7 +21,7 @@ public class LongHairSingleThron : LongHairBaseState
     {
         if (!StateManager.EnemyState.AttackIng)
         {
-      //      Debug.Log(StateManager.gameObject.name + " end thron attack state");
+            Debug.Log(StateManager.gameObject.name + " end thron attack state");
 
             StateManager.StateSwitch(StateManager.Idle);
         }

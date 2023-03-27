@@ -10,7 +10,6 @@ public class LongHairAttack : CommonAttack
     public float Atk3PreCast;
 
     [Header("¦a¨ë§ðÀ»³]©w")]
-    public float ThronPreCast;
     public float ThronBackSwing;
     public GameObject Thron;
 
@@ -56,9 +55,21 @@ public class LongHairAttack : CommonAttack
 
     public IEnumerator ThronAttack(float XrayOffset)
     {
-        yield return new WaitForSecondsRealtime(ThronPreCast);
+        CommonState.AttackAble = false;
+        CommonState.AttackIng = true;
+
+        LastAttackTime = Time.time;
+
+        StartCoroutine(CommonMove.SuddenlyBrake(CommonState.AttackAniLength[5] * 0.75f));
+
+        CommonAnimation.Animator.SetTrigger("AtkThron");
+
+        Instantiate(Thron, new Vector2(XrayOffset, transform.position.y), Quaternion.identity);
 
         yield return new WaitForSecondsRealtime(EnemyState.AttackAniLength[5]);
+
+        CommonState.AttackIng = false;
+        CommonState.AttackAble = true;
 
         yield return new WaitForSecondsRealtime(BackSwing);
     }

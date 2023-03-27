@@ -27,7 +27,7 @@ public class CommonAttack : MonoBehaviour
     protected float AttackStartTime;
     public float CDStartTime;
 
-    private float LastAttackTime;
+    protected float LastAttackTime;
     public float AttackResetTime;
 
     #region Component
@@ -138,7 +138,7 @@ public class CommonAttack : MonoBehaviour
 
         foreach (var Attacked in AttackDetect)
         {
-            Debug.Log(Attacked.gameObject.name);
+         //   Debug.Log(Attacked.gameObject.name);
             StartCoroutine(Attacked.GetComponent<CommonHP>().Hurt(ChatacterData.Atk, this.transform.position, false));
         }
 

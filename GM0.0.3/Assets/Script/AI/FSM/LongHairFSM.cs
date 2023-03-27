@@ -40,6 +40,11 @@ public class LongHairFSM : BaseFSM
     void FixedUpdate()
     {
         CurrentState.UpdateState(this);
+
+        //if(EnemyState.PlayerDistanceIndex == 2)
+        //{
+        //    Debug.Log("thron");
+        //}
     }
 
     public void StateSwitch(LongHairBaseState NextState)
@@ -66,6 +71,11 @@ public class LongHairFSM : BaseFSM
     public void CallDash()
     {
         StartCoroutine(EnemyMove.Roll(EnemyState.MoveDirection,EnemyState.RollAniLength, EnemyMove.CharacterData.MaxMoveSpeed * EnemyMove.DashAdjust));
+    }
+
+    public void CallThronAttack()
+    {
+        StartCoroutine(EnemyAttack.ThronAttack(EnemyDetect.PlayerPos.x));
     }
 
     // 待優化,action layer的設定完全沒有用到

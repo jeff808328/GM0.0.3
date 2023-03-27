@@ -37,7 +37,7 @@ public class EnemyDetect : CommonDetect
     public float RamdonValue; // 調整用亂數
     public float Buffer; // 中間段長度最小值
 
-    private Vector3 PlayerPos;
+    public Vector3 PlayerPos;
     [SerializeField] private float Distance;
 
     private Vector3 MidMiniPos;

@@ -10,7 +10,7 @@ public abstract class LongHairBaseState
 
     protected void HurtTrigger(LongHairFSM StateManger)
     {
-        if (StateManger.EnemyState.Hurting)
+        if (StateManger.EnemyState.Hurting & !StateManger.EnemyState.IsUnbreakable)
         {
             StateManger.StateSwitch(StateManger.Hurt);
         }
@@ -22,10 +22,10 @@ public abstract class LongHairBaseState
 
         if (StateManager.EnemyState.PlayerInAttakRange)
         {
-            // StateManager.EnemyState.MoveAble = false;
             //  Debug.Log("player in attack range");
 
             StateManager.EnemyState.MoveAble = false;
+
 
             if (StateManager.EnemyState.AttackAble &
                     Time.time > StateManager.EnemyAttack.CDStartTime + StateManager.EnemyState.AttackCD &
@@ -37,7 +37,7 @@ public abstract class LongHairBaseState
         }
         else
         {
-            StateManager.EnemyState.MoveAble = false;
+            StateManager.EnemyState.MoveAble = true;
         }
 
         //if (StateManager.EnemyState.HPOri * 0.25f * (3 - StateManager.EnemyState.AttackMethodUsedTime[0]) > StateManager.EnemyState.HP)
@@ -47,10 +47,10 @@ public abstract class LongHairBaseState
 
         if (StateManager.EnemyState.PlayerDistanceIndex == 2 & StateManager.EnemyState.AttackAble & StateManager.EnemyState.AttackMethodUsedTime[5] < 2)
         {
-            Debug.Log("call Thron");
+          //  Debug.Log("call Thron");
             StateManager.StateSwitch(StateManager.SingleThron);
         }
-        
+
     }
 
     protected void SPAttackTrigger(LongHairFSM StateManager)
@@ -79,7 +79,7 @@ public abstract class LongHairBaseState
 
             // StateManager.LastFlipTime = Time.time;
 
-            Debug.Log("Flip because player not in view");
+        //    Debug.Log("Flip because player not in view");
         }
 
         else if (StateManager.EnemyState.NearingWall & StateManager.LastFlipTime + StateManager.EnemyState.FlipCD * 3 < Time.time)
@@ -88,7 +88,7 @@ public abstract class LongHairBaseState
 
             StateManager.LastFlipTime = Time.time;
 
-            Debug.Log("Flip because nearing wall");
+       //     Debug.Log("Flip because nearing wall");
         }
 
 

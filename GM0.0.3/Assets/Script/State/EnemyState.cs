@@ -17,7 +17,6 @@ public class EnemyState : CommonState
     [Header("招式參數")]
     public int[] AttackMethodUsedTime;
     [HideInInspector] public int[] AttackMethodHitTime;
-    public float[] SpAttackAniLength;
 
     [Header("行動控制")]
     public float ReactionTime;

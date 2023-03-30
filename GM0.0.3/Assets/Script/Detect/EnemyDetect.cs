@@ -129,7 +129,7 @@ public class EnemyDetect : CommonDetect
         }
         else
         {
-            Debug.Log("lost player");
+          //  Debug.Log("lost player");
         }
     }
 

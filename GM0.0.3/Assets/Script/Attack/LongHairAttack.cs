@@ -15,9 +15,10 @@ public class LongHairAttack : CommonAttack
 
     [Header("®üÁx§ðÀ»³]©w")]
     public float UmiAttackRadious;
-    public float UmiAttackBoxHeightOffset;
-    public float UmiAttackBoxWidthOffset;
+    public float UmiPreCast;
+    public float UmiBackSwing;
     public GameObject Umi;
+    private GameObject UmiCon;
 
     private Vector2 UmiAttackBoxPos;
     private Vector2 UmiAttackBoxSize;
@@ -60,6 +61,8 @@ public class LongHairAttack : CommonAttack
 
         LastAttackTime = Time.time;
 
+        transform.GetChild(0).localEulerAngles = new Vector3(0, 180, 0);
+
         StartCoroutine(CommonMove.SuddenlyBrake(CommonState.AttackAniLength[5] * 0.75f));
 
         CommonAnimation.Animator.SetTrigger("AtkThron");
@@ -67,6 +70,8 @@ public class LongHairAttack : CommonAttack
         Instantiate(Thron, new Vector2(XrayOffset, transform.position.y), Quaternion.identity);
 
         yield return new WaitForSecondsRealtime(EnemyState.AttackAniLength[5]);
+
+        transform.GetChild(0).localEulerAngles = new Vector3(0, 90, 0);
 
         CommonState.AttackIng = false;
         CommonState.AttackAble = true;
@@ -83,7 +88,40 @@ public class LongHairAttack : CommonAttack
 
     public IEnumerator UmiAttack()
     {
-        yield return new WaitForSecondsRealtime(EnemyState.SpAttackAniLength[1]);
+        //  Debug.Log("Umiattack triggered");
+
+        CommonState.AttackAble = false;
+        CommonState.AttackIng = true;
+
+        LastAttackTime = Time.time;
+
+        yield return new WaitForSecondsRealtime(UmiPreCast);
+
+        transform.GetChild(0).localEulerAngles = new Vector3(0, 180, 0);
+        CommonAnimation.Animator.SetTrigger("AtkUmi");
+
+        StartCoroutine(CommonMove.SuddenlyBrake(CommonState.AttackAniLength[4] * 0.75f));
+        StartCoroutine(CommonMove.AntiGravity(CommonState.AttackAniLength[4] * 0.75f));
+
+        UmiCon = Instantiate(Umi, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
+        UmiCon.GetComponent<UmiDestory>().FollowTarget = this.gameObject;
+
+        var AttackDetect = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y + 1f), UmiAttackRadious, 0, AttackAble);
+
+        foreach (var Attacked in AttackDetect)
+        {
+            StartCoroutine(Attacked.GetComponent<CommonHP>().Hurt(10, this.transform.position, false));
+            Debug.Log(Attacked.gameObject.name);
+        }
+
+        yield return new WaitForSecondsRealtime(EnemyState.AttackAniLength[4]);
+
+        transform.GetChild(0).localEulerAngles = new Vector3(0, 90, 0);
+
+        CommonState.AttackIng = false;
+        CommonState.AttackAble = true;
+
+        yield return new WaitForSecondsRealtime(UmiBackSwing);
     }
 
     // Umi animation index 1
@@ -117,7 +155,16 @@ public class LongHairAttack : CommonAttack
 
         //if (EnemyState.AttackIng)
         //    DealDamage();
+    }
 
+    protected void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
 
+        Gizmos.DrawWireCube(AttackBoxPos, AttackBoxSize);
+
+        Gizmos.color = Color.gray;
+
+        Gizmos.DrawWireSphere(new Vector2(transform.position.x, transform.position.y + 1f), UmiAttackRadious);
     }
 }

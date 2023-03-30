@@ -9,6 +9,7 @@ public class CommonHP : MonoBehaviour
     protected CommonMove CommonMove;
     protected CommonState CommonState;
     protected CommonAnimation CommonAnimation;
+    protected CommonAudioManager CommonAudioManager;
 
     [Header("¶Ë®`°Ñ¼Æ")]
 
@@ -58,6 +59,7 @@ public class CommonHP : MonoBehaviour
             LastHurtTime = Time.time + CommonState.HeavyHurtAniLength;
 
             CommonAnimation.Animator.SetTrigger("HeavyHurt");
+            CommonAudioManager.CallHurt(1);
 
             StartCoroutine(DamageControl(0, CommonState.HeavyHurtAniLength));
             StartCoroutine(CommonMove.Roll(RollDirection, CommonState.HeavyHurtAniLength, HvRollSpeed));
@@ -72,6 +74,7 @@ public class CommonHP : MonoBehaviour
             LastHurtTime = Time.time + CommonState.LightHurtAniLength;
 
             CommonAnimation.Animator.SetTrigger("LightHurt");
+            CommonAudioManager.CallHurt(0);
 
             StartCoroutine(DamageControl(0, CommonState.LightHurtAniLength));
             StartCoroutine(CommonMove.Roll(RollDirection, CommonState.LightHurtAniLength, LtRollSpeed));
@@ -105,8 +108,22 @@ public class CommonHP : MonoBehaviour
         if (Hp < 0)
         {
             Debug.Log(this.gameObject.name + "die");
-            Destroy(this.gameObject);
+            StartCoroutine(Die());
+            CommonState.Aliving = false;
         }
+        else
+        {
+            CommonState.Aliving = true;
+        }
+    }
+
+    private IEnumerator Die()
+    {
+        CommonAudioManager.CallDeath();
+
+        yield return new WaitForSecondsRealtime(CommonState.DieAniLength);
+
+        Destroy(this.gameObject);
     }
 
 }

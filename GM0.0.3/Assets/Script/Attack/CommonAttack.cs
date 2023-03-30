@@ -37,6 +37,7 @@ public class CommonAttack : MonoBehaviour
     protected CommonState CommonState;
     protected CommonMove CommonMove;
     protected CommonAnimation CommonAnimation;
+    protected CommonAudioManager CommonAudioManager;
 
     #endregion
 
@@ -57,9 +58,9 @@ public class CommonAttack : MonoBehaviour
         CommonState.Combo++;
         CommonState.ComboIng = true;
 
-   //     Debug.Log(CommonState.Combo);
+        //     Debug.Log(CommonState.Combo);
 
-     //   Debug.Log("call attack");
+        //   Debug.Log("call attack");
         //   StartCoroutine(AttackStateTrigger(UseSuddenlyBrake));
 
         StartCoroutine(Attack(UseSuddenlyBrake));
@@ -112,7 +113,7 @@ public class CommonAttack : MonoBehaviour
         if (Time.time > LastAttackTime + AttackResetTime)
         {
             CommonState.Combo = 0;
-        //    Debug.Log("combo reset");
+            //    Debug.Log("combo reset");
         }
 
     }
@@ -121,14 +122,14 @@ public class CommonAttack : MonoBehaviour
 
     protected IEnumerator Attack(bool UseSuddenlyBrake)
     {
-        Debug.Log("function start");
+        //   Debug.Log("function start");
         CommonState.AttackAble = false;
         CommonState.AttackIng = true;
 
         LastAttackTime = Time.time;
 
         if (UseSuddenlyBrake)
-            StartCoroutine(CommonMove.SuddenlyBrake(CommonState.AttackAniLength[CommonState.Combo]*0.75f));
+            StartCoroutine(CommonMove.SuddenlyBrake(CommonState.AttackAniLength[CommonState.Combo] * 0.75f));
 
         CommonAnimation.Animator.SetTrigger("Atk" + CommonState.Combo.ToString());
 
@@ -138,11 +139,11 @@ public class CommonAttack : MonoBehaviour
 
         foreach (var Attacked in AttackDetect)
         {
-         //   Debug.Log(Attacked.gameObject.name);
+            //   Debug.Log(Attacked.gameObject.name);
             StartCoroutine(Attacked.GetComponent<CommonHP>().Hurt(ChatacterData.Atk, this.transform.position, false));
         }
 
-        Debug.Log(CommonState.Combo);
+        //      Debug.Log(CommonState.Combo);
 
         yield return new WaitForSecondsRealtime(CommonState.AttackAniLength[CommonState.Combo] - PreCast);
 
@@ -154,12 +155,5 @@ public class CommonAttack : MonoBehaviour
         yield return new WaitForSecondsRealtime(BackSwing);
 
         //      Debug.Log("function end");
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-
-        Gizmos.DrawWireCube(AttackBoxPos, AttackBoxSize);
     }
 }

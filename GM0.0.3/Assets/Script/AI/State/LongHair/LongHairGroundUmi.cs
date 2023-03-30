@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class LongHairGroundUmi : LongHairBaseState
 {
+    private float StateEnterTime;
     public override void EnterState(LongHairFSM StateManager)
     {
-     //   Debug.Log(StateManager.gameObject.name + " start ground umi attack state");
+        StateEnterTime = Time.time;
+        //   Debug.Log(StateManager.gameObject.name + " start ground umi attack state");
 
-        StateManager.EnemyAttack.UmiAttack();
+        StateManager.CallUmiAttack();
 
         StateManager.EnemyState.AttackMethodUsedTime[4]++;
     }
 
     public override void UpdateState(LongHairFSM StateManager)
     {
-        if (!StateManager.EnemyState.AttackIng)
+        if (!StateManager.EnemyState.AttackIng & Time.time > StateEnterTime + StateManager.EnemyState.ReactionTime)
         {
        //     Debug.Log(StateManager.gameObject.name + " end ground umi attack state");
 

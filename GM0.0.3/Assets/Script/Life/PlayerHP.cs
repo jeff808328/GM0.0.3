@@ -11,6 +11,7 @@ public class PlayerHP : CommonHP
         CommonMove = this.GetComponent<PlayerMove>();
         CommonState = this.GetComponent<PlayerState>();
         CommonAnimation = this.GetComponent<PlayerAnimation>();
+        CommonAudioManager = this.GetComponent<PlayerAudioManager>();
     }
 
     void Update()

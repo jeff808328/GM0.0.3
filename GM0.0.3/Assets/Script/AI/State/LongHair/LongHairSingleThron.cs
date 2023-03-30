@@ -19,7 +19,11 @@ public class LongHairSingleThron : LongHairBaseState
 
     public override void UpdateState(LongHairFSM StateManager)
     {
-        if (!StateManager.EnemyState.AttackIng)
+        if(StateManager.EnemyState.AttackMethodUsedTime[5] == 2)
+        {
+            StateManager.StateSwitch(StateManager.Idle);
+        }
+        else if (!StateManager.EnemyState.AttackIng)
         {
             Debug.Log(StateManager.gameObject.name + " end thron attack state");
 

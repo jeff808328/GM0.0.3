@@ -8,7 +8,7 @@ public class LongHairIdle : LongHairBaseState
 
     public override void EnterState(LongHairFSM StateManager)
     {
-      //      Debug.Log(StateManager.gameObject.name + "In Idle");
+        //      Debug.Log(StateManager.gameObject.name + "In Idle");
 
         StateStartTime = Time.time;
     }
@@ -19,16 +19,14 @@ public class LongHairIdle : LongHairBaseState
 
         HurtTrigger(StateManager);
 
+        SPAttackTrigger(StateManager);
 
         if (Time.time > StateStartTime + StateManager.EnemyState.ReactionTime)
         {
             AttackTrigger(StateManager);
 
-            SPAttackTrigger(StateManager);
-
             SwitchAction(StateManager);
         }
-
     }
 
     private void SwitchAction(LongHairFSM StateManager)
@@ -37,7 +35,7 @@ public class LongHairIdle : LongHairBaseState
         {
             StateManager.StateSwitch(StateManager.Walk);
         }
-        else if(StateManager.EnemyState.RollAble & StateManager.EnemyState.PlayerDistanceIndex == 1)
+        else if (StateManager.EnemyState.RollAble & StateManager.EnemyState.PlayerDistanceIndex == 1)
         {
             StateManager.StateSwitch(StateManager.Dash);
         }

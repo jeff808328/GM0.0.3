@@ -17,7 +17,7 @@ MonoBehaviour:
   MinusSpeed: 0
   Gravity: 2
   JumpSpeed: 10
-  AirJumpTimes: 0
+  AirJumpTimes: 1
   HP: 1
   Atk: 12
   Def: 0

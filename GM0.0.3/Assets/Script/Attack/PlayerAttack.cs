@@ -107,6 +107,13 @@ public class PlayerAttack : CommonAttack
         ResetCombo();
     }
 
+    protected void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+
+        Gizmos.DrawWireCube(AttackBoxPos, AttackBoxSize);
+    }
+
 
     //也許可以試試在attacking時 持續對範圍內的敵人造成傷害的寫法
 

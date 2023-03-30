@@ -32,7 +32,7 @@ public class LongHairFSM : BaseFSM
 
         EnemyAttack = this.GetComponent<LongHairAttack>();
 
-        CurrentState = Idle;
+        LongHairInitSet();
 
     }
 
@@ -76,6 +76,16 @@ public class LongHairFSM : BaseFSM
     public void CallThronAttack()
     {
         StartCoroutine(EnemyAttack.ThronAttack(EnemyDetect.PlayerPos.x));
+    }
+
+    public void CallUmiAttack()
+    {
+        StartCoroutine(EnemyAttack.UmiAttack());
+    }
+
+    public void CallJump()
+    {
+        StartCoroutine(EnemyMove.Jump());
     }
 
     // 待優化,action layer的設定完全沒有用到

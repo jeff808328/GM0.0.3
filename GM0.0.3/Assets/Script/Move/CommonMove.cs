@@ -240,12 +240,14 @@ public class CommonMove : MonoBehaviour
         AddSpeed = CharacterData.AddSpeed;
     }
 
-    protected IEnumerator Lock(float Length)
+    public IEnumerator AntiGravity(float Length)
     {
         GravityValue = 0;
+        Rd.mass = 0;// rdªºgravity­nÃö±¼
 
         yield return new WaitForSecondsRealtime(Length);
 
+        Rd.mass = 10;
         GravityValue = CharacterData.Gravity;
     }
 }

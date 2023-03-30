@@ -20,6 +20,9 @@ public class CommonState : MonoBehaviour
     [Header("當前動作階級")]
     public int ActionLayerNow;
 
+    [Header("存活狀態顯示")]
+    public bool Aliving;    
+
     [Header("牆 & 地板碰撞判定")]
     public bool GroundTouching;
     public bool WallTouching;
@@ -32,12 +35,12 @@ public class CommonState : MonoBehaviour
     public bool Hurting;
     public float LightHurtAniLength;
     public float HeavyHurtAniLength;
+    public float DieAniLength;
 
     [Header("攻擊設定")]
     public bool AttackAble;
     public bool AttackIng;
     public float AttackCD;
-  //  [HideInInspector] public float LastAttackTime;
     [HideInInspector] public float AttackCDOri;
     public float[] AttackAniLength;
 
@@ -54,6 +57,7 @@ public class CommonState : MonoBehaviour
     [Header("移動設定")]
     public bool MoveAble;
     public bool Moveing;
+    public bool Locking;
 
     [Header("跳躍設定")]
     public int MaxJumpTime;

@@ -6,6 +6,7 @@ public class PlayerMove : CommonMove
 {
     private PlayerState PlayerState;
     private PlayerAnimation PlayerAnimation;
+    private PlayerAudioManager PlayerAudioManager;
 
     void Start()
     {
@@ -15,7 +16,7 @@ public class PlayerMove : CommonMove
 
         PlayerInitComponentSet();
 
-        DashCDStartTime = Time.time - CommonState.RollCD;    
+        DashCDStartTime = Time.time - CommonState.RollCD;  
     }
 
     void Update()
@@ -36,6 +37,7 @@ public class PlayerMove : CommonMove
                 if (Input.GetKeyDown(KeyCode.R) & PlayerState.RollAble)
                 {
                     //  Debug.Log("Roll trigger");
+                    PlayerAudioManager.CallDash();
 
                     StartCoroutine(Roll(LastMoveDirection, PlayerState.RollAniLength, CharacterData.MaxMoveSpeed * DashAdjust));
 
@@ -52,18 +54,23 @@ public class PlayerMove : CommonMove
                     PlayerAnimation.Animator.SetTrigger("Jump");
                 }
 
+                if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+                {
+                    PlayerAudioManager.CallWalk(0);
+                }
+
                 if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) & PlayerState.MoveAble)
                 {
-                    Run(-1);
-
+                    Run(-1);             
                 }
                 else if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) & PlayerState.MoveAble)
                 {
-                    Run(1);
+                    Run(1);               
                 }
                 else
                 {
                     Brake();
+                    PlayerAudioManager.AudioSource.Stop();
                 }
             }
         }
@@ -102,6 +109,7 @@ public class PlayerMove : CommonMove
         PlayerState = this.GetComponent<PlayerState>();
 
         PlayerAnimation = this.GetComponent<PlayerAnimation>();
+        PlayerAudioManager = this.GetComponent <PlayerAudioManager>();   
     }
 
 

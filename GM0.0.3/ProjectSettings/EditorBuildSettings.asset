@@ -5,13 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/TitleMenu.unity
+    guid: 19b23e2f56c4e684ebeb592dc11482cb
   - enabled: 0
     path: Assets/Scenes/InkTest.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/LittleRedBettle.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/LHPRBettle.unity
     guid: 7f6d88ee0b6f3b04fa1b2264680cd374
   m_configObjects: {}

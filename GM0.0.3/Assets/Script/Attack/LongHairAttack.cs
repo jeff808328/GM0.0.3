@@ -13,6 +13,10 @@ public class LongHairAttack : CommonAttack
     public float ThronBackSwing;
     public GameObject Thron;
 
+    [Header("範圍地刺設定")]
+    public int GenerateAmount;
+    public float Gap;
+
     [Header("海膽攻擊設定")]
     public float UmiAttackRadious;
     public float UmiPreCast;
@@ -81,6 +85,13 @@ public class LongHairAttack : CommonAttack
 
     public void MutipleThronAttack()
     {
+        EnemyState.AttackMethodUsedTime[0]++;
+
+        for(int i = 0; i < GenerateAmount; i++)
+        {
+            StartCoroutine(ThronAttack(transform.position.x + Gap * i));
+            StartCoroutine(ThronAttack(transform.position.x - Gap * i));
+        }
 
     }
 
@@ -106,7 +117,7 @@ public class LongHairAttack : CommonAttack
         UmiCon = Instantiate(Umi, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
         UmiCon.GetComponent<UmiDestory>().FollowTarget = this.gameObject;
 
-        var AttackDetect = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y + 1f), UmiAttackRadious, 0, AttackAble);
+        var AttackDetect = Physics2D.OverlapBoxAll(new Vector2(transform.position.x, transform.position.y + 1f), new Vector2(UmiAttackRadious,UmiAttackRadious), 0, AttackAble);
 
         foreach (var Attacked in AttackDetect)
         {

@@ -40,10 +40,10 @@ public abstract class LongHairBaseState
             StateManager.EnemyState.MoveAble = true;
         }
 
-        //if (StateManager.EnemyState.HPOri * 0.25f * (3 - StateManager.EnemyState.AttackMethodUsedTime[0]) > StateManager.EnemyState.HP)
-        //{
-        //    StateManager.StateSwitch(StateManager.MultipleThron);
-        //}
+        if (StateManager.EnemyState.HPOri * 0.25f * (3 - StateManager.EnemyState.AttackMethodUsedTime[0]) > StateManager.EnemyState.HP)
+        {
+            StateManager.StateSwitch(StateManager.MultipleThron);
+        }
 
         if (StateManager.EnemyState.PlayerDistanceIndex == 2 & StateManager.EnemyState.AttackAble & StateManager.EnemyState.AttackMethodUsedTime[5] < 2)
         {
